@@ -1,3 +1,6 @@
+const prompt = require("prompt-sync")();
+console.clear()
+
 let pontuacao = 0
 let mapa = 0
 let espada = 0
