@@ -1,3 +1,6 @@
+const prompt = require("prompt-sync")();
+console.clear()
+
 let pontuacao = 0
 
 const introducao1 = prompt("JOGO DETETIVE \n============= \nPressione [ENTER] para começar.")
