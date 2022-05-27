@@ -1,2 +1,1 @@
-# Blue-Modulo-1
-Códigos criados durante o módulo 1.
+Códigos criados por mim durante o curso de programação na Blue.
