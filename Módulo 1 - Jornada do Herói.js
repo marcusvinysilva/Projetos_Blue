@@ -15,13 +15,13 @@ while (jogador.length < 3) {
     jogador = prompt("Digite o nome do(a) jogador(a) para começar: ")
 }
 
-
 console.log("\nOPÇÕES DE PERSONAGENS: \n[1] Um grande guerreiro, forte e destemido, em busca de uma boa aventura. \n[2] Uma guerreira habilidosa e valente, em busca de sua jornada para se tornar heroína.\n")
 let personagem = +prompt("Escolha um personagem. Número [1] ou [2]: ")
 while (personagem != 1 && personagem != 2) {
     console.log("\nNÚMERO INVÁLIDO!")
     personagem = +prompt("Escolha um personagem. Número [1] ou [2]: ")
 }
+console.clear()
 
 let introducao1 = prompt("\nEra uma linda semana de primavera na terra de Blue, as pássaros cantavam, as flores desabrochavam e as pessoas estavam felizem e em paz.... [ENTER]")
 if (personagem == 1) {
@@ -29,15 +29,20 @@ if (personagem == 1) {
 } else {
     let introducao2 = prompt("\nVocê, uma guerreira habilidosa e valente, teve de partir momentaneamente para ir comprar especiarias na cidade vizinha... [ENTER]")
 }
+console.clear()
+
 let introducao3 = prompt("\nDurante o caminho de volta, ao ver sua cidade surgindo no horizonte, percebe fumaça e destruição em grande parte dela. Você acelera seu cavalo... [ENTER]")
 let introducao4 = prompt(`\nAo entrar em sua cidade, um guarda real vêm ao seu encontro e diz: \n'${jogador}, nosso rei precisa de sua presença o mais rápido possível!' [ENTER]`)
+console.clear()
 let introducao5 = prompt("\nApós uma breve conversa com o rei de Blue, descobre que o ataque à cidade foi feito pelo poderoso bruxo Mordog, o qual rouba a alma dos seres vivos para aumentar seu poder... [ENTER}")
 let h = prompt(`\nO rei disse: \n 'Dessa vez conseguimos conter Mordog e seu exército, mas com as almas que ele conseguiu tememos que venha mais forte da próxima vez.' [ENTER]`) 
 if (personagem == 1) {
     let i = prompt(`\n'${jogador}, você já fez parte de minha guarda real, é o único guerreiro que pode deter Mordog!'[ENTER]`)
 } else {
     let i = prompt(`\n'${jogador}, você já fez parte de minha guarda real, é a única guerreira que pode deter Mordog!'[ENTER]`)
-   }
+}
+console.clear()
+
 console.log("\nVocê aceita a missão de ir atrás do bruxo. Antes de deixar o salão, o rei lhe oferece um mapa de onde possivelmente Mordog se esconde.")
 
 let a = +prompt("Você pega o mapa? 1.[SIM] 2.[NÃO]")
@@ -52,6 +57,8 @@ if (a == 1) {
 } else if ( a== 2) {
     console.log("\nVocê diz: \n'Não preciso de mapas, já sei o caminho!' \n e parte.")
 }
+console.clear()
+
 
 console.log("\nVocê vai até sua casa e começa a se aprontar para a missão.")
 let b = +prompt("Vai levar sua espada? 1.[SIM] 2.[NÃO]")
@@ -66,6 +73,7 @@ if (b == 1) {
 } else if ( b== 2) {
     let j = prompt("\nVocê confia muito em seus punhos e decide não levar sua espada. [ENTER]")
 }
+console.clear()
 
 console.log("\nVocê se lembra do alerta que o rei lhe deu sobre os perigosos dragões que compõem o exército de Mordog.")
 let c = +prompt("Vai levar sua capa contra fogo? 1.[SIM] 2.[NÃO]")
@@ -80,6 +88,7 @@ if (c == 1) {
 } else if ( c == 2) {
     let k = prompt("\nVocê escolhe priorizar a agilidade e decide deixar sua armadura leve. [ENTER]")
 }
+console.clear()
 
 console.log("\nApós arrumar todas as coisas, visita seu vizinho elfo, que entende um pouco de magia e abençoa seu caminho.")
 console.log("Ele disse, lhe oferecendo um colar: \n'Use esse amuleto em seu pescoço, vai proteger contra os feitiços do bruxo.'")
@@ -95,7 +104,7 @@ if (d == 1) {
 } else if ( d == 2) {
     let l = prompt("\nVocê agradece pela benção, mas escolhe não levar o amuleto. [ENTER]")
 }
-
+console.clear()
 
 if (personagem == 1) {
     console.log("\nPor um breve momento, você pensa em seus amigos que também são guerreiros e moram no mesmo vilarejo. \nVocê pensa que, mesmo com toda sua habilidade e determinação, talvez seja difícil completar a missão sozinho.")
@@ -127,6 +136,7 @@ if (e == 1) {
     let m = prompt("\nVocê decide não chamar suas amigas e parte sozinha em sua jornada. [ENTER]")
 }
 }
+console.clear()
 
 if (mapa == 1) {
     let map = prompt("\nApesar de ter sido um caminho longo, foi fácil encontrar o esconderijo do bruxo com o mapa. [ENTER]")
@@ -165,8 +175,6 @@ if (personagem == 1) {
         let gru = prompt("\nÉ muito difícil finalizar uma jornda desse tipo sem companhia, mas você estava muito confiante. [ENTER]")
     }
 }
-
-
 
 if (personagem == 1) {
  if (pontuacao == 0) {
