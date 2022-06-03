@@ -5,14 +5,14 @@ let introducao = prompt("JOGO JOKEMPÔ \n==================== \nPressione [ENTER
 
 let resposta = "s"
 
-while (resposta == "s" || resposta == "sim" || resposta == "SIM" || resposta == 1) {
+const continuacaoDeJogo = ['s','S','SIM','sim',1]
+const possibilidadesDeJogada = ['Pedra', 'Papel', 'Tesoura']
+const possiveisResultados = ['GANHOU', 'PERDEU', 'EMPATE']
+
+while (resposta == continuacaoDeJogo[1] || resposta == continuacaoDeJogo[2] || resposta == continuacaoDeJogo[3] || resposta == continuacaoDeJogo[4] || resposta == continuacaoDeJogo[0]) {
   console.clear()
 
   let numero_de_rodadas = prompt("Quantas rodadas serão jogadas? ")
-    
-  const pedra = 1
-  const papel = 2
-  const tesoura = 3
     
   let pontuacao_computador = 0
   let pontuacao_jogador = 0
@@ -29,48 +29,48 @@ while (resposta == "s" || resposta == "sim" || resposta == "SIM" || resposta == 
     }
 
     if (jogada_jogador == 1 || jogada_jogador.toLowerCase() == "pedra") {
-      console.log("Jogador: Pedra")
+      console.log(`Jogador: ${possibilidadesDeJogada[0]}`)
       jogada = 1
     } else if (jogada_jogador == 2 || jogada_jogador.toLowerCase() == "papel") {
-      console.log("Jogador: Papel")
+      console.log(`Jogador: ${possibilidadesDeJogada[1]}`)
       jogada = 2
     } else if (jogada_jogador == 3 || jogada_jogador.toLowerCase() == "tesoura") {
-      console.log("Jogador: Tesoura")
+      console.log(`Jogador: ${possibilidadesDeJogada[2]}`)
       jogada = 3
     }
 
     if (jogada_computador == 1) {
-      console.log("Computador: Pedra")
+      console.log(`Computador: ${possibilidadesDeJogada[0]}`)
     } else if (jogada_computador == 2) {
-      console.log("Computador: Papel")
+      console.log(`Computador: ${possibilidadesDeJogada[1]}`)
     } else if (jogada_computador == 3) {
-      console.log("Computador: Tesoura")
+      console.log(`Computador: ${possibilidadesDeJogada[2]}`)
     }
 
     if (jogada == 1 && jogada_computador == 1) {
-      console.log("EMPATE")
+      console.log(`${possiveisResultados[2]}`)
     } else if (jogada == 1 && jogada_computador == 2) {
-      console.log("PERDEU")
+      console.log(`${possiveisResultados[1]}`)
       pontuacao_computador++
     } else if (jogada == 1 && jogada_computador == 3) {
-      console.log("GANHOU")
+      console.log(`${possiveisResultados[0]}`)
       pontuacao_jogador++
     } else if (jogada == 2 && jogada_computador == 1) {
-      console.log("GANHOU")
+      console.log(`${possiveisResultados[0]}`)
       pontuacao_jogador++
     } else if (jogada == 2 && jogada_computador == 2) {
-      console.log("EMPATE")
+      console.log(`${possiveisResultados[2]}`)
     } else if (jogada == 2 && jogada_computador == 3) {
-      console.log("PERDEU")
+      console.log(`${possiveisResultados[1]}`)
       pontuacao_computador++
     } else if (jogada == 3 && jogada_computador == 1) {
-      console.log("PERDEU")
+      console.log(`${possiveisResultados[1]}`)
       pontuacao_computador++
     } else if (jogada == 3 && jogada_computador == 2) {
-      console.log("GANHOU")
+      console.log(`${possiveisResultados[0]}`)
       pontuacao_jogador++
     } else if (jogada == 3 && jogada_computador == 3) {
-      console.log("EMPATE")
+      console.log(`${possiveisResultados[2]}`)
     }
     }
     console.log()
