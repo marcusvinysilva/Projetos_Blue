@@ -201,3 +201,6 @@ if (personagem == 1) {
     console.log(`\nVOCÊ CONSEGUIU DETER MORDOG, SALVOU SUA CIDADE E SE TORNOU UMA HEROÍNA. SUA HISTÓRIA SERÁ LEMBRADA POR VÁRIAS GERAÇÕES!`)
  }   
 }
+
+////Criado por Douglas Volcato
+////Github: https://github.com/DouglasVolcato
