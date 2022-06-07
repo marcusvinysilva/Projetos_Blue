@@ -73,3 +73,6 @@ if (pontuacao <= 2) {
 } else if (pontuacao >= 4) {
     console.log(`\nVocê é CULPADO(A)!`)
 }
+
+////Criado por Douglas Volcato
+////Github: https://github.com/DouglasVolcato
