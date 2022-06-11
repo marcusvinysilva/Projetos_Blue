@@ -1,7 +1,7 @@
 const prompt = require("prompt-sync")();
 console.clear()
 
-let introducao = prompt("JOGO JOKEMPÔ \n==================== \nPressione [ENTER] para começar... \n")
+let introducao = prompt("JOGO JOKENPÔ \n==================== \nPressione [ENTER] para começar... \n")
 
 let resposta = "s"
 
@@ -93,4 +93,5 @@ while (resposta == continuacaoDeJogo[1] || resposta == continuacaoDeJogo[2] || r
 }
 console.log("\nO jogo acabou.")
 
-
+////Criado por Douglas Volcato
+////Github: https://github.com/DouglasVolcato
