@@ -30,18 +30,27 @@ jogo0: while (true) {
             console.log("\nDigite apenas [1] ou [2]!")
             XouO = +prompt("Escolha seu símbolo para jogar [1]X [2]O: ")
         }
+        if(XouO == 1) {
+            console.log(`\nJogador = X \nMáquina = O\n`)
+            prompt("[ENTER]")
+        } else {
+            console.log(`\nJogador: O \nMáquina: X\n`)
+            prompt("[ENTER]")
+        }
         console.log()
     } else {
         console.log()
-        XouOJog1 = +prompt("Jogador(1), Escolha seu símbolo para jogar [1]X [2]O: ")
+        XouOJog1 = +prompt("Jogador(1), escolha seu símbolo para jogar [1]X [2]O: ")
         while (XouOJog1 != 1 && XouOJog1 != 2) {
             console.log("\nDigite apenas [1] ou [2]!")
-            XouOJog1 = +prompt("Escolha seu símbolo para jogar [1]X [2]O: ")
+            XouOJog1 = +prompt("Jogador(1), escolha seu símbolo para jogar [1]X [2]O: ")
         }
         if(XouOJog1 == 1) {
-            console.log(`\nJogador(1): X \nJogador(2): O`)
+            console.log(`\nJogador(1) = X \nJogador(2) = O\n`)
+            prompt("[ENTER]")
         } else {
-            console.log(`\nJogador(1): O \nJogador(2): X`)
+            console.log(`\nJogador(1) = O \nJogador(2) = X\n`)
+            prompt("[ENTER]")
         }
         console.log()
     }
@@ -52,15 +61,23 @@ jogo0: while (true) {
         const lista2 = [2,"_","_","_"]
         const lista3 = [3,"_","_","_"]
         const tabuleiro = []
-        console.clear()
-        tabuleiro.push(letras)
-        tabuleiro.push(lista1)
-        tabuleiro.push(lista2)
-        tabuleiro.push(lista3)
-        for (let w of tabuleiro){
+        function frontEnd(){
+            tabuleiro.push(letras)
+            tabuleiro.push(lista1)
+            tabuleiro.push(lista2)
+            tabuleiro.push(lista3)
+            console.clear()
             console.log()
-            console.log(w)
+            console.log(tabuleiro[0])
+            console.log()
+            console.log(tabuleiro[1])
+            console.log()
+            console.log(tabuleiro[2])
+            console.log()
+            console.log(tabuleiro[3])
+            console.log()
         }
+        frontEnd()
         jogo2: while (true) {
             function checarEspacos() {
                 let coordenadasChecadas = 0
@@ -218,7 +235,8 @@ jogo0: while (true) {
                 }
             }
             function cerebroNumero() {
-                if (lista1[2] == 'O' && lista1[3] == 'O' && lista1[1] == '_') {
+                if (XouO == 1) {
+                    if (lista1[2] == 'O' && lista1[3] == 'O' && lista1[1] == '_') {
                         return 1
                     } else if (lista2[1] == 'O' && lista3[1] == 'O' && lista1[1] == '_') {
                         return 1
@@ -266,60 +284,162 @@ jogo0: while (true) {
                         return 2
                     } else if (lista1[3] == 'O' && lista3[3] == 'O' && lista2[3] == '_') {
                         return 2
-                    } else if (lista1[2] == 'x' && lista1[3] == 'x' && lista1[1] == '_') {
+                    } else if (lista1[2] == 'X' && lista1[3] == 'X' && lista1[1] == '_') {
                         return 1
-                    } else if (lista2[1] == 'x' && lista3[1] == 'x' && lista1[1] == '_') {
+                    } else if (lista2[1] == 'X' && lista3[1] == 'X' && lista1[1] == '_') {
                         return 1
-                    } else if (lista2[2] == 'x' && lista3[3] == 'x' && lista1[1] == '_') {
+                    } else if (lista2[2] == 'X' && lista3[3] == 'X' && lista1[1] == '_') {
                         return 1
-                    } else if (lista3[2] == 'x' && lista3[3] == 'x' && lista3[1] == '_') {
+                    } else if (lista3[2] == 'X' && lista3[3] == 'X' && lista3[1] == '_') {
                         return 3
-                    } else if (lista1[1] == 'x' && lista2[1] == 'x' && lista3[1] == '_') {
+                    } else if (lista1[1] == 'X' && lista2[1] == 'X' && lista3[1] == '_') {
                         return 3
-                    } else if (lista2[2] == 'x' && lista1[3] == 'x' && lista3[1] == '_') {
+                    } else if (lista2[2] == 'X' && lista1[3] == 'X' && lista3[1] == '_') {
                         return 3
-                    } else if (lista1[1] == 'x' && lista1[2] == 'x' && lista1[3] == '_') {
+                    } else if (lista1[1] == 'X' && lista1[2] == 'X' && lista1[3] == '_') {
                         return 1
-                    } else if (lista2[3] == 'x' && lista3[3] == 'x' && lista1[3] == '_') {
+                    } else if (lista2[3] == 'X' && lista3[3] == 'X' && lista1[3] == '_') {
                         return 1
-                    } else if (lista3[1] == 'x' && lista2[2] == 'x' && lista1[3] == '_') {
+                    } else if (lista3[1] == 'X' && lista2[2] == 'X' && lista1[3] == '_') {
                         return 1
-                    } else if (lista3[1] == 'x' && lista3[2] == 'x' && lista3[3] == '_') {
+                    } else if (lista3[1] == 'X' && lista3[2] == 'X' && lista3[3] == '_') {
                         return 3
-                    } else if (lista1[3] == 'x' && lista2[3] == 'x' && lista3[3] == '_') {
+                    } else if (lista1[3] == 'X' && lista2[3] == 'X' && lista3[3] == '_') {
                         return 3
-                    } else if (lista1[1] == 'x' && lista2[2] == 'x' && lista3[3] == '_') {
+                    } else if (lista1[1] == 'X' && lista2[2] == 'X' && lista3[3] == '_') {
                         return 3
-                    } else if (lista2[1] == 'x' && lista2[3] == 'x' && lista2[2] == '_') {
+                    } else if (lista2[1] == 'X' && lista2[3] == 'X' && lista2[2] == '_') {
                         return 2
-                    } else if (lista1[2] == 'x' && lista3[2] == 'x' && lista2[2] == '_') {
+                    } else if (lista1[2] == 'X' && lista3[2] == 'X' && lista2[2] == '_') {
                         return 2
-                    } else if (lista1[1] == 'x' && lista3[3] == 'x' && lista2[2] == '_') {
+                    } else if (lista1[1] == 'X' && lista3[3] == 'X' && lista2[2] == '_') {
                         return 2
-                    } else if (lista3[1] == 'x' && lista1[3] == 'x' && lista2[2] == '_') {
+                    } else if (lista3[1] == 'X' && lista1[3] == 'X' && lista2[2] == '_') {
                         return 2
-                    } else if (lista1[1] == 'x' && lista1[3] == 'x' && lista1[2] == '_') {
+                    } else if (lista1[1] == 'X' && lista1[3] == 'X' && lista1[2] == '_') {
                         return 1
-                    } else if (lista2[2] == 'x' && lista3[2] == 'x' && lista1[2] == '_') {
+                    } else if (lista2[2] == 'X' && lista3[2] == 'X' && lista1[2] == '_') {
                         return 1
-                    } else if (lista3[1] == 'x' && lista3[3] == 'x' && lista3[2] == '_') {
+                    } else if (lista3[1] == 'X' && lista3[3] == 'X' && lista3[2] == '_') {
                         return 3
-                    } else if (lista1[2] == 'x' && lista2[2] == 'x' && lista3[2] == '_') {
+                    } else if (lista1[2] == 'X' && lista2[2] == 'X' && lista3[2] == '_') {
                         return 3
-                    } else if (lista2[2] == 'x' && lista2[3] == 'x' && lista2[1] == '_') {
+                    } else if (lista2[2] == 'X' && lista2[3] == 'X' && lista2[1] == '_') {
                         return 2
-                    } else if (lista1[1] == 'x' && lista3[1] == 'x' && lista2[1] == '_') {
+                    } else if (lista1[1] == 'X' && lista3[1] == 'X' && lista2[1] == '_') {
                         return 2
-                    } else if (lista2[1] == 'x' && lista2[2] == 'x' && lista2[3] == '_') {
+                    } else if (lista2[1] == 'X' && lista2[2] == 'X' && lista2[3] == '_') {
                         return 2
-                    } else if (lista1[3] == 'x' && lista3[3] == 'x' && lista2[3] == '_') {
+                    } else if (lista1[3] == 'X' && lista3[3] == 'X' && lista2[3] == '_') {
                         return 2
                     } else {
                         return Math.floor(Math.random() * 3 + 1)
                     }
+                } else if (XouO == 2) {
+                    if (lista1[2] == 'X' && lista1[3] == 'X' && lista1[1] == '_') {
+                        return 1
+                    } else if (lista2[1] == 'X' && lista3[1] == 'X' && lista1[1] == '_') {
+                        return 1
+                    } else if (lista2[2] == 'X' && lista3[3] == 'X' && lista1[1] == '_') {
+                        return 1
+                    } else if (lista3[2] == 'X' && lista3[3] == 'X' && lista3[1] == '_') {
+                        return 3
+                    } else if (lista1[1] == 'X' && lista2[1] == 'X' && lista3[1] == '_') {
+                        return 3
+                    } else if (lista2[2] == 'X' && lista1[3] == 'X' && lista3[1] == '_') {
+                        return 3
+                    } else if (lista1[1] == 'X' && lista1[2] == 'X' && lista1[3] == '_') {
+                        return 1
+                    } else if (lista2[3] == 'X' && lista3[3] == 'X' && lista1[3] == '_') {
+                        return 1
+                    } else if (lista3[1] == 'X' && lista2[2] == 'X' && lista1[3] == '_') {
+                        return 1
+                    } else if (lista3[1] == 'X' && lista3[2] == 'X' && lista3[3] == '_') {
+                        return 3
+                    } else if (lista1[3] == 'X' && lista2[3] == 'X' && lista3[3] == '_') {
+                        return 3
+                    } else if (lista1[1] == 'X' && lista2[2] == 'X' && lista3[3] == '_') {
+                        return 3
+                    } else if (lista2[1] == 'X' && lista2[3] == 'X' && lista2[2] == '_') {
+                        return 2
+                    } else if (lista1[2] == 'X' && lista3[2] == 'X' && lista2[2] == '_') {
+                        return 2
+                    } else if (lista1[1] == 'X' && lista3[3] == 'X' && lista2[2] == '_') {
+                        return 2
+                    } else if (lista3[1] == 'X' && lista1[3] == 'X' && lista2[2] == '_') {
+                        return 2
+                    } else if (lista1[1] == 'X' && lista1[3] == 'X' && lista1[2] == '_') {
+                        return 1
+                    } else if (lista2[2] == 'X' && lista3[2] == 'X' && lista1[2] == '_') {
+                        return 1
+                    } else if (lista3[1] == 'X' && lista3[3] == 'X' && lista3[2] == '_') {
+                        return 3
+                    } else if (lista1[2] == 'X' && lista2[2] == 'X' && lista3[2] == '_') {
+                        return 3
+                    } else if (lista2[2] == 'X' && lista2[3] == 'X' && lista2[1] == '_') {
+                        return 2
+                    } else if (lista1[1] == 'X' && lista3[1] == 'X' && lista2[1] == '_') {
+                        return 2
+                    } else if (lista2[1] == 'X' && lista2[2] == 'X' && lista2[3] == '_') {
+                        return 2
+                    } else if (lista1[3] == 'X' && lista3[3] == 'X' && lista2[3] == '_') {
+                        return 2
+                    } else if (lista1[2] == 'O' && lista1[3] == 'O' && lista1[1] == '_') {
+                        return 1
+                    } else if (lista2[1] == 'O' && lista3[1] == 'O' && lista1[1] == '_') {
+                        return 1
+                    } else if (lista2[2] == 'O' && lista3[3] == 'O' && lista1[1] == '_') {
+                        return 1
+                    } else if (lista3[2] == 'O' && lista3[3] == 'O' && lista3[1] == '_') {
+                        return 3
+                    } else if (lista1[1] == 'O' && lista2[1] == 'O' && lista3[1] == '_') {
+                        return 3
+                    } else if (lista2[2] == 'O' && lista1[3] == 'O' && lista3[1] == '_') {
+                        return 3
+                    } else if (lista1[1] == 'O' && lista1[2] == 'O' && lista1[3] == '_') {
+                        return 1
+                    } else if (lista2[3] == 'O' && lista3[3] == 'O' && lista1[3] == '_') {
+                        return 1
+                    } else if (lista3[1] == 'O' && lista2[2] == 'O' && lista1[3] == '_') {
+                        return 1
+                    } else if (lista3[1] == 'O' && lista3[2] == 'O' && lista3[3] == '_') {
+                        return 3
+                    } else if (lista1[3] == 'O' && lista2[3] == 'O' && lista3[3] == '_') {
+                        return 3
+                    } else if (lista1[1] == 'O' && lista2[2] == 'O' && lista3[3] == '_') {
+                        return 3
+                    } else if (lista2[1] == 'O' && lista2[3] == 'O' && lista2[2] == '_') {
+                        return 2
+                    } else if (lista1[2] == 'O' && lista3[2] == 'O' && lista2[2] == '_') {
+                        return 2
+                    } else if (lista1[1] == 'O' && lista3[3] == 'O' && lista2[2] == '_') {
+                        return 2
+                    } else if (lista3[1] == 'O' && lista1[3] == 'O' && lista2[2] == '_') {
+                        return 2
+                    } else if (lista1[1] == 'O' && lista1[3] == 'O' && lista1[2] == '_') {
+                        return 1
+                    } else if (lista2[2] == 'O' && lista3[2] == 'O' && lista1[2] == '_') {
+                        return 1
+                    } else if (lista3[1] == 'O' && lista3[3] == 'O' && lista3[2] == '_') {
+                        return 3
+                    } else if (lista1[2] == 'O' && lista2[2] == 'O' && lista3[2] == '_') {
+                        return 3
+                    } else if (lista2[2] == 'O' && lista2[3] == 'O' && lista2[1] == '_') {
+                        return 2
+                    } else if (lista1[1] == 'O' && lista3[1] == 'O' && lista2[1] == '_') {
+                        return 2
+                    } else if (lista2[1] == 'O' && lista2[2] == 'O' && lista2[3] == '_') {
+                        return 2
+                    } else if (lista1[3] == 'O' && lista3[3] == 'O' && lista2[3] == '_') {
+                        return 2
+                    } else {
+                        return Math.floor(Math.random() * 3 + 1)
+                    }
+                }
             }
             function cerebroLetra() {
-                if (lista1[2] == 'O' && lista1[3] == 'O' && lista1[1] == '_') {
+                if (XouO == 1) {
+                    if (lista1[2] == 'O' && lista1[3] == 'O' && lista1[1] == '_') {
                         return computadorLetra[0]
                     } else if (lista2[1] == 'O' && lista3[1] == 'O' && lista1[1] == '_') {
                         return computadorLetra[0]
@@ -367,62 +487,166 @@ jogo0: while (true) {
                         return computadorLetra[2]
                     } else if (lista1[3] == 'O' && lista3[3] == 'O' && lista2[3] == '_') {
                         return computadorLetra[2]
-                    } else if (lista1[2] == 'x' && lista1[3] == 'x' && lista1[1] == '_') {
+                    } else if (lista1[2] == 'X' && lista1[3] == 'X' && lista1[1] == '_') {
                         return computadorLetra[0]
-                    } else if (lista2[1] == 'x' && lista3[1] == 'x' && lista1[1] == '_') {
+                    } else if (lista2[1] == 'X' && lista3[1] == 'X' && lista1[1] == '_') {
                         return computadorLetra[0]
-                    } else if (lista2[2] == 'x' && lista3[3] == 'x' && lista1[1] == '_') {
+                    } else if (lista2[2] == 'X' && lista3[3] == 'X' && lista1[1] == '_') {
                         return computadorLetra[0]
-                    } else if (lista3[2] == 'x' && lista3[3] == 'x' && lista3[1] == '_') {
+                    } else if (lista3[2] == 'X' && lista3[3] == 'X' && lista3[1] == '_') {
                         return computadorLetra[0]
-                    } else if (lista1[1] == 'x' && lista2[1] == 'x' && lista3[1] == '_') {
+                    } else if (lista1[1] == 'X' && lista2[1] == 'X' && lista3[1] == '_') {
                         return computadorLetra[0]
-                    } else if (lista2[2] == 'x' && lista1[3] == 'x' && lista3[1] == '_') {
+                    } else if (lista2[2] == 'X' && lista1[3] == 'X' && lista3[1] == '_') {
                         return computadorLetra[0]
-                    } else if (lista1[1] == 'x' && lista1[2] == 'x' && lista1[3] == '_') {
+                    } else if (lista1[1] == 'X' && lista1[2] == 'X' && lista1[3] == '_') {
                         return computadorLetra[2]
-                    } else if (lista2[3] == 'x' && lista3[3] == 'x' && lista1[3] == '_') {
+                    } else if (lista2[3] == 'X' && lista3[3] == 'X' && lista1[3] == '_') {
                         return computadorLetra[2]
-                    } else if (lista3[1] == 'x' && lista2[2] == 'x' && lista1[3] == '_') {
+                    } else if (lista3[1] == 'X' && lista2[2] == 'X' && lista1[3] == '_') {
                         return computadorLetra[2]
-                    } else if (lista3[1] == 'x' && lista3[2] == 'x' && lista3[3] == '_') {
+                    } else if (lista3[1] == 'X' && lista3[2] == 'X' && lista3[3] == '_') {
                         return computadorLetra[2]
-                    } else if (lista1[3] == 'x' && lista2[3] == 'x' && lista3[3] == '_') {
+                    } else if (lista1[3] == 'X' && lista2[3] == 'X' && lista3[3] == '_') {
                         return computadorLetra[2]
-                    } else if (lista1[1] == 'x' && lista2[2] == 'x' && lista3[3] == '_') {
+                    } else if (lista1[1] == 'X' && lista2[2] == 'X' && lista3[3] == '_') {
                         return computadorLetra[2]
-                    } else if (lista2[1] == 'x' && lista2[3] == 'x' && lista2[2] == '_') {
+                    } else if (lista2[1] == 'X' && lista2[3] == 'X' && lista2[2] == '_') {
                         return computadorLetra[1]
-                    } else if (lista1[2] == 'x' && lista3[2] == 'x' && lista2[2] == '_') {
+                    } else if (lista1[2] == 'X' && lista3[2] == 'X' && lista2[2] == '_') {
                         return computadorLetra[1]
-                    } else if (lista1[1] == 'x' && lista3[3] == 'x' && lista2[2] == '_') {
+                    } else if (lista1[1] == 'X' && lista3[3] == 'X' && lista2[2] == '_') {
                         return computadorLetra[1]
-                    } else if (lista3[1] == 'x' && lista1[3] == 'x' && lista2[2] == '_') {
+                    } else if (lista3[1] == 'X' && lista1[3] == 'X' && lista2[2] == '_') {
                         return computadorLetra[1]
-                    } else if (lista1[1] == 'x' && lista1[3] == 'x' && lista1[2] == '_') {
+                    } else if (lista1[1] == 'X' && lista1[3] == 'X' && lista1[2] == '_') {
                         return computadorLetra[1]
-                    } else if (lista2[2] == 'x' && lista3[2] == 'x' && lista1[2] == '_') {
+                    } else if (lista2[2] == 'X' && lista3[2] == 'X' && lista1[2] == '_') {
                         return computadorLetra[1]
-                    } else if (lista3[1] == 'x' && lista3[3] == 'x' && lista3[2] == '_') {
+                    } else if (lista3[1] == 'X' && lista3[3] == 'X' && lista3[2] == '_') {
                         return computadorLetra[1]
-                    } else if (lista1[2] == 'x' && lista2[2] == 'x' && lista3[2] == '_') {
+                    } else if (lista1[2] == 'X' && lista2[2] == 'X' && lista3[2] == '_') {
                         return computadorLetra[1]
-                    } else if (lista2[2] == 'x' && lista2[3] == 'x' && lista2[1] == '_') {
+                    } else if (lista2[2] == 'X' && lista2[3] == 'X' && lista2[1] == '_') {
                         return computadorLetra[0]
-                    } else if (lista1[1] == 'x' && lista3[1] == 'x' && lista2[1] == '_') {
+                    } else if (lista1[1] == 'X' && lista3[1] == 'X' && lista2[1] == '_') {
                         return computadorLetra[0]
-                    } else if (lista2[1] == 'x' && lista2[2] == 'x' && lista2[3] == '_') {
+                    } else if (lista2[1] == 'X' && lista2[2] == 'X' && lista2[3] == '_') {
                         return computadorLetra[2]
-                    } else if (lista1[3] == 'x' && lista3[3] == 'x' && lista2[3] == '_') {
+                    } else if (lista1[3] == 'X' && lista3[3] == 'X' && lista2[3] == '_') {
                         return computadorLetra[2]
                     } else {
                         return computadorLetra[(Math.floor(Math.random() * 3))]
                     }
+                } else if (XouO == 2) {
+                    if (lista1[2] == 'X' && lista1[3] == 'X' && lista1[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista2[1] == 'X' && lista3[1] == 'X' && lista1[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista2[2] == 'X' && lista3[3] == 'X' && lista1[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista3[2] == 'X' && lista3[3] == 'X' && lista3[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista1[1] == 'X' && lista2[1] == 'X' && lista3[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista2[2] == 'X' && lista1[3] == 'X' && lista3[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista1[1] == 'X' && lista1[2] == 'X' && lista1[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista2[3] == 'X' && lista3[3] == 'X' && lista1[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista3[1] == 'X' && lista2[2] == 'X' && lista1[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista3[1] == 'X' && lista3[2] == 'X' && lista3[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista1[3] == 'X' && lista2[3] == 'X' && lista3[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista1[1] == 'X' && lista2[2] == 'X' && lista3[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista2[1] == 'X' && lista2[3] == 'X' && lista2[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista1[2] == 'X' && lista3[2] == 'X' && lista2[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista1[1] == 'X' && lista3[3] == 'X' && lista2[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista3[1] == 'X' && lista1[3] == 'X' && lista2[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista1[1] == 'X' && lista1[3] == 'X' && lista1[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista2[2] == 'X' && lista3[2] == 'X' && lista1[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista3[1] == 'X' && lista3[3] == 'X' && lista3[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista1[2] == 'X' && lista2[2] == 'X' && lista3[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista2[2] == 'X' && lista2[3] == 'X' && lista2[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista1[1] == 'X' && lista3[1] == 'X' && lista2[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista2[1] == 'X' && lista2[2] == 'X' && lista2[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista1[3] == 'X' && lista3[3] == 'X' && lista2[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista1[2] == 'O' && lista1[3] == 'O' && lista1[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista2[1] == 'O' && lista3[1] == 'O' && lista1[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista2[2] == 'O' && lista3[3] == 'O' && lista1[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista3[2] == 'O' && lista3[3] == 'O' && lista3[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista1[1] == 'O' && lista2[1] == 'O' && lista3[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista2[2] == 'O' && lista1[3] == 'O' && lista3[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista1[1] == 'O' && lista1[2] == 'O' && lista1[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista2[3] == 'O' && lista3[3] == 'O' && lista1[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista3[1] == 'O' && lista2[2] == 'O' && lista1[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista3[1] == 'O' && lista3[2] == 'O' && lista3[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista1[3] == 'O' && lista2[3] == 'O' && lista3[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista1[1] == 'O' && lista2[2] == 'O' && lista3[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista2[1] == 'O' && lista2[3] == 'O' && lista2[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista1[2] == 'O' && lista3[2] == 'O' && lista2[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista1[1] == 'O' && lista3[3] == 'O' && lista2[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista3[1] == 'O' && lista1[3] == 'O' && lista2[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista1[1] == 'O' && lista1[3] == 'O' && lista1[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista2[2] == 'O' && lista3[2] == 'O' && lista1[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista3[1] == 'O' && lista3[3] == 'O' && lista3[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista1[2] == 'O' && lista2[2] == 'O' && lista3[2] == '_') {
+                        return computadorLetra[1]
+                    } else if (lista2[2] == 'O' && lista2[3] == 'O' && lista2[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista1[1] == 'O' && lista3[1] == 'O' && lista2[1] == '_') {
+                        return computadorLetra[0]
+                    } else if (lista2[1] == 'O' && lista2[2] == 'O' && lista2[3] == '_') {
+                        return computadorLetra[2]
+                    } else if (lista1[3] == 'O' && lista3[3] == 'O' && lista2[3] == '_') {
+                        return computadorLetra[2]
+                    } else {
+                        return computadorLetra[(Math.floor(Math.random() * 3))]
+                    }
+                }
             }
             if (opcoesDeJogo == 1) {
                 jogador: while(true) {
                     vitoria = vencedor()
                     if (vitoria == 'o' || vitoria == 'x') {
+                        break
+                    }
+                    if (checarEspacos() == true) {
                         break
                     }
                     console.log()
@@ -437,9 +661,6 @@ jogo0: while (true) {
                         console.log()
                         console.log("Resposta inválida, escolha o número [1], [2] ou [3]")
                         numero = +prompt("Escolha um número [1], [2], [3]:  ")
-                    }
-                    if (checarEspacos(numero,letra) == true) {
-                        break
                     }
                     if (checarCoordenadas(numero,letra) == false) {
                         console.log("\nEscolha outra jogada!\n")
@@ -458,37 +679,19 @@ jogo0: while (true) {
                     if (vitoria == 'o' || vitoria == 'x') {
                         break
                     }
+                    if (checarEspacos() == true) {
+                        break
+                    }
                     computadorLetra = ['A','B', 'C']
                     computadorLetra1 = cerebroLetra()
                     computadorNumero = cerebroNumero()
-                     if (checarEspacos(computadorNumero,computadorLetra1) == true) {
-                         break
-                    }
                     if (checarCoordenadas(computadorNumero,computadorLetra1) == false) {
                     continue computadorIneligente
                     } else {
                         break
                     }
                 }
-                if (XouO == 1) {
-                    coordenadasO(computadorNumero,computadorLetra1)
-                } else if (XouO == 2) {
-                    coordenadasX(computadorNumero,computadorLetra1)
-                }
-                tabuleiro.push(letras)
-                tabuleiro.push(lista1)
-                tabuleiro.push(lista2)
-                tabuleiro.push(lista3)
-                console.clear()
-                console.log()
-                console.log(tabuleiro[0])
-                console.log()
-                console.log(tabuleiro[1])
-                console.log()
-                console.log(tabuleiro[2])
-                console.log()
-                console.log(tabuleiro[3])
-                console.log()
+                frontEnd()
                 vitoria = vencedor()
                 if (vitoria == 'x' && XouO == 1) {
                     pontuacaoJogador++
@@ -516,6 +719,12 @@ jogo0: while (true) {
                     console.log(`Jogador: ${pontuacaoJogador} \nComputador: ${pontuacaoComputador}`)
                     break jogo1
                 }
+                if (XouO == 1) {
+                    coordenadasO(computadorNumero,computadorLetra1)
+                } else if (XouO == 2) {
+                    coordenadasX(computadorNumero,computadorLetra1)
+                }
+                frontEnd()
                 console.log(`O computador jogou ${computadorLetra1}${computadorNumero}`)
             } else if (opcoesDeJogo == 2) {
                 jogador1: while(true) {
@@ -554,15 +763,7 @@ jogo0: while (true) {
                 } else if (XouOJog1 == 2) {
                     coordenadasO(numeroJog1,letraJog1)
                 }
-                console.clear()
-                tabuleiro.push(letras)
-                tabuleiro.push(lista1)
-                tabuleiro.push(lista2)
-                tabuleiro.push(lista3)
-                for (let w of tabuleiro){
-                    console.log()
-                    console.log(w)
-                }
+                frontEnd()
                 jogador2: while(true) {
                     vitoria = vencedor()
                     if (vitoria == 'o' || vitoria == 'x') {
@@ -599,15 +800,7 @@ jogo0: while (true) {
                 } else if (XouOJog1 == 2) {
                     coordenadasX(numeroJog2,letraJog2)
                 }
-                console.clear()
-                tabuleiro.push(letras)
-                tabuleiro.push(lista1)
-                tabuleiro.push(lista2)
-                tabuleiro.push(lista3)
-                for (let w of tabuleiro){
-                    console.log()
-                    console.log(w)
-                }
+                frontEnd()
                 vitoria = vencedor()
                 if (checarEspacos() == true) {
                     console.log("EMPATE!")
@@ -650,3 +843,6 @@ jogo0: while (true) {
         break jogo0
     }
 }
+
+////Criado por Douglas Volcato
+////Github: https://github.com/DouglasVolcato
