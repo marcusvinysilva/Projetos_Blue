@@ -1,0 +1,1636 @@
+const prompt = require("prompt-sync")();
+console.clear()
+let rodada = 0
+let kills = 0
+const backupJogador = {
+    nome: "",
+    nivel: 1,
+    vida: 100,
+    ataque: 20,
+    defesa: 20,
+    dinheiro: 20,
+    magia: 0,
+}
+const backupReserva = {
+    nome: "",
+    nivel: 1,
+    vida: 100,
+    ataque: 20,
+    defesa: 20,
+    dinheiro: 20,
+    magia: 0,
+}
+function backup(a,b){
+    if (a == 1){
+        backupJogador.nome = b.nome
+        backupJogador.nivel = b.nivel
+        backupJogador.vida = b.vida
+        backupJogador.ataque = b.ataque
+        backupJogador.defesa = b.defesa
+        backupJogador.dinheiro = b.dinheiro
+        backupJogador.magia = b.magia
+    }   
+     else if (a == 2){
+        b.nome = backupJogador.nome 
+        b.nivel = backupJogador.nivel 
+        b.vida = backupJogador.vida 
+        b.ataque = backupJogador.ataque  
+        b.defesa = backupJogador.defesa  
+        b.dinheiro = backupJogador.dinheiro  
+        b.magia = backupJogador.magia  
+    }
+}
+function backup2(a,b){
+    if (a == 1){
+        backupReserva.nome = b.nome
+        backupReserva.nivel = b.nivel
+        backupReserva.vida = b.vida
+        backupReserva.ataque = b.ataque
+        backupReserva.defesa = b.defesa
+        backupReserva.dinheiro = b.dinheiro
+        backupReserva.magia = b.magia
+    }   
+     else if (a == 2){
+        b.nome = backupReserva.nome 
+        b.nivel = backupReserva.nivel 
+        b.vida = backupReserva.vida 
+        b.ataque = backupReserva.ataque  
+        b.defesa = backupReserva.defesa  
+        b.dinheiro = backupReserva.dinheiro  
+        b.magia = backupReserva.magia  
+    }
+}
+const statusJogador = {
+    nome: "",
+    nivel: 1,
+    vida: 100,
+    ataque: 20,
+    defesa: 20,
+    dinheiro: 20,
+    magia: 0,
+    pontuacao: 0,
+    mapa: 0,
+    espada: 0,
+    capa: 0,
+    amuleto: 0,
+    pocao: 0,
+    grupo: 0,
+    tempo: 0,
+    consultarStatus: function(){
+        console.log(`\nSEU STATUS:`)
+        console.log(`Nome: ${this.nome}`)
+        console.log(`Nível: ${this.nivel}`)
+        console.log(`Vida: ${this.vida}`)
+        console.log(`Ataque: ${this.ataque}`)
+        console.log(`Defesa: ${this.defesa}`)
+        console.log(`Dinheiro: ${this.dinheiro}`)
+        console.log(`Magia: ${this.magia}\n`)
+        prompt(`[ENTER]`)
+    },
+    consultarInventário: function(){
+        console.log(`Mapa: ${this.mapa}`)
+        console.log(`Espada: ${this.espada}`)
+        console.log(`Capa contra fogo: ${this.capa}`)
+        console.log(`Amuleto mágico: ${this.amuleto}`)
+        prompt(`[ENTER]`)
+    },
+    aumentarNivel: function(a = 1){
+        this.nivel += a
+        this.vida *= this.nivel
+        this.ataque *= this.nivel
+        this.defesa *= this.nivel
+        console.log(`\nVida restaurada.`) 
+        console.log(`\nVOCÊ SUBIU DE NÍVEL!`)
+        console.log(`Nível: ${this.nivel}`)
+        console.log(`Vida: ${this.vida}`)
+        console.log(`Ataque: ${this.ataque}`)
+        console.log(`Defesa: ${this.defesa}`)
+        prompt(`[ENTER]`)
+    },
+    dano: function(quantidade){
+        let a = quantidade - this.defesa
+        let b = quantidade > this.defesa ? a : 0
+        this.vida -= b
+        console.log()
+        if (b == 0){
+            console.log("Você defendeu o ataque.")
+        }
+        if (this.vida < 0) {
+            console.log(`Sua vida acabou.`)
+            this.vida = 0
+        } else {
+            console.log(`Sua vida diminuiu -${b}.`)
+        }
+        console.log()
+        prompt(`[ENTER]`)
+    },
+    regeneracao: function(quantidade){
+        this.vida += quantidade
+        if (this.vida > 100) {
+            console.log(`\nSua vida está cheia.\n`) 
+            this.vida = 100
+        } else {
+           
+           console.log(`\nSua vida aumentou +${quantidade}.\n`) 
+        }
+        prompt(`[ENTER]`)
+    },
+    gastarDinheiro: function(quantidade){
+        this.dinheiro -= quantidade
+        if (this.dinheiro < 0) {
+            console.log(`\nSeu dinheiro acabou.\n`)
+            this.dinheiro = 0
+        } else {
+           console.log(`\n-${quantidade} de dinheiro.\n`) 
+        }
+        prompt(`[ENTER]`)
+    },
+    ganharDinheiro: function(quantidade){
+        console.log(`\n+${quantidade} de dinheiro.\n`)
+        this.dinheiro += quantidade
+        prompt(`[ENTER]`)
+    },
+    aumentarAtaque: function(quantidade){
+        //console.log(`\nSeu ataque aumentou em +${quantidade}.`)
+        this.ataque += quantidade
+    },
+    diminuirAtaque: function(quantidade){
+        console.log(`\nSeu ataque diminuiu em -${quantidade}.\n`)
+        this.ataque -= quantidade
+        if (this.ataque < 0) {
+            console.log(`\nSeu ataque chegou em 0.\n`)
+            this.ataque = 0
+        }
+        prompt(`[ENTER]`)
+    },
+    aumentarDefesa: function(quantidade){
+        // console.log(`\nSua defesa aumentou em +${quantidade}.`)
+        this.defesa += quantidade
+    },
+    diminuirDefesa: function(quantidade){
+        console.log(`\nSua defesa diminuiu em -${quantidade}.\n`)
+        this.defesa -= quantidade
+        if (this.defesa < 0) {
+            console.log(`\nSua defesa chegou em 0.\n`)
+            this.defesa = 0
+        }
+        prompt(`[ENTER]`)
+    },
+    aumentarMagia: function(quantidade){
+        console.log(`\nSua magia aumentou em +${quantidade}.\n`)
+        this.magia += quantidade
+        prompt(`[ENTER]`)
+    },
+    diminuirMagia: function(quantidade){
+        console.log(`\nSua magia diminuiu em +${quantidade}.\n`)
+        this.magia -= quantidade
+        if (this.magia < 0) {
+            console.log(`\nSua magia chegou em 0.\n`)
+            this.magia = 0
+        }
+        prompt(`[ENTER]`)
+    },
+    aumentarPontuacao: function(){
+        this.pontuacao += 1
+    },
+    itemMapa: function(){
+        this.mapa += 1
+    },
+    itemEspada: function(){
+        this.espada += 1
+    },
+    itemCapa: function(){
+        this.capa += 1
+    },
+    itemAmuleto: function(){
+        this.amuleto += 1
+    },
+    aumentarGrupo: function(quantidade = 1){
+        this.grupo += quantidade
+        console.log(`\nSeu grupo aumentou em +${quantidade} membro. \nQuantidade atual: ${this.grupo} membros.\n`)
+        prompt(`[ENTER]`)
+    },
+    diminuirGrupo: function(quantidade = 1){
+        this.grupo -= quantidade
+        console.log(`\nSeu grupo diminuiu em -${quantidade} membro. \nQuantidade atual: ${this.grupo} membros.\n`)
+        prompt(`[ENTER]`)
+    },
+    aumentarTempo: function(quantidade = 1){
+        this.tempo += quantidade
+        console.log(`DIA ${this.tempo}`)
+    },
+    diminuirTempo: function(quantidade = 1){
+        this.tempo -= quantidade
+    },
+    insultar: function(){
+        let insultos = [`É só isso que você consegue fazer?`,
+        `Vai precisar de uma arma maior que essa para me derrotar`,
+        `Quem te ensinou a lutar desse jeito, sua vovózinha?`,
+        `Se houvessem mais 5 de você, ainda não conseguiriam me derrotar.`,
+        `Quer que eu te dê algumas aulas de luta?`,
+        `Se continuarmos, só eu vou sair vivo dessa luta.`,
+        `Está sendo um bom aquecimento, quando começamos a luta?.`]
+        console.log(`\nVocê disse: \n'${insultos[Math.floor(Math.random() * insultos.length)]}'\n`)
+        prompt(`[ENTER]`)
+    },
+    opcoesDeJogada: function(a) {
+        console.log()
+        console.log(`Escolha uma das opções: \n[1]Atacar \n[2]Insultar \n[3]Consultar Status`)
+        let opcao = +prompt(`Opção: `)
+        while (opcao != 1 && opcao != 2 && opcao != 3) {
+            console.log("\nNÚMERO INVÁLIDO!")
+            console.log(`Escolha uma das opções: \n[1]Atacar \n[2]Insultar \n[3]Consultar Status`)
+            opcao = +prompt(`Opção: `)
+        }
+        if (opcao == 1) {
+            let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+            if (a == "jhonny") {
+                jhonny.dano(numeroAleatorio)
+            } else if (a == 'amanda') {
+                amanda.dano(numeroAleatorio)
+            } else if (a == 'goblin') {
+                goblin.dano(numeroAleatorio)
+            } else if (a == 'elfoDaFloresta') {
+                elfoDaFloresta.dano(numeroAleatorio)
+            } else if (a == 'troll') {
+                troll.dano(numeroAleatorio)
+            } else if (a == 'dragao') {
+                dragao.dano(numeroAleatorio)
+            } else if (a == 'bruxa') {
+                bruxa.dano(numeroAleatorio)
+            } else if (a == 'cavaleiroFantasma') {
+                cavaleiroFantasma.dano(numeroAleatorio)
+            } else if (a == 'mordog') {
+                mordog.dano(numeroAleatorio)
+            } 
+            console.log()
+        } else if (opcao == 2){
+            this.insultar()
+        } else if (opcao == 3){
+            statusJogador.consultarStatus()
+            if (a == "jhonny") {
+                jhonny.consultarStatus()
+            } else if (a == 'amanda') {
+                amanda.consultarStatus()
+            } else if (a == 'goblin') {
+                goblin.consultarStatus()
+            } else if (a == 'elfoDaFloresta') {
+                elfoDaFloresta.consultarStatus()
+            } else if (a == 'troll') {
+                troll.consultarStatus()
+            } else if (a == 'dragao') {
+                dragao.consultarStatus()
+            } else if (a == 'bruxa') {
+                bruxa.consultarStatus()
+            } else if (a == 'cavaleiroFantasma') {
+                cavaleiroFantasma.consultarStatus()
+            } else if (a == 'mordog') {
+                mordog.consultarStatus()
+            }
+        }
+    }
+}
+const jhonny = {
+    nome: 'Jhonny',
+    nivel: 1,
+    descricao: 'Seu melhor amigo.',
+    vida: 100,
+    ataque: 20,
+    defesa: 10,
+    dinheiro: 20,
+    magia: 0,
+    consultarStatus: function(){    
+        console.log(`\nSTATUS DE JHONNY:`)
+        console.log(`Nome: ${this.nome}`)
+        console.log(`Nível: ${this.nivel}`)
+        console.log(`Descrição: ${this.descricao}`)
+        console.log(`Vida: ${this.vida}`)
+        console.log(`Ataque: ${this.ataque}`)
+        console.log(`Defesa: ${this.defesa}`)
+        console.log(`Dinheiro: ${this.dinheiro}`)
+        console.log(`Magia: ${this.magia}\n`)
+        prompt(`[ENTER]`)
+    },
+    dano: function(quantidade){
+        let a = quantidade - this.defesa
+        let b = quantidade > this.defesa ? a : 0
+        this.vida -= b
+        console.log()
+        if (b == 0){
+            console.log("Jhonny defendeu o ataque.")
+        }
+        if (this.vida < 0) {
+            console.log(`A vida de Jhonny acabou.`)
+            this.vida = 0
+        } else {
+            console.log(`Jhonny perdeu -${b} de vida.`)
+        }
+        console.log()
+        prompt(`[ENTER]`)
+    },
+    regeneracao: function(quantidade){
+        this.vida += quantidade
+        if (this.vida > 100) {
+            console.log(`\nA vida de Jhonny está cheia.\n`) 
+            this.vida = 100
+        } else {
+           console.log(`\nJhonny ganhou +${quantidade} de vida.\n`) 
+        }
+        prompt(`[ENTER]`)
+    },
+    gastarDinheiro: function(quantidade){
+        this.dinheiro -= quantidade
+        if (this.dinheiro < 0) {
+            console.log(`\nO dinheiro de Jhonny acabou.\n`)
+            this.dinheiro = 0
+        } else {
+           console.log(`\nJhonny perdeu -${quantidade} de dinheiro.\n`) 
+        }
+        prompt(`[ENTER]`)
+    },
+    ganharDinheiro: function(quantidade){
+        console.log(`\nJhonny ganhou +${quantidade} de dinheiro.\n`)
+        this.dinheiro += quantidade
+        prompt(`[ENTER]`)
+    },
+    aumentarAtaque: function(quantidade){
+        console.log(`\nO ataque de Jhonny aumentou em +${quantidade}.\n`)
+        this.ataque += quantidade
+        prompt(`[ENTER]`)
+    },
+    diminuirAtaque: function(quantidade){
+        console.log(`\nO ataque de Jhonny diminuiu em -${quantidade}.\n`)
+        this.ataque -= quantidade
+        if (this.ataque < 0) {
+            console.log(`\nO ataque de Jhonny chegou em 0.\n`)
+            this.ataque = 0
+        }
+        prompt(`[ENTER]`)
+    },
+    aumentarDefesa: function(quantidade){
+        console.log(`\nA defesa de Jhonny aumentou em +${quantidade}.\n`)
+        this.defesa += quantidade
+        prompt(`[ENTER]`)
+    },
+    diminuirDefesa: function(quantidade){
+        console.log(`\nA defesa de Jhonny diminuiu em -${quantidade}.\n`)
+        this.defesa -= quantidade
+        if (this.defesa < 0) {
+            console.log(`\nA defesa de Jhonny chegou em 0.\n`)
+            this.defesa = 0
+        }
+        prompt(`[ENTER]`)
+    },
+    jogada: function() {
+        let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+        statusJogador.dano(numeroAleatorio)
+    }
+}
+const amanda = {
+    nome: 'Amanda',
+    nivel: 1,
+    descricao: 'Sua melhor amiga.',
+    vida: 100,
+    ataque: 20,
+    defesa: 10,
+    dinheiro: 20,
+    magia: 0,
+    consultarStatus: function(){    
+        console.log(`\nSTATUS DE AMANDA:`)
+        console.log(`Nome: ${this.nome}`)
+        console.log(`Nível: ${this.nivel}`)
+        console.log(`Descrição: ${this.descricao}`)
+        console.log(`Vida: ${this.vida}`)
+        console.log(`Ataque: ${this.ataque}`)
+        console.log(`Defesa: ${this.defesa}`)
+        console.log(`Dinheiro: ${this.dinheiro}`)
+        console.log(`Magia: ${this.magia}\n`)
+        prompt(`[ENTER]`)
+    },
+    dano: function(quantidade){
+        let a = quantidade - this.defesa
+        let b = quantidade > this.defesa ? a : 0
+        this.vida -= b
+        console.log()
+        if (b == 0){
+            console.log("Amanda defendeu o ataque.")
+        }
+        if (this.vida < 0) {
+            console.log(`A vida de Amanda acabou.`)
+            this.vida = 0
+        } else {
+            console.log(`Amanda perdeu -${b} de vida.`)
+        }
+        console.log()
+        prompt(`[ENTER]`)
+    },
+    regeneracao: function(quantidade){
+        this.vida += quantidade
+        if (this.vida > 100) {
+            console.log(`\nA vida de Amanda está cheia.\n`) 
+            this.vida = 100
+        } else {
+           console.log(`\Amanda ganhou +${quantidade} de vida.\n`) 
+        }
+        prompt(`[ENTER]`)
+    },
+    gastarDinheiro: function(quantidade){
+        this.dinheiro -= quantidade
+        if (this.dinheiro < 0) {
+            console.log(`\nO dinheiro de Jhonny acabou.\n`)
+            this.dinheiro = 0
+        } else {
+           console.log(`\Amanda perdeu -${quantidade} de dinheiro.\n`) 
+        }
+        prompt(`[ENTER]`)
+    },
+    ganharDinheiro: function(quantidade){
+        console.log(`\Amanda ganhou +${quantidade} de dinheiro.\n`)
+        this.dinheiro += quantidade
+        prompt(`[ENTER]`)
+    },
+    aumentarAtaque: function(quantidade){
+        console.log(`\nO ataque de Amanda aumentou em +${quantidade}.\n`)
+        this.ataque += quantidade
+        prompt(`[ENTER]`)
+    },
+    diminuirAtaque: function(quantidade){
+        console.log(`\nO ataque de Amanda diminuiu em -${quantidade}.\n`)
+        this.ataque -= quantidade
+        if (this.ataque < 0) {
+            console.log(`\nO ataque de Amanda chegou em 0.\n`)
+            this.ataque = 0
+        }
+        prompt(`[ENTER]`)
+    },
+    aumentarDefesa: function(quantidade){
+        console.log(`\nA defesa de Amanda aumentou em +${quantidade}.\n`)
+        this.defesa += quantidade
+        prompt(`[ENTER]`)
+    },
+    diminuirDefesa: function(quantidade){
+        console.log(`\nA defesa de Amanda diminuiu em -${quantidade}.\n`)
+        this.defesa -= quantidade
+        if (this.defesa < 0) {
+            console.log(`\nA defesa de Amanda chegou em 0.\n`)
+            this.defesa = 0
+        }
+        prompt(`[ENTER]`)
+    },
+    jogada: function() {
+        let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+        statusJogador.dano(numeroAleatorio)
+    }
+}
+const goblin = {
+    nome: 'Goblin',
+    nivel: 1,
+    descricao: 'Baixinho, musculoso e raivoso',
+    vida: (100 * statusJogador.nivel),
+    ataque: (20 * statusJogador.nivel),
+    defesa: (10 * statusJogador.nivel),
+    dinheiro: 23,
+    magia: 0,
+    ataques: ["Estocada mortal", "Soco agressivo", "Voadora do trovão"],
+    consultarStatus: function(){    
+        console.log(`\nSTATUS DE GOBLIN:`)
+        console.log(`Nome: ${this.nome}`)
+        console.log(`Nível: ${this.nivel}`)
+        console.log(`Descrição: ${this.descricao}`)
+        console.log(`Vida: ${this.vida}`)
+        console.log(`Ataque: ${this.ataque}`)
+        console.log(`Defesa: ${this.defesa}`)
+        console.log(`Dinheiro: ${this.dinheiro}`)
+        console.log(`Magia: ${this.magia}\n`)
+        prompt(`[ENTER]`)
+    },
+    dano: function(quantidade){
+        let a = quantidade - this.defesa
+        let b = quantidade > this.defesa ? a : 0
+        this.vida -= b
+        console.log()
+        if (b == 0){
+            console.log("Goblin defendeu o ataque.")
+        }
+        if (this.vida < 0) {
+            console.log(`A vida de Goblin acabou.`)
+            this.vida = 0
+        } else {
+            console.log(`Goblin perdeu -${b} de vida.`)
+        }
+        console.log()
+        prompt(`[ENTER]`)
+    },
+    jogada: function() {
+        console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
+        let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+        statusJogador.dano(numeroAleatorio)
+    }
+}
+const elfoDaFloresta = {
+    nome: 'Elfo da Floresta',
+    nivel: 2,
+    descricao: 'Lutador de artes marciais, possui extrema conexão com a natureza.',
+    vida: (100 * statusJogador.nivel),
+    ataque: (20 * statusJogador.nivel),
+    defesa: (10 * statusJogador.nivel),
+    dinheiro: 60,
+    magia: 30,
+    ataques: ["Ataque da folha", "Golpe de karatê", "Socos super rápidos"],
+    consultarStatus: function(){    
+        console.log(`\nSTATUS DE ELFO DA FLORESTA:`)
+        console.log(`Nome: ${this.nome}`)
+        console.log(`Nível: ${this.nivel}`)
+        console.log(`Descrição: ${this.descricao}`)
+        console.log(`Vida: ${this.vida}`)
+        console.log(`Ataque: ${this.ataque}`)
+        console.log(`Defesa: ${this.defesa}`)
+        console.log(`Dinheiro: ${this.dinheiro}`)
+        console.log(`Magia: ${this.magia}\n`)
+        prompt(`[ENTER]`)
+    },
+    dano: function(quantidade){
+        let a = quantidade - this.defesa
+        let b = quantidade > this.defesa ? a : 0
+        this.vida -= b
+        console.log()
+        if (b == 0){
+            console.log("Elfo da Floresta defendeu o ataque.")
+        }
+        if (this.vida < 0) {
+            console.log(`A vida de Elfo da Floresta acabou.`)
+            this.vida = 0
+        } else {
+            console.log(`Elfo da Floresta perdeu -${b} de vida.`)
+        }
+        console.log()
+        prompt(`[ENTER]`)
+    },
+    jogada: function() {
+        console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
+        let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+        statusJogador.dano(numeroAleatorio)
+    }
+}
+const troll = {
+    nome: 'Troll',
+    nivel: 3,
+    descricao: 'O que não possui de inteligência, possui de força bruta.',
+    vida: (100 * statusJogador.nivel),
+    ataque: (20 * statusJogador.nivel),
+    defesa: (10 * statusJogador.nivel),
+    dinheiro: 82,
+    magia: 0,
+    ataques:["Mordida raivosa", "Punho giratório", "Cabeçada atordoante"],
+    consultarStatus: function(){    
+        console.log(`\nSTATUS DE TROLL:`)
+        console.log(`Nome: ${this.nome}`)
+        console.log(`Nível: ${this.nivel}`)
+        console.log(`Descrição: ${this.descricao}`)
+        console.log(`Vida: ${this.vida}`)
+        console.log(`Ataque: ${this.ataque}`)
+        console.log(`Defesa: ${this.defesa}`)
+        console.log(`Dinheiro: ${this.dinheiro}`)
+        console.log(`Magia: ${this.magia}\n`)
+        prompt(`[ENTER]`)
+    },
+    dano: function(quantidade){
+        let a = quantidade - this.defesa
+        let b = quantidade > this.defesa ? a : 0
+        this.vida -= b
+        console.log()
+        if (b == 0){
+            console.log("Troll defendeu o ataque.")
+        }
+        if (this.vida < 0) {
+            console.log(`A vida de Troll acabou.`)
+            this.vida = 0
+        } else {
+            console.log(`Troll perdeu -${b} de vida.`)
+        }
+        console.log()
+        prompt(`[ENTER]`)
+    },
+    jogada: function() {
+        console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
+        let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+        statusJogador.dano(numeroAleatorio)
+    }
+}
+const dragao = {
+    nome: 'Dragão',
+    nivel: 4,
+    descricao: 'Ser elegante que via e gospe fogo.',
+    vida: (100 * statusJogador.nivel),
+    ataque: (20 * statusJogador.nivel),
+    defesa: (10 * statusJogador.nivel),
+    dinheiro: 0,
+    magia: 10,
+    ataques:["Bola de fogo", "Ataque aéreo", "Fogo mortal"],
+    consultarStatus: function(){    
+        console.log(`\nSTATUS DE DRAGÃO:`)
+        console.log(`Nome: ${this.nome}`)
+        console.log(`Nível: ${this.nivel}`)
+        console.log(`Descrição: ${this.descricao}`)
+        console.log(`Vida: ${this.vida}`)
+        console.log(`Ataque: ${this.ataque}`)
+        console.log(`Defesa: ${this.defesa}`)
+        console.log(`Dinheiro: ${this.dinheiro}`)
+        console.log(`Magia: ${this.magia}\n`)
+        prompt(`[ENTER]`)
+    },
+    dano: function(quantidade){
+        let a = quantidade - this.defesa
+        let b = quantidade > this.defesa ? a : 0
+        this.vida -= b
+        console.log()
+        if (b == 0){
+            console.log("Dragão defendeu o ataque.")
+        }
+        if (this.vida < 0) {
+            console.log(`A vida de Dragão acabou.`)
+            this.vida = 0
+        } else {
+            console.log(`Dragão perdeu -${b} de vida.`)
+        }
+        console.log()
+        prompt(`[ENTER]`)
+    },
+    jogada: function() {
+        console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
+        let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+        statusJogador.dano(numeroAleatorio)
+    }
+}
+const bruxa = {
+    nome: 'Bruxa',
+    nivel: 5,
+    descricao: 'Feiticeira nata, inteligente e cartomante nas horas vagas.',
+    vida: (100 * statusJogador.nivel),
+    ataque: (20 * statusJogador.nivel),
+    defesa: (10 * statusJogador.nivel),
+    dinheiro: 320,
+    magia: 200,
+    ataques: ["Invocação de esqueletos", "Poção explosiva", "Feitiço venenoso"],
+    consultarStatus: function(){    
+        console.log(`\nSTATUS DE BRUXA:`)
+        console.log(`Nome: ${this.nome}`)
+        console.log(`Nível: ${this.nivel}`)
+        console.log(`Descrição: ${this.descricao}`)
+        console.log(`Vida: ${this.vida}`)
+        console.log(`Ataque: ${this.ataque}`)
+        console.log(`Defesa: ${this.defesa}`)
+        console.log(`Dinheiro: ${this.dinheiro}`)
+        console.log(`Magia: ${this.magia}\n`)
+        prompt(`[ENTER]`)
+    },
+    dano: function(quantidade){
+        let a = quantidade - this.defesa
+        let b = quantidade > this.defesa ? a : 0
+        this.vida -= b
+        console.log()
+        if (b == 0){
+            console.log("Bruxa defendeu o ataque.")
+        }
+        if (this.vida < 0) {
+            console.log(`A vida de Bruxa acabou.`)
+            this.vida = 0
+        } else {
+            console.log(`Bruxa perdeu -${b} de vida.`)
+        }
+        console.log()
+        prompt(`[ENTER]`)
+    },
+    jogada: function() {
+        console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
+        let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+        statusJogador.dano(numeroAleatorio)
+    }
+}
+const cavaleiroFantasma = {
+    nome: 'Cavaleiro Fantasma',
+    nivel: 6,
+    descricao: 'Guerreiro forte e muito habilidoso com sua espada.',
+    vida: (100 * statusJogador.nivel),
+    ataque: (20 * statusJogador.nivel),
+    defesa: (10 * statusJogador.nivel),
+    dinheiro: 210,
+    magia: 50,
+    ataques: ["Espada de fogo", "Lâmina da morte", "Investida rápida"],
+    consultarStatus: function(){    
+        console.log(`\nSTATUS DE CAVALEIRO FANTASMA:`)
+        console.log(`Nome: ${this.nome}`)
+        console.log(`Nível: ${this.nivel}`)
+        console.log(`Descrição: ${this.descricao}`)
+        console.log(`Vida: ${this.vida}`)
+        console.log(`Ataque: ${this.ataque}`)
+        console.log(`Defesa: ${this.defesa}`)
+        console.log(`Dinheiro: ${this.dinheiro}`)
+        console.log(`Magia: ${this.magia}\n`)
+        prompt(`[ENTER]`)
+    },
+    dano: function(quantidade){
+        let a = quantidade - this.defesa
+        let b = quantidade > this.defesa ? a : 0
+        this.vida -= b
+        console.log()
+        if (b == 0){
+            console.log("Cavaleiro Fantasma defendeu o ataque.")
+        }
+        if (this.vida < 0) {
+            console.log(`A vida de Cavaleiro Fantasma acabou.`)
+            this.vida = 0
+        } else {
+            console.log(`Cavaleiro Fantasma perdeu -${b} de vida.`)
+        }
+        console.log()
+        prompt(`[ENTER]`)
+    },
+    jogada: function() {
+        console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
+        let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+        statusJogador.dano(numeroAleatorio)
+    }
+}
+const mordog = {
+    nome: 'Mordog',
+    nivel: 'Infinito(∞)',
+    descricao: 'Possui o poder equivalente a 1 milhão de almas.',
+    vida: (100 * statusJogador.nivel),
+    ataque: (20 * statusJogador.nivel),
+    defesa: (10 * statusJogador.nivel),
+    dinheiro: 213123,
+    magia: 1000000,
+    ataques: [],
+    consultarStatus: function(){    
+        console.log(`\nSTATUS DE MORDOG:`)
+        console.log(`Nome: ${this.nome}`)
+        console.log(`Nível: ${this.nivel}`)
+        console.log(`Descrição: ${this.descricao}`)
+        console.log(`Vida: ${this.vida}`)
+        console.log(`Ataque: ${this.ataque}`)
+        console.log(`Defesa: ${this.defesa}`)
+        console.log(`Dinheiro: ${this.dinheiro}`)
+        console.log(`Magia: ${this.magia}\n`)
+        prompt(`[ENTER]`)
+    },
+    dano: function(quantidade){
+        let a = quantidade - this.defesa
+        let b = quantidade > this.defesa ? a : 0
+        this.vida -= b
+        console.log()
+        if (b == 0){
+            console.log("Mordog defendeu o ataque.")
+        }
+        if (this.vida < 0) {
+            console.log(`A vida de Mordog acabou.`)
+            this.vida = 0
+        } else {
+            console.log(`Mordog perdeu -${b} de vida.`)
+        }
+        console.log()
+        prompt(`[ENTER]`)
+    },
+    jogada: function() {
+        console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * this.ataques.length)]}\n`)
+        let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+        statusJogador.dano(numeroAleatorio)
+    }
+}
+function alteracao(b){
+    b.nivel = 1
+    b.vida = 100
+    b.ataque = 40
+    b.defesa = 10 
+    b.dinheiro = 0
+    b.magia = 0
+}
+console.log("A JORNADA DO HERÓI \nUma Ficção Interativa \n=====================")
+let jogador = prompt("Digite o nome do(a) jogador(a) para começar: ")
+while (jogador.length < 3) {
+    console.log("\nDigite um nome de, pelo menos, 3 letras.")
+    jogador = prompt("Digite o nome do(a) jogador(a) para começar: ")
+}
+statusJogador.nome = jogador
+console.log("\nOPÇÕES DE PERSONAGENS: \n[1] Um grande guerreiro, forte e destemido, em busca de uma boa aventura. \n[2] Uma guerreira habilidosa e valente, em busca de sua jornada para se tornar heroína.\n")
+let personagem = +prompt("Escolha um personagem. Número [1] ou [2]: ")
+while (personagem != 1 && personagem != 2) {
+    console.log("\nNÚMERO INVÁLIDO!")
+    personagem = +prompt("Escolha um personagem. Número [1] ou [2]: ")
+}
+statusJogador.consultarStatus()
+console.clear()
+statusJogador.aumentarTempo()
+console.log("======== \nO INÍCIO")
+prompt("\nEra uma linda semana de primavera na terra de Blue, as pássaros cantavam, as flores desabrochavam e as pessoas estavam felizem e em paz.... [ENTER]")
+if (personagem == 1) {
+    prompt("\nVocê, um conhecido guerreiro forte e destemido, teve de partir momentaneamente para ir comprar especiarias na cidade vizinha... [ENTER]")
+} else {
+    prompt("\nVocê, uma guerreira habilidosa e valente, teve de partir momentaneamente para ir comprar especiarias na cidade vizinha... [ENTER]")
+}
+console.clear()
+prompt("\nDurante o caminho de volta, ao ver sua cidade surgindo no horizonte, percebe fumaça e destruição em grande parte dela. Você acelera seu cavalo... [ENTER]")
+prompt(`\nAo entrar em sua cidade, um guarda real vêm ao seu encontro e diz: \n'${statusJogador.nome}, nosso rei precisa de sua presença o mais rápido possível!' [ENTER]`)
+console.clear()
+prompt("\nApós uma breve conversa com o rei de Blue, descobre que o ataque à cidade foi feito pelo poderoso bruxo Mordog, o qual rouba a alma dos seres vivos para aumentar seu poder... [ENTER}")
+prompt(`\nO rei disse: \n 'Dessa vez conseguimos conter Mordog e seu exército, mas com as almas que ele conseguiu tememos que venha mais forte da próxima vez.' [ENTER]`) 
+if (personagem == 1) {
+    prompt(`\n'${statusJogador.nome}, você já fez parte de minha guarda real, é o único guerreiro que pode deter Mordog!'[ENTER]`)
+} else {
+    prompt(`\n'${statusJogador.nome}, você já fez parte de minha guarda real, é a única guerreira que pode deter Mordog!'[ENTER]`)
+}
+console.clear()
+console.log("\nVocê aceita a missão de ir atrás do bruxo. Antes de deixar o salão, o rei lhe oferece um mapa de onde possivelmente Mordog se esconde.")
+let a = +prompt("Você pega o mapa? 1.[SIM] 2.[NÃO]: ")
+while (a != 1 && a != 2) {
+    console.log("\nNÚMERO INVÁLIDO!")
+    a = +prompt("Você pega o mapa? 1.[SIM] 2.[NÃO]: ")
+}
+if (a == 1) {
+    prompt("\nVocê pega o mapa e parte. [ENTER]")
+    statusJogador.mapa += 1
+    statusJogador.pontuacao += 1
+} else if ( a == 2) {
+    prompt("\nVocê diz:\n'Não preciso de mapas, já sei o caminho!' \n e parte. [ENTER]")
+}
+console.clear()
+console.log("\nVocê vai até sua casa e começa a se aprontar para a missão.")
+let b = +prompt("Vai levar sua espada? 1.[SIM] 2.[NÃO]: ")
+while (b != 1 && b != 2) {
+    console.log("\nNÚMERO INVÁLIDO!")
+    b = +prompt("Vai levar sua espada? 1.[SIM] 2.[NÃO]: ")
+}
+if (b == 1) {
+    prompt("\nVocê pega sua espada. [ENTER]")
+    statusJogador.aumentarAtaque(30)
+    prompt("Seu ataque aumentou em +30. [ENTER]")
+    statusJogador.pontuacao += 1
+    statusJogador.espada += 1
+} else if ( b == 2) {
+    prompt("\nVocê confia muito em seus punhos e decide não levar sua espada. [ENTER]")
+}
+console.clear()
+console.log("\nVocê se lembra do alerta que o rei lhe deu sobre os perigosos dragões que compõem o exército de Mordog.")
+let c = +prompt("Vai levar sua capa contra fogo? 1.[SIM] 2.[NÃO]: ")
+while (c != 1 && c != 2) {
+    console.log("\nNÚMERO INVÁLIDO!")
+    c = +prompt("Vai levar sua capa contra fogo? 1.[SIM] 2.[NÃO]: ")
+}
+if (c == 1) {
+    prompt("\nVocê veste sua linda capa contra fogo. [ENTER]")
+    statusJogador.pontuacao += 1
+    statusJogador.capa += 1
+} else if ( c == 2) {
+    prompt("\nVocê escolhe priorizar a agilidade e decide deixar sua armadura leve. [ENTER]")
+}
+console.clear()
+console.log()
+prompt("Após arrumar todas as coisas, visita seu vizinho elfo, que entende um pouco de magia e abençoa seu caminho. [ENTER]")
+console.log("\nEle disse, lhe oferecendo um colar e dois frascos: \n'Use esse amuleto em seu pescoço, vai proteger contra os feitiços do bruxo.'")
+console.log("'Leve também essa poção de cura, ela pode ser muito útil em algum momento.'")
+let d = +prompt("Você leva o amuleto e a poção? 1.[SIM] 2.[NÃO]: ")
+while (d != 1 && d != 2) {
+    console.log("\nNÚMERO INVÁLIDO!")
+    d = +prompt("Você leva o amuleto e as poção? 1.[SIM] 2.[NÃO]: ")
+}
+if (d == 1) {
+    prompt("\nVocê agradece pelos presentes, e coloca o amuleto em seu pescoço. [ENTER]")
+    statusJogador.aumentarMagia(50)
+    statusJogador.pontuacao += 1
+    statusJogador.amuleto += 1
+    statusJogador.pocao += 1
+} else if ( d == 2) {
+    prompt("\nVocê agradece pela benção, mas escolhe não levar os itens. [ENTER]")
+}
+console.clear()
+if (personagem == 1) {
+    console.log("\nPor um breve momento você pensa que, mesmo com toda sua habilidade e determinação, talvez seja difícil completar a missão sozinho.")
+    console.log("Você pensa em Jhonny, seu amigo que, assim como você, gosta de uma boa aventura e pode ajudar.\n")
+    let e = +prompt("Você convida Jhonny? 1.[SIM] 2.[NÃO]: ")
+    while (e != 1 && e != 2) {
+     console.log("\nNÚMERO INVÁLIDO!")
+     e = +prompt("Você convida Jhonny? 1.[SIM] 2.[NÃO]: ")
+}
+if (e == 1) {
+    prompt("\nVocê decide chamar seu amigo.[ENTER]")
+    statusJogador.pontuacao += 1
+    statusJogador.grupo += 1
+    console.clear()
+    console.log("\nJhonny diz que já faz muito tempo que não participa de uma batalha, vocês decidem simular uma luta para testar isso.")
+    prompt("[ENTER]")
+    console.log("\nVocês se dirigem até uma área aberta e, sem espadas, começam a luta.")
+    console.log("Você diz: \n'Me mostre o que você sabe fazer!'")
+    prompt("[ENTER]")
+    backup(1,statusJogador)
+    backup2(1,jhonny)
+    alteracao(statusJogador)
+    rodada = 0
+    while(true){
+        rodada++
+        console.clear()
+        console.log(`RODADA ${rodada}:`)
+        console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
+        console.log(`Vida ${jhonny.nome}: ${jhonny.vida}`)
+        console.log()
+        console.log("Jhonny ataca.")
+        jhonny.jogada()
+        statusJogador.opcoesDeJogada('jhonny')
+        if (jhonny.vida <= 50) {
+            break
+        }
+    }
+    backup(2,statusJogador)
+    backup2(2,jhonny)
+    console.clear()
+    console.log("'De fato não estou mais tão em forma como antigamente' \nDisse Jhonny.")
+    console.log("\nPor conta disso, seu amigo concorda em ajudar na viagem, ficando encarregado de cuidar dos mantimentos, enquanto você cuida dos inimigos.")
+    prompt("[ENTER]")
+    statusJogador.aumentarGrupo()
+    console.log()
+    prompt("Vocês partirão no dia seguinte. [ENTER]")
+} else if ( e == 2) {
+    prompt("\nVocê decide não chamar seu amigo e se prepara para partir no dia seguinte. [ENTER]")
+}
+} else {
+    console.log("\nPor um breve momento, você pensa que, mesmo com toda sua habilidade e determinação, talvez seja difícil completar a missão sozinha.")
+    console.log("Você pensa em Amanda, sua amiga que, assim como você, gosta de uma boa aventura e pode ajudar.\n")
+    let e = +prompt("Você convida Amanda? 1.[SIM] 2.[NÃO]: ")
+    while (e != 1 && e != 2) {
+     console.log("\nNÚMERO INVÁLIDO!")
+     e = +prompt("Você convida Amanda? 1.[SIM] 2.[NÃO]: ")
+}
+if (e == 1) {
+    prompt("\nVocê decide chamar sua amiga. [ENTER]")
+    statusJogador.pontuacao += 1
+    statusJogador.grupo += 1
+    console.clear()
+    console.log("\nAmanda diz que já faz muito tempo que não participa de uma batalha, vocês decidem simular uma luta para testar isso.")
+    prompt("[ENTER]")
+    console.log("\nVocês se dirigem até uma área aberta e, sem espadas, começam a luta.")
+    console.log("Você diz: \n'Me mostre o que você sabe fazer!'")
+    prompt("[ENTER]")
+    backup2(1,amanda)
+    backup(1,statusJogador)
+    alteracao(statusJogador)
+    rodada = 0
+    while(true){
+        rodada++
+        console.clear()
+        console.log(`RODADA ${rodada}:`)
+        console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
+        console.log(`Vida ${amanda.nome}: ${amanda.vida}`)
+        console.log()
+        console.log("Amanda ataca.")
+        amanda.jogada()
+        statusJogador.opcoesDeJogada('amanda')
+        if (amanda.vida <= 50) {
+            break
+        }
+    }
+    backup(2,statusJogador)
+    backup2(1,amanda)
+    console.clear()
+    console.log("'De fato não estou mais tão em forma como antigamente' \nDisse Amanda.")
+    console.log("\nPor conta disso, sua amiga concorda em ajudar na viagem, ficando encarregada de cuidar dos mantimentos, enquanto você cuida dos inimigos.")
+    prompt("[ENTER]")
+    statusJogador.aumentarGrupo()
+    console.log()
+    prompt("Vocês partirão no dia seguinte. [ENTER]")
+} else if ( e == 2) {
+    prompt("\nVocê decide não chamar sua amiga e se prepara para partir no dia seguinte. [ENTER]")
+}
+}
+console.clear()
+statusJogador.aumentarTempo()
+console.log("================ \nA AVENTURA COMEÇA")
+if (personagem == 1) {
+    if (statusJogador.grupo >= 1) {
+        console.log("\nAo deixar a cidade vocês sabem que esse pode ser um caminho sem volta...")
+        prompt("Mas sua paixão pela aventura e vontade de salvar seu povo falam mais alto. [ENTER]")
+        console.clear()
+        console.log("Vocês conversam enquanto caminham até seu objetivo:")
+        console.log(`\n'Sabe ${statusJogador.nome}, ouvi dizer que o exército de Mordog têm apenas 6 guerreiros, é realmente impressionante como ele consegue causar tanta destruição...'`)
+        console.log("Disse Jhonny.")
+        if (statusJogador.mapa == 1) {
+            prompt("\nVocês encontram facilmente seu caminho seguindo o mapa. [ENTER]")
+        }
+    } else {
+        console.log("\nAo deixar a cidade você sabe que esse pode ser um caminho sem volta...")
+        prompt("Mas sua paixão pela aventura e vontade de salvar seu povo falam mais alto. [ENTER]")
+        console.clear()
+        console.log("Você pensa caminham até seu objetivo:")
+        console.log("\n'Ouvi dizer que o exército de Mordog têm apenas 6 guerreiros, é realmente impressionante como ele consegue causar tanta destruição...'")
+        if (statusJogador.mapa == 1) {
+            prompt("\nVocês encontra facilmente seu caminho seguindo o mapa. [ENTER]")
+        }
+    }
+} else {
+    if (statusJogador.grupo >= 1) {
+        console.log("\nAo deixar a cidade vocês sabem que esse pode ser um caminho sem volta...")
+        prompt("Mas sua paixão pela aventura e vontade de salvar seu povo falam mais alto. [ENTER]")
+        console.clear()
+        console.log("Vocês conversam enquanto caminham até seu objetivo:")
+        console.log(`\n'Sabe ${statusJogador.nome}, ouvi dizer que o exército de Mordog têm apenas 6 guerreiros, é realmente impressionante como ele consegue causar tanta destruição...'`)
+        console.log("Disse Amanda.")
+        if (statusJogador.mapa == 1) {
+            prompt("\nVocês encontram facilmente seu caminho seguindo o mapa. [ENTER]")
+        }
+    } else {
+        console.log("\nAo deixar a cidade você sabe que esse pode ser um caminho sem volta...")
+        prompt("Mas sua paixão pela aventura e vontade de salvar seu povo falam mais alto. [ENTER]")
+        console.clear()
+        console.log("Você pensa caminham até seu objetivo:")
+        console.log("\n'Ouvi dizer que o exército de Mordog têm apenas 6 guerreiros, é realmente impressionante como ele consegue causar tanta destruição...'")
+        if (statusJogador.mapa == 1) {
+            prompt("\nVocê encontram facilmente seu caminho seguindo o mapa. [ENTER]")
+        }
+    }
+}
+console.clear()
+if (personagem == 1) {
+    if (statusJogador.grupo >= 1) {
+        prompt("No caminho vocês se deparam com uma ser baixinho e musculoso que os recebe aos gritos: [ENTER]")
+        console.log("\n'Sou o guerreiro Goblin do exército de Mordog, vocês jamais passarão por mim!'")
+        prompt("Disse o Goblin se lançando contra vocês de maneira deselegante. [ENTER]")
+        if (statusJogador.espada == 1) {
+            prompt("\nVocê saca sua espada... [ENTER]")
+        }
+        backup(1,statusJogador)
+        rodada = 0
+        while(true){
+            rodada++
+            console.clear()
+            console.log(`RODADA ${rodada}:`)
+            console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
+            console.log(`Vida ${goblin.nome}: ${goblin.vida}`)
+            console.log()
+            console.log("O Goblin ataca.")
+            goblin.jogada()
+            statusJogador.opcoesDeJogada('goblin')
+            if (goblin.vida <= 0) {
+                break
+            }
+        }
+        backup(2,statusJogador)
+    } else {
+        prompt("No caminho você se depara com uma ser baixinho e musculoso que o recebe aos gritos: [ENTER]")
+        console.log("\n'Sou o guerreiro Goblin do exército de Mordog, você jamais passará por mim!'")
+        prompt("Disse o Goblin se lançando contra você de maneira deselegante. [ENTER]")
+        if (statusJogador.espada == 1) {
+            prompt("\nVocê saca sua espada... [ENTER]")
+        }
+        backup(1,statusJogador)
+        rodada = 0
+        while(true){
+            rodada++
+            console.clear()
+            console.log(`RODADA ${rodada}:`)
+            console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
+            console.log(`Vida ${goblin.nome}: ${goblin.vida}`)
+            console.log()
+            console.log("O Goblin ataca.")
+            goblin.jogada()
+            statusJogador.opcoesDeJogada('goblin')
+            if (goblin.vida <= 0) {
+                break
+            }
+        }
+        backup(2,statusJogador)
+    }
+} else if (personagem == 2) {
+    if (statusJogador.grupo >= 1) {
+        prompt("No caminho vocês se deparam com uma ser baixinho e musculoso que os recebe aos gritos: [ENTER]")
+        console.log("\n'Sou o guerreiro Goblin do exército de Mordog, vocês jamais passarão por mim!'")
+        prompt("Disse o Goblin se lançando contra vocês de maneira deselegante. [ENTER]")
+        if (statusJogador.espada == 1) {
+            prompt("\nVocê saca sua espada... [ENTER]")
+        }
+        backup(1,statusJogador)
+        rodada = 0
+        while(true){
+            rodada++
+            console.clear()
+            console.log(`RODADA ${rodada}:`)
+            console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
+            console.log(`Vida ${goblin.nome}: ${goblin.vida}`)
+            console.log()
+            console.log("O Goblin ataca.")
+            goblin.jogada()
+            statusJogador.opcoesDeJogada('goblin')
+            if (goblin.vida <= 0) {
+                break
+            }
+        }
+        backup(2,statusJogador)
+    } else {
+        prompt("No caminho você se depara com uma ser baixinho e musculoso que o recebe aos gritos: [ENTER]")
+        console.log("\n'Sou o guerreiro Goblin do exército de Mordog, você jamais passará por mim!'")
+        prompt("Disse o Goblin se lançando contra você de maneira deselegante. [ENTER]")
+        if (statusJogador.espada == 1) {
+            prompt("\nVocê saca sua espada... [ENTER]")
+        }
+        backup(1,statusJogador)
+        rodada = 0
+        while(true){
+            rodada++
+            console.clear()
+            console.log(`RODADA ${rodada}:`)
+            console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
+            console.log(`Vida ${goblin.nome}: ${goblin.vida}`)
+            console.log()
+            console.log("O Goblin ataca.")
+            goblin.jogada()
+            statusJogador.opcoesDeJogada('goblin')
+            if (goblin.vida <= 0) {
+                break
+            }
+        }
+        backup(2,statusJogador)
+    }
+}
+console.clear()
+console.log("'Não consigo acreditar que fui derrotado por um humano...'")
+console.log("Disse o Goblin sem conseguir acreditar que tinha sido derrotado.\n")
+let escolha1 = +prompt("O que você faz? [1]MATAR [2]POUPAR: ")
+while(escolha1 != 1 && escolha1 != 2) {
+    console.log("\nNÚMERO INVÁLIDO!")
+    escolha1 = +prompt("O que você faz? [1]MATAR [2]POUPAR: ")
+}
+if (escolha1 == 1){
+    console.log("\nVocê mata o inimigo e segue seu caminho.")
+    kills++
+} else if (escolha1 == 2){
+    console.clear()
+    console.log()
+    prompt("'O quê? Você está me poupando?' [ENTER]")
+    console.log()
+    prompt("'Pois então deixe-me contar um segredo sobre meu mestre...' [ENTER]")
+    prompt("'Mordog é extremamente poderoso, mesmo que consiga chegar até ele, é impossível derrotá-lo com todas as almas que ele já possui.' [ENTER]")
+    if (statusJogador.grupo >= 1) {
+        console.log("\n'Mas talvez vocês tenham alguma chance enquanto ele se recupera da última batalha, vocês têm apenas 6 dias.'\n")
+    } else {
+        console.log("\n'Mas talvez você tenha alguma chance enquanto ele se recupera da última batalha, você têm apenas 6 dias.'\n")
+    }
+    prompt("O Goblin sai correndo e desaparece na floresta. [ENTER]")
+}
+statusJogador.aumentarNivel()
+console.clear()
+statusJogador.aumentarTempo()
+console.log("================ \nPERDIDOS NA FLORESTA")
+console.log()
+if (personagem == 1) {
+    if (statusJogador.grupo >= 1) {
+        prompt("Após terem derrotado o Goblin, você e Jhonny encontram-se passando pelo meio de uma floresta muito densa.[ENTER]")
+        if (kills == 0) {
+            console.log("\n'Você ouviu o que o Goblin falou? temos que nos apressar se quisermos derrotar o inimigo.'")
+            prompt("Disse Jhonny. [ENTER]")
+        } else {
+            console.log("\n'Temos que nos apressar se quisermos chegar antes que Mordog se recupere da última batalha.'")
+            prompt("Disse Jhonny. [ENTER]")
+        }
+    } else {
+        prompt("Após ter derrotado o Goblin, você encontra-se passando pelo meio de uma floresta muito densa.[ENTER]")
+        if (kills == 0) {
+            console.log("\nVocê lembra do que o Goblin falou e caminha mais rápido para chegar ao destino o quanto antes.")
+            prompt("[ENTER]")
+        } else {
+            console.log("\nVocê caminha mais rápido para chegar ao destino antes que Mordog se recupere da última batalha.")
+            prompt("[ENTER]")
+        }
+    }
+} else if (personagem == 2) {
+    if (statusJogador.grupo >= 1) {
+        prompt("Após terem derrotado o Goblin, você e Amanda encontram-se passando pelo meio de uma floresta muito densa.[ENTER]")
+        if (kills == 0) {
+            console.log("\n'Você ouviu o que o Goblin falou? temos que nos apressar se quisermos derrotar o inimigo.'")
+            prompt("Disse Amanda. [ENTER]")
+        } else {
+            console.log("\n'Temos que nos apressar se quisermos chegar antes que Mordog se recupere da última batalha.'")
+            prompt("Disse Amanda. [ENTER]")
+        }
+    } else {
+        prompt("Após ter derrotado o Goblin, você encontra-se passando pelo meio de uma floresta muito densa.[ENTER]")
+        if (kills == 0) {
+            console.log("\nVocê lembra do que o Goblin falou e caminha mais rápido para chegar ao destino o quanto antes.")
+            prompt("[ENTER]")
+        } else {
+            console.log("\nVocê caminha mais rápido para chegar ao destino antes que Mordog se recupere da última batalha.")
+            prompt("[ENTER]")
+        }
+    }
+}
+console.clear()
+if (personagem == 1) {
+    if (statusJogador.grupo >= 1) {
+        prompt("Ao longe vocês avistam um elfo em cima de uma árvore. Ele é magro e está com uma linda roupa feita de folhas e cordas biodegradáveis. [ENTER]")
+        console.log("\n'Que interessante, vocês conseguiram passar pelo meu amigo.'")
+        console.log("'Infelizmente vocês não terão tanta sorte contra mim.'")
+        prompt("Disse o Elfo saltando da árvore. [ENTER]")
+    } else {
+        prompt("Ao longe você avista um elfo em cima de uma árvore. Ele é magro e está com uma linda roupa feita de folhas e cordas biodegradáveis. [ENTER]")
+        console.log("\n'Que interessante, você conseguiu passar pelo meu amigo.'")
+        console.log("'Infelizmente não terá tanta sorte contra mim.'")
+        prompt("Disse o Elfo saltando da árvore. [ENTER]")
+    }
+} else if (personagem == 2) {
+    if (statusJogador.grupo >= 1) {
+        prompt("Ao longe vocês avistam um elfo em cima de uma árvore. Ele é magro e está com uma linda roupa feita de folhas e cordas biodegradáveis. [ENTER]")
+        console.log("\n'Que interessante, vocês conseguiram passar pelo meu amigo.'")
+        console.log("'Infelizmente vocês não terão tanta sorte contra mim.'")
+        prompt("Disse o Elfo saltando da árvore. [ENTER]")
+    } else {
+        prompt("Ao longe você avista um elfo em cima de uma árvore. Ele é magro e está com uma linda roupa feita de folhas e cordas biodegradáveis. [ENTER]")
+        console.log("\n'Que interessante, você conseguiu passar pelo meu amigo.'")
+        console.log("'Infelizmente não terá tanta sorte contra mim.'")
+        prompt("Disse o Elfo saltando da árvore. [ENTER]")
+    }
+}
+backup(1,statusJogador)
+rodada = 0
+while(true){
+    rodada++
+    console.clear()
+    console.log(`RODADA ${rodada}:`)
+    console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
+    console.log(`Vida ${elfoDaFloresta.nome}: ${elfoDaFloresta.vida}`)
+    console.log()
+    console.log("O Elfo da Floresta ataca.")
+    elfoDaFloresta.jogada()
+    statusJogador.opcoesDeJogada('elfoDaFloresta')
+    if (elfoDaFloresta.vida <= 0) {
+        break
+    }
+}backup(2,statusJogador)
+console.clear()
+console.log("'Você é mais forte do que eu pensava. É digno da vitória!'\n")
+let escolha2 = +prompt("O que você faz? [1]MATAR [2]POUPAR: ")
+while(escolha2 != 1 && escolha2 != 2) {
+    console.log("\nNÚMERO INVÁLIDO!")
+    escolha2 = +prompt("O que você faz? [1]MATAR [2]POUPAR: ")
+}
+if (personagem == 1) {
+    if (statusJogador.grupo >= 1) {
+        if (escolha2 == 1){
+            console.log("\nVocê tira a vida do elfo e continua sua jornada.")
+            kills++
+        } else if (escolha2 == 2 && kills == 0) {
+            console.log("'\nVocês são mesmo guerreiros de coração puro.'")
+            prompt("[ENTER]")
+            console.clear()
+            console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
+            prompt("'Poucos sabem o que o fez mudar.'[ENTER]")
+            console.log()
+            console.log("O Elfo da Floresta faz uma reverência e vai embora.")
+        } else if (escolha2 == 2) {
+            console.log("'\nAgradeço por pouparem minha vida, esperava que meu amigo tivesse tido essa mesma sorte.'")
+            prompt("[ENTER]")
+            console.clear()
+            console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
+            prompt("'Poucos sabem o que o fez mudar.'[ENTER]")
+            console.log()
+            console.log("O Elfo da Floresta faz uma reverência e vai embora.")
+        }
+    } else {
+        if (escolha2 == 1){
+            console.log("\nVocê tira a vida do elfo e continua sua jornada.")
+            kills++
+        } else if (escolha2 == 2 && kills == 0) {
+            console.log("'\nVocê é mesmo um guerreiro de coração puro.'")
+            prompt("[ENTER]")
+            console.clear()
+            console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
+            prompt("'Poucos sabem o que o fez mudar.'[ENTER]")
+            console.log()
+            console.log("O Elfo da Floresta faz uma reverência e vai embora.")
+        } else if (escolha2 == 2) {
+            console.log("'\nAgradeço por poupar minha vida, esperava que meu amigo tivesse tido essa mesma sorte.'")
+            prompt("[ENTER]")
+            console.clear()
+            console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
+            prompt("'Poucos sabem o que o fez mudar.'[ENTER]")
+            console.log()
+            console.log("O Elfo da Floresta faz uma reverência e vai embora.")
+        }
+    }
+} else if (personagem == 2) {
+    if (statusJogador.grupo >= 1) {
+        if (escolha2 == 1){
+            console.log("\nVocê tira a vida do elfo e continua sua jornada.")
+            kills++
+        } else if (escolha2 == 2 && kills == 0) {
+            console.log("'\nVocês são mesmo guerreiras de coração puro.'")
+            prompt("[ENTER]")
+            console.clear()
+            console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
+            prompt("'Poucos sabem o que o fez mudar.'[ENTER]")
+            console.log()
+            console.log("O Elfo da Floresta faz uma reverência e vai embora.")
+        } else if (escolha2 == 2) {
+            console.log("'\nAgradeço por pouparem minha vida, esperava que meu amigo tivesse tido essa mesma sorte.'")
+            prompt("[ENTER]")
+            console.clear()
+            console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
+            prompt("'Poucos sabem o que o fez mudar.'[ENTER]")
+            console.log()
+            console.log("O Elfo da Floresta faz uma reverência e vai embora.")
+        }
+    } else {
+        if (escolha2 == 1){
+            console.log("\nVocê tira a vida do elfo e continua sua jornada.")
+            kills++
+        } else if (escolha2 == 2 && kills == 0) {
+            console.log("'\nVocê é mesmo uma guerreira de coração puro.'")
+            prompt("[ENTER]")
+            console.clear()
+            console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
+            prompt("'Poucos sabem o que o fez mudar.'[ENTER]")
+            console.log()
+            console.log("O Elfo da Floresta faz uma reverência e vai embora.")
+        } else if (escolha2 == 2) {
+            console.log("'\nAgradeço por poupar minha vida, esperava que meu amigo tivesse tido essa mesma sorte.'")
+            prompt("[ENTER]")
+            console.clear()
+            console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
+            prompt("'Poucos sabem o que o fez mudar.'[ENTER]")
+            console.log()
+            console.log("O Elfo da Floresta faz uma reverência e vai embora.")
+        }
+    } 
+}
+statusJogador.aumentarNivel()
+console.clear()
+statusJogador.aumentarTempo()
+console.log("================ \nATAQUE NOTURNO")
+console.log()
+if (personagem == 1) {
+    if (statusJogador.grupo >= 1) {
+        console.log("Você dormia. Jhonny estava de vigia do lado de fora da barraca.")
+        prompt("Foi então quando um barulho de passos os assustou, passos que faziam tremer o chão abaixo de vocês. [ENTER]")
+        console.log("\nO ser gigante lhes pergunta: ")
+        console.log("'Fiquei sabendo que dois humanos estão passando aqui perto. Eu vim acabar com eles antes que cheguem no meu mestre.'")
+        console.log("'Vocês viram eles?'\n")
+        console.log("O que você responde? \n[1]SOMOS NÓS \n[2]NÃO VIMOS ELES")
+        let a = prompt("Resposta: ")
+        if (a == 2) {
+            console.log()
+            prompt("'Ah ok, descupem atrapalhar seu sono.' [ENTER]")
+            console.log("Um momento, vocês estão tentando me enganar?")
+            prompt("[ENTER]")
+        } else {
+            console.log("\n'Encontrei vocês!'")
+            prompt("[ENTER]")
+        }
+    } else {
+        prompt("Você dormia. Foi então quando um barulho de passos o acordou, passos que faziam tremer o chão abaixo de você. [ENTER]")
+        console.log("\nO ser gigante lhe pergunta: ")
+        console.log("'Fiquei sabendo que um humano está passando aqui perto. Eu vim acabar com ele antes que chegue no meu mestre.'")
+        console.log("'Você viu ele?'\n")
+        console.log("O que você responde? \n[1]SOU EU \n[2]NÃO VI ELE")
+        let a = prompt("Resposta: ")
+        if (a == 2) {
+            console.log()
+            prompt("'Ah ok, descupe atrapalhar seu sono.' [ENTER]")
+            console.log("Um momento, você está tentando me enganar?")
+            prompt("[ENTER]")
+        } else {
+            console.log("\n'Encontrei você!'")
+            prompt("[ENTER]")
+        }
+    }
+} else if (personagem == 2) {
+    if (statusJogador.grupo >= 1) {
+        console.log("Você dormia. Amanda estava de vigia do lado de fora da barraca.")
+        prompt("Foi então quando um barulho de passos as assustou, passos que faziam tremer o chão abaixo de vocês. [ENTER]")
+        console.log("\nO ser gigante lhes pergunta: ")
+        console.log("'Fiquei sabendo que duas humanas estão passando aqui perto. Eu vim acabar com elas antes que cheguem no meu mestre.'")
+        console.log("'Vocês viram elas?'\n")
+        console.log("O que você responde? \n[1]SOMOS NÓS \n[2]NÃO VIMOS ELAS")
+        let a = prompt("Resposta: ")
+        if (a == 2) {
+            console.log()
+            prompt("'Ah ok, descupem atrapalhar seu sono.' [ENTER]")
+            console.log("Um momento, vocês estão tentando me enganar?")
+            prompt("[ENTER]")
+        } else {
+            console.log("\n'Encontrei vocês!'")
+            prompt("[ENTER]")
+        }
+    } else {
+        prompt("Você dormia. Foi então quando um barulho de passos a acordou, passos que faziam tremer o chão abaixo de você. [ENTER]")
+        console.log("\nO ser gigante lhe pergunta: ")
+        console.log("'Fiquei sabendo que uma humana está passando aqui perto. Eu vim acabar com ela antes que chegue no meu mestre.'")
+        console.log("'Você viu ela?'\n")
+        console.log("O que você responde? \n[1]SOU EU \n[2]NÃO VI ELA")
+        let a = prompt("Resposta: ")
+        if (a == 2) {
+            console.log()
+            prompt("'Ah ok, descupe atrapalhar seu sono.' [ENTER]")
+            console.log("Um momento, você está tentando me enganar?")
+            prompt("[ENTER]")
+        } else {
+            console.log("\n'Encontrei você!'")
+            prompt("[ENTER]")
+        }
+    }
+}
+backup(1,statusJogador)
+rodada = 0
+while(true){
+    rodada++
+    console.clear()
+    console.log(`RODADA ${rodada}:`)
+    console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
+    console.log(`Vida ${troll.nome}: ${troll.vida}`)
+    console.log()
+    console.log("O Troll ataca.")
+    troll.jogada()
+    statusJogador.opcoesDeJogada('troll')
+    if (troll.vida <= 0) {
+        break
+    }
+}
+backup(2,statusJogador)
+console.clear()
+if (personagem == 1) {
+    if (statusJogador.grupo >= 1) {
+        console.log("'Como humanos tão pequeninos conseguem me derrotar?'")
+        console.log("'Talvez eu esteja ficando velho para essas batalhas.'") 
+        prompt("Disse o Troll chateado. [ENTER]")
+    } else {
+        console.log("'Como um humano tão pequenino consegue me derrotar?'")
+        console.log("'Talvez eu esteja ficando velho para essas batalhas.'") 
+        prompt("Disse o Troll chateado. [ENTER]")
+    }
+} else if (personagem == 2) {
+    if (statusJogador.grupo >= 1) {
+        console.log("'Como humanas tão pequeninas conseguem me derrotar?'")
+        console.log("'Talvez eu esteja ficando velho para essas batalhas.'") 
+        prompt("Disse o Troll chateado. [ENTER]")
+    } else {
+        console.log("'Como uma humana tão pequenina consegue me derrotar?'")
+        console.log("'Talvez eu esteja ficando velho para essas batalhas.'") 
+        prompt("Disse o Troll chateado. [ENTER]")
+    }
+}
+console.log()
+let escolha3 = +prompt("O que você faz? [1]MATAR [2]POUPAR: ")
+while(escolha3 != 1 && escolha3 != 2) {
+    console.log("\nNÚMERO INVÁLIDO!")
+    escolha3 = +prompt("O que você faz? [1]MATAR [2]POUPAR: ")
+}
+if (escolha3 == 1){
+    console.log("\nVocê acaba com o Troll e vai preparar o café da manhã.")
+} else if (escolha3 == 2){
+    console.clear()
+    console.log("O Troll fica perplexo e diz:")
+    prompt("'Nunca havia visto tamanha compaixão vinda da raça humana. Obrigado!' [ENTER]")
+    console.log("\n'Sei o objetivo de sua missão. Mas saiba que Mordog sempre foi uma pessoa boa, e seu objetivo sempre foi nobre.'")
+    prompt("'Por isso eu e os outros 5 guerreiros o seguimos.' [ENTER]")
+    console.log("\nO Troll retorna para sua caverna antes que o sol apareça e o transforme em pedra.")
+    prompt("[ENTER]")
+}
+statusJogador.aumentarNivel()
+console.clear()
+statusJogador.aumentarTempo()
+console.log("================ \nCHAMAS DA DESTRUIÇÃO")
+console.log()
+if (personagem == 1) {
+    if (statusJogador.grupo >= 1) {
+        console.log("Após serem surpreendidos pelo Troll ontem de madrugada, vocês agora ficam mais atentos.\n")
+        console.log("'Se aquele Troll não fosse tão pesado, talvez nós nem teríamos visto sua chegada.'")
+        prompt("Disse Jhonny. [ENTER]")
+        console.log("\nVocês se alegram por estarem na metade do caminho. A jornada está mesmo longa.")
+        prompt("[ENTER]")
+        console.clear()
+        prompt("De repente vocês avistam uma sombra no horizonte voando em sua direção. [ENTER]")
+        console.log("Um Grande Dragão aparece e enche o céu sob vocês de chamas.")
+        prompt("[ENTER]")
+        if (statusJogador.capa == 1) {
+            console.log()
+            prompt("Ainda bem que você trouxe sua capa contra fogo... [ENTER]")
+        }
+    } else {
+        console.log("Após ser surpreendido pelo Troll ontem de madrugada, você agora fica mais atento.\n")
+        console.log("Se aquele Troll não fosse tão pesado, talvez eu nem teria visto sua chegada.")
+        prompt("Você pensa. [ENTER]")
+        console.log("\nVocê se alegra por estar na metade do caminho. A jornada está mesmo longa.")
+        prompt("[ENTER]")
+        console.clear()
+        prompt("De repente você avista uma sombra no horizonte voando em sua direção. [ENTER]")
+        console.log("Um Grande Dragão aparece e enche o céu sob você de chamas.")
+        prompt("[ENTER]")
+        if (statusJogador.capa == 1) {
+            console.log()
+            prompt("Ainda bem que você trouxe sua capa contra fogo... [ENTER]")
+        }
+    }
+} else if (personagem == 2) {
+    if (statusJogador.grupo >= 1) {
+        console.log("Após serem surpreendidas pelo Troll ontem de madrugada, vocês agora ficam mais atentas.\n")
+        console.log("'Se aquele Troll não fosse tão pesado, talvez nós nem teríamos visto sua chegada.'")
+        prompt("Disse Amanda. [ENTER]")
+        console.log("\nVocês se alegram por estarem na metade do caminho. A jornada está mesmo longa.")
+        prompt("[ENTER]")
+        console.clear()
+        prompt("De repente vocês avistam uma sombra no horizonte voando em sua direção. [ENTER]")
+        console.log("Um Grande Dragão aparece e enche o céu sob vocês de chamas.")
+        prompt("[ENTER]")
+        if (statusJogador.capa == 1) {
+            console.log()
+            prompt("Ainda bem que você trouxe sua capa contra fogo... [ENTER]")
+        }
+    } else {
+        console.log("Após ser surpreendida pelo Troll ontem de madrugada, você agora fica mais atenta.\n")
+        console.log("Se aquele Troll não fosse tão pesado, talvez eu nem teria visto sua chegada.")
+        prompt("Você pensa. [ENTER]")
+        console.log("\nVocê se alegra por estar na metade do caminho. A jornada está mesmo longa.")
+        prompt("[ENTER]")
+        console.clear()
+        prompt("De repente você avista uma sombra no horizonte voando em sua direção. [ENTER]")
+        console.log("Um Grande Dragão aparece e enche o céu sob você de chamas.")
+        prompt("[ENTER]")
+        if (statusJogador.capa == 1) {
+            console.log()
+            prompt("Ainda bem que você trouxe sua capa contra fogo... [ENTER]")
+        }
+    }
+}
+backup(1,statusJogador)
+rodada = 0
+while(true){
+    rodada++
+    console.clear()
+    console.log(`RODADA ${rodada}:`)
+    console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
+    console.log(`Vida ${dragao.nome}: ${dragao.vida}`)
+    console.log()
+    console.log("O Dragão ataca.")
+    dragao.jogada()
+    statusJogador.opcoesDeJogada('dragao')
+    if (dragao.vida <= 0) {
+        break
+    }
+}
+backup(2,statusJogador)
+console.clear()
+statusJogador.aumentarNivel()
+//////  
+console.clear()
+if (statusJogador.mapa == 1) {
+    prompt("\nApesar de ter sido um caminho longo, foi fácil encontrar o esconderijo do bruxo com o mapa. [ENTER]")
+} else {
+    prompt("\nFoi difícil encontrar o esconderijo do bruxo sem o mapa, mas você conseguiu. [ENTER]")
+}
+if (statusJogador.espada == 1) {
+    prompt("\nA espada foi de grande ajuda para derrotar os inimigos. [ENTER]")
+} else {
+    prompt("\nDerrotar os inimigos foi muito mais diícil sem sua espada. [ENTER]")
+}
+if (statusJogador.capa == 1) {
+    prompt("\nVocê se protegeu muito bem do fogo dos dragões com sua linda capa. [ENTER]")
+} else {
+    prompt("\nVocê acabou sofrendo queimaduras pelo fogo dos dragões. [ENTER]")
+}
+if (statusJogador.amuleto == 1) {
+    prompt("\nO bruxo ficou surpreso ao perceber que você era imune aos feitiços dele, graças ao seu amuleto mágico. [ENTER]")
+} else {
+    prompt("\nVocê teve dificuldades em lutar contra os feitiços do bruxo, ele era mesmo muito poderoso. [ENTER]")
+}
+if (personagem == 1) {
+    if (statusJogador.grupo == 1) {
+        prompt("\nVocê não teria chegado tão longe sem seu amigo, ele realmente foi de grande ajuda. [ENTER]")
+    } else {
+        prompt("\nÉ muito difícil finalizar uma jornda desse tipo sem companhia, mas você estava muito confiante. [ENTER]")
+    }
+} else {
+    if (statusJogador.grupo == 1) {
+        prompt("\nVocê não teria chegado tão longe sem sua amiga, ela realmente foi de grande ajuda. [ENTER]")
+    } else {
+        prompt("\nÉ muito difícil finalizar uma jornda desse tipo sem companhia, mas você estava muito confiante. [ENTER]")
+    }
+}
+if (personagem == 1) {
+ if (statusJogador.pontuacao == 0) {
+    console.log(`\nVOCÊ NÃO CONSEGUIU CHEGAR NEM PERTO DE DETER MORDOG.`)
+ } else if (statusJogador.pontuacao == 1 || statusJogador.pontuacao == 2) {
+    console.log(`\nVOCÊ NÃO CONSEGUIU DETER MORDOG.`)
+ } else if (statusJogador.pontuacao == 3) {
+    console.log(`\nVOCÊ CONSEGUIU DETER MORDOG, MAS INFELIZMENTE NÃO SOBREVIVEU À BATALHA.`)
+ } else if (statusJogador.pontuacao == 4) {    
+    console.log(`\nAPESAR DE TER SIDO UMA BATALHA DIFÍCIL, VOCÊ CONSEGUIU DETER MORDOG E SE TORNOU UM HERÓI!`)
+ } else if (statusJogador.pontuacao == 5) {
+    console.log(`\nVOCÊ CONSEGUIU DETER MORDOG, SALVOU SUA CIDADE E SE TORNOU UM HERÓI. SUA HISTÓRIA SERÁ LEMBRADA POR VÁRIAS GERAÇÕES!`)
+ }
+} else {
+  if (statusJogador.pontuacao == 0) {
+    console.log(`\nVOCÊ NÃO CONSEGUIU CHEGAR NEM PERTO DE DETER MORDOG.`)
+ } else if (statusJogador.pontuacao == 1 || statusJogador.pontuacao == 2) {
+    console.log(`\nVOCÊ NÃO CONSEGUIU DETER MORDOG.`)
+ } else if (statusJogador.pontuacao == 3) {
+    console.log(`\nVOCÊ CONSEGUIU DETER MORDOG, MAS INFELIZMENTE NÃO SOBREVIVEU À BATALHA.`)
+ } else if (statusJogador.pontuacao == 4) {    
+    console.log(`\nAPESAR DE TER SIDO UMA BATALHA DIFÍCIL, VOCÊ CONSEGUIU DETER MORDOG E SE TORNOU UMA HEROÍNA!`)
+ } else if (statusJogador.pontuacao == 5) {
+    console.log(`\nVOCÊ CONSEGUIU DETER MORDOG, SALVOU SUA CIDADE E SE TORNOU UMA HEROÍNA. SUA HISTÓRIA SERÁ LEMBRADA POR VÁRIAS GERAÇÕES!`)
+ }   
+}
