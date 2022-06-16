@@ -96,9 +96,9 @@ const statusJogador = {
     },
     aumentarNivel: function(a = 1){
         this.nivel += a
-        this.vida = 100 *= this.nivel
-        this.ataque = 20 *= this.nivel
-        this.defesa = 20 *= this.nivel
+        this.vida += 100
+        this.ataque += 20
+        this.defesa += 20
         console.log(`\nVida restaurada.`) 
         console.log(`\nVOCÊ SUBIU DE NÍVEL!`)
         console.log(`Nível: ${this.nivel}`)
