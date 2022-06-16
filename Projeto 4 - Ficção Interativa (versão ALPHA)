@@ -96,9 +96,9 @@ const statusJogador = {
     },
     aumentarNivel: function(a = 1){
         this.nivel += a
-        this.vida *= this.nivel
-        this.ataque *= this.nivel
-        this.defesa *= this.nivel
+        this.vida = 100 *= this.nivel
+        this.ataque = 20 *= this.nivel
+        this.defesa = 20 *= this.nivel
         console.log(`\nVida restaurada.`) 
         console.log(`\nVOCÊ SUBIU DE NÍVEL!`)
         console.log(`Nível: ${this.nivel}`)
@@ -130,7 +130,6 @@ const statusJogador = {
             console.log(`\nSua vida está cheia.\n`) 
             this.vida = 100
         } else {
-           
            console.log(`\nSua vida aumentou +${quantidade}.\n`) 
         }
         prompt(`[ENTER]`)
@@ -1480,6 +1479,7 @@ while(escolha3 != 1 && escolha3 != 2) {
 }
 if (escolha3 == 1){
     console.log("\nVocê acaba com o Troll e vai preparar o café da manhã.")
+    kills++
 } else if (escolha3 == 2){
     console.clear()
     console.log("O Troll fica perplexo e diz:")
@@ -1568,6 +1568,132 @@ while(true){
     dragao.jogada()
     statusJogador.opcoesDeJogada('dragao')
     if (dragao.vida <= 0) {
+        break
+    }
+}
+backup(2,statusJogador)
+console.clear()
+if (statusJogador.capa == 0) {
+    prompt("\nVocê acabou sofrendo queimaduras pelo fogo do dragão. [ENTER]")
+}
+console.log("\nCaído no chão, o Dragão disse:")
+console.log("'Estou mesmo impressionado com sua força a habilidade para desviar de meus ataques.'")
+console.log("'Mas não pense que vai ser o bastante contra o que existe à frente.'")
+prompt("[ENTER]")
+console.log()
+let escolha4 = +prompt("O que você faz? [1]MATAR [2]POUPAR: ")
+while(escolha4 != 1 && escolha4 != 2) {
+    console.log("\nNÚMERO INVÁLIDO!")
+    escolha4 = +prompt("O que você faz? [1]MATAR [2]POUPAR: ")
+    console.log()
+}
+if (escolha4 == 1){
+    prompt("Você dá o golpe final no inimigo.")
+    kills++
+} else if (escolha4 == 2) {
+    console.log("'Esse foi mesmo um lindo gesto.'")
+    if(kills >= 2) {
+        console.log("'Gostaria que meus amigos também tivessem sobrevivido.")
+        prompt("[ENTER]")
+    }
+    console.clear()
+    prompt("'Permita que eu conte um segredo antes de minha retirada humilhante... [ENTER]'")
+    console.log("\n'Há muito tempo atrás, Mordog era bondoso e feliz.'")
+    prompt("'Ele tinha um reino, uma esposa, um filho, e gostava de ajudar a todos.'[ENTER]")
+    console.log("\n'Mas certo dia seu seu reino foi atacado por bandidos saqueadores.'")
+    prompt("'Eles colocaram fogo em seu castelo, apenas Mordog sobreviveu.' [ENTER]")
+    console.log("\n'Desde então ele busca cada vez mais poder para trazer de volta aqueles que ama.'\n")
+    console.log("O Dragão se levanta e sai voando.")
+    prompt("[ENTER]")
+    console.clear()
+}
+statusJogador.aumentarNivel()
+console.clear()
+statusJogador.aumentarTempo()
+console.log("================ \nUM CAMINHO SEM VOLTA")
+console.log()
+if (personagem == 1) {
+    if (statusJogador.grupo >= 1) {
+        console.log("Mais um dia de caminhada, dessa vez vocês estão cada vez mais próximos do destino.")
+        console.log()
+        console.log("'O Dragão que enfrentamos ontem era muito poderoso, e ele ainda avisou que será mais difícil à frente.'")
+        prompt("Disse Jhonny. [ENTER]")
+        console.log()
+        let resposta1 = +prompt("'Você acha que vamos conseguir? [1]SIM [2]NÃO: '")
+        while (resposta1 != 1 && resposta1 != 2){
+            console.log("\nNÚMERO INVÁLIDO!")
+            resposta1 = +prompt("'Você acha que vamos conseguir? [1]SIM [2]NÃO: '")
+        }
+        console.log()
+        if (resposta1 == 1) {
+            prompt("'Acredito que sim, estamos tão perto de conseguirmos.' [ENTER]")
+        } else {
+            prompt("'Mais dificuldades virão, de qualquer modo agora estamos perto de mais para desistirmos.' [ENTER]")
+        }
+        console.clear()
+        prompt("Eis que então vocês se deparam com uma mulher de chapéu pontudo em seu caminho. [ENTER]")
+        console.log("\n'Sou a Bruxa Guerreira de Mordog, preparem-se para enfrentar meu exército!'")
+        console.log("\nDe repente centenas de esqueletos saem de baixo da terra e partem para o ataque.")
+    } else {
+        console.log("Mais um dia de caminhada, dessa vez você está cada vez mais próximo do destino.")
+        console.log()
+        console.log("'O Dragão que enfrentamei ontem era muito poderoso, e ele ainda avisou que será mais difícil à frente.'")
+        prompt("Você pensa. [ENTER]")
+        console.log()
+        prompt("'Mais dificuldades virão, de qualquer modo agora estou perto de mais para desistir.' [ENTER]")
+        console.clear()
+        prompt("Eis que então você se depara com uma mulher de chapéu pontudo em seu caminho. [ENTER]")
+        console.log("\n'Sou a Bruxa Guerreira de Mordog, prepare-se para enfrentar meu exército!'")
+        console.log("\nDe repente centenas de esqueletos saem de baixo da terra e partem para o ataque.")
+    }
+} else if (personagem == 2) {
+    if (statusJogador.grupo >= 1) {
+        console.log("Mais um dia de caminhada, dessa vez vocês estão cada vez mais próximos do destino.")
+        console.log()
+        console.log("'O Dragão que enfrentamos ontem era muito poderoso, e ele ainda avisou que será mais difícil à frente.'")
+        prompt("Disse Amanda. [ENTER]")
+        console.log()
+        let resposta1 = +prompt("'Você acha que vamos conseguir? [1]SIM [2]NÃO: '")
+        while (resposta1 != 1 && resposta1 != 2){
+            console.log("\nNÚMERO INVÁLIDO!")
+            resposta1 = +prompt("'Você acha que vamos conseguir? [1]SIM [2]NÃO: '")
+        }
+        console.log()
+        if (resposta1 == 1) {
+            prompt("'Acredito que sim, estamos tão perto de conseguirmos.' [ENTER]")
+        } else {
+            prompt("'Mais dificuldades virão, de qualquer modo agora estamos perto de mais para desistirmos.' [ENTER]")
+        }
+        console.clear()
+        prompt("Eis que então vocês se deparam com uma mulher de chapéu pontudo em seu caminho. [ENTER]")
+        console.log("\n'Sou a Bruxa Guerreira de Mordog, preparem-se para enfrentar meu exército!'")
+        console.log("\nDe repente centenas de esqueletos saem de baixo da terra e partem para o ataque.")
+    } else {
+        console.log("Mais um dia de caminhada, dessa vez você está cada vez mais próximo do destino.")
+        console.log()
+        console.log("'O Dragão que enfrentamei ontem era muito poderoso, e ele ainda avisou que será mais difícil à frente.'")
+        prompt("Você pensa. [ENTER]")
+        console.log()
+        prompt("'Mais dificuldades virão, de qualquer modo agora estou perto de mais para desistir.' [ENTER]")
+        console.clear()
+        prompt("Eis que então você se depara com uma mulher de chapéu pontudo em seu caminho. [ENTER]")
+        console.log("\n'Sou a Bruxa Guerreira de Mordog, prepare-se para enfrentar meu exército!'")
+        console.log("\nDe repente centenas de esqueletos saem de baixo da terra e partem para o ataque.")
+    }
+}
+backup(1,statusJogador)
+rodada = 0
+while(true){
+    rodada++
+    console.clear()
+    console.log(`RODADA ${rodada}:`)
+    console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
+    console.log(`Vida ${bruxa.nome}: ${bruxa.vida}`)
+    console.log()
+    console.log("A Bruxa ataca.")
+    dragao.jogada()
+    statusJogador.opcoesDeJogada('bruxa')
+    if (bruxa.vida <= 0) {
         break
     }
 }
