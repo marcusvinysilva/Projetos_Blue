@@ -5,6 +5,7 @@ jogo: while(true) {
         let rodada = 0
         let kills = 0
         let dia = 0
+        let numeroOponente = 0
         const backupJogador = {
             nome: "",
             nivel: 1,
@@ -251,7 +252,7 @@ jogo: while(true) {
                 }
                 if (opcao == 1) {
                     let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
-                    while (numeroAleatorio < (this.ataque * 0.3)) {
+                    while (numeroAleatorio < (this.ataque * 0.45)) {
                         numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
                     }
                     if (a == "jhonny") {
@@ -901,9 +902,9 @@ jogo: while(true) {
             },
             alterarAtributos: function(numero = 0) {
                 if (numero == 1) {
-                    this.vida = (2 * statusJogador.vida)
-                    this.defesa = (2 * statusJogador.defesa)
-                    this.ataque = (2 * statusJogador.ataque)
+                    this.vida = statusJogador.vida
+                    this.defesa =  statusJogador.defesa
+                    this.ataque =  statusJogador.ataque
                 } else {
                     this.vida = (100 * statusJogador.nivel)
                     this.ataque = (20 * statusJogador.nivel)
@@ -932,7 +933,18 @@ jogo: while(true) {
             console.log("\nNÚMERO INVÁLIDO!")
             personagem = +prompt("Escolha um personagem. Número [1] ou [2]: ")
         }
-        dia1: while (true) {
+        console.clear()
+        const modosdDeJogo = ["Escolha um modo de jogo:", "[1]MODO HISTÓRIA - Entre em uma aventura épica", "[2]MODO SOBREVIVÊNCIA - Batalhe até se cansar"]
+        for (let n of modosdDeJogo){
+            console.log(n)
+            console.log()
+        }
+        let escolhaModo = +prompt("Número: ")
+        while (escolhaModo != 1 && escolhaModo != 2){
+            console.log("\nNÚMERO INVÁLIDO!")
+            escolhaModo = +prompt("Número: ")
+        }
+        dia1: while (escolhaModo == 1) {
             dia++
             statusJogador.consultarStatus()
             console.clear()
@@ -978,7 +990,7 @@ jogo: while(true) {
             }
             if (b == 1) {
                 prompt("\nVocê pega sua espada. [ENTER]")
-                statusJogador.aumentarAtaque(30)
+                statusJogador.aumentarAtaque(20)
                 statusJogador.pontuacao += 1
                 statusJogador.espada += 1
             } else if ( b == 2) {
@@ -1147,7 +1159,7 @@ jogo: while(true) {
             }
         break
         }
-        dia2: while (true) {
+        dia2: while (escolhaModo == 1) {
             dia++
             console.clear()
             statusJogador.aumentarTempo()
@@ -1389,7 +1401,7 @@ jogo: while(true) {
             statusJogador.aumentarNivel()
             break
         }
-        dia3: while (true) {
+        dia3: while (escolhaModo == 1) {
             dia++
             console.clear()
             statusJogador.aumentarTempo()
@@ -1594,7 +1606,7 @@ jogo: while(true) {
             statusJogador.aumentarNivel()
             break
         }
-        dia4: while (true) {
+        dia4: while (escolhaModo == 1) {
             dia++
             console.clear()
             statusJogador.aumentarTempo()
@@ -1767,7 +1779,7 @@ jogo: while(true) {
             statusJogador.aumentarNivel()
             break
         }
-        dia5: while (true) {
+        dia5: while (escolhaModo == 1) {
             dia++
             console.clear()
             statusJogador.aumentarTempo()
@@ -1905,7 +1917,7 @@ jogo: while(true) {
             statusJogador.aumentarNivel()
             break
         }
-        dia6: while (true) {
+        dia6: while (escolhaModo == 1) {
             dia++
             console.clear()
             statusJogador.aumentarTempo()
@@ -2073,7 +2085,7 @@ jogo: while(true) {
             statusJogador.aumentarNivel()
             break
         }
-        dia7: while (true) {
+        dia7: while (escolhaModo == 1) {
             dia++
             console.clear()
             statusJogador.aumentarTempo()
@@ -2368,7 +2380,7 @@ jogo: while(true) {
             statusJogador.aumentarNivel()
             break
         }
-        dia8: while (true) {
+        dia8: while (escolhaModo == 1) {
             console.clear()
             statusJogador.aumentarTempo()
             console.log("================ \nONDE TUDO TERMINA")
@@ -2394,6 +2406,10 @@ jogo: while(true) {
                     prompt("'Mas eu perdi pessoas que amava e vou usar esse poder para trazê-las de volta. [ENTER]'")
                     console.log("\n'Depois as almas ficarão livres para voltarem para casa.'")
                     prompt("'Estou tão perto de concluir meu plano, não posso deixar que vocês atrapalhem.' [ENTER]")
+                    if(statusJogador.amuleto >= 1){
+                        console.log()
+                        prompt("'Esse amuleto mágico que está usando não lhe salvará.'")
+                    }
                     if(kills == 6) {
                         console.log("\n'Além disso, Vocês mataram todos os meus leais companheiros.'")
                         console.log("'Desse modo é impossível que eu lhes dê piedade.'")
@@ -2422,6 +2438,10 @@ jogo: while(true) {
                     prompt("'Mas eu perdi pessoas que amava e vou usar esse poder para trazê-las de volta. [ENTER]'")
                     console.log("\n'Depois as almas ficarão livres para voltarem para casa.'")
                     prompt("'Estou tão perto de concluir meu plano, não posso deixar que você atrapalhe.' [ENTER]")
+                    if(statusJogador.amuleto >= 1){
+                        console.log()
+                        prompt("'Esse amuleto mágico que está usando não lhe salvará.'")
+                    }
                     if(kills == 6) {
                         console.log("\n'Além disso, Você matou todos os meus leais companheiros.'")
                         console.log("'Desse modo é impossível que eu lhe dê piedade.'")
@@ -2452,6 +2472,10 @@ jogo: while(true) {
                     prompt("'Mas eu perdi pessoas que amava e vou usar esse poder para trazê-las de volta. [ENTER]'")
                     console.log("\n'Depois as almas ficarão livres para voltarem para casa.'")
                     prompt("'Estou tão perto de concluir meu plano, não posso deixar que vocês atrapalhem.' [ENTER]")
+                    if(statusJogador.amuleto >= 1){
+                        console.log()
+                        prompt("'Esse amuleto mágico que está usando não lhe salvará.'")
+                    }
                     if(kills == 6) {
                         console.log("\n'Além disso, Vocês mataram todos os meus leais companheiros.'")
                         console.log("'Desse modo é impossível que eu lhes dê piedade.'")
@@ -2480,6 +2504,10 @@ jogo: while(true) {
                     prompt("'Mas eu perdi pessoas que amava e vou usar esse poder para trazê-las de volta. [ENTER]'")
                     console.log("\n'Depois as almas ficarão livres para voltarem para casa.'")
                     prompt("'Estou tão perto de concluir meu plano, não posso deixar que você atrapalhe.' [ENTER]")
+                    if(statusJogador.amuleto >= 1){
+                        console.log()
+                        prompt("'Esse amuleto mágico que está usando não lhe salvará.'")
+                    }
                     if(kills == 6) {
                         console.log("\n'Além disso, Você matou todos os meus leais companheiros.'")
                         console.log("'Desse modo é impossível que eu lhe dê piedade.'")
@@ -2605,18 +2633,21 @@ jogo: while(true) {
             console.log()
             prompt("Você se lembra das escolhas que teve de fazer. [ENTER]")
             console.log()
-            console.log("Então você se lembra da poção de cura que seu vizinho elfo lhe deu antes de partir.")
-            let final = +prompt("Você entrega a poção para Mordog? [1]SIM [2]NÃO: ")
-            while(final != 1 && final != 2) {
-                console.log("\nNÚMERO INVÁLIDO!")
-                final = +prompt("Você entrega a poção para Mordog? [1]SIM [2]NÃO: ")
-            }
-            console.clear()
-            if (final == 1) {
-                prompt("Você entrega a poção para Mordog, ele bebe e é magicamente curado. [ENTER]")
-            } else {
-                prompt("Mordog realiza seu desejo de ver sua família, mas acaba não resistindo ao seu próprio feitiço. [ENTER]")
-            }
+            if(statusJogador.pocao >= 1) {
+                console.log("Então você se lembra da poção de cura que seu vizinho elfo lhe deu antes de partir.")
+                let final = +prompt("Você entrega a poção para Mordog? [1]SIM [2]NÃO: ")
+                while(final != 1 && final != 2) {
+                    console.log("\nNÚMERO INVÁLIDO!")
+                    final = +prompt("Você entrega a poção para Mordog? [1]SIM [2]NÃO: ")
+                }
+                console.clear()
+                if (final == 1) {
+                    prompt("Você entrega a poção para Mordog, ele bebe e é magicamente curado. [ENTER]")
+                } else {
+                    prompt("Mordog realiza seu desejo de ver sua família, mas acaba não resistindo ao seu próprio feitiço. [ENTER]")
+                }
+            } else
+            prompt("Mordog consegue realizar seu desejo de ver sua família, mas acaba não resistindo ao seu próprio feitiço. [ENTER]")
             if (personagem == 1) {
                 if (statusJogador.grupo >= 1) {
                     console.log("\nVocê e Jhonny retornam para a terra de Blue, sua casa, para reencontrar seus amigos e familiares que voltaram.")
@@ -2637,6 +2668,211 @@ jogo: while(true) {
             console.log()
             prompt(`[ENTER]`)
             break
+        }
+        modoSobrevivência: while (escolhaModo == 2) {
+            backup(1,statusJogador)
+            rodada = 0
+            numeroOponente++
+            let selecaoDeOponente = Math.floor(Math.random() * 6)
+            if (selecaoDeOponente == 0) {
+                goblin.alterarAtributos()
+                while(true){
+                    rodada++
+                    console.clear()
+                    console.log(`OPONENTE ${numeroOponente} \nRODADA ${rodada}:`)
+                    console.log("===========")
+                    console.log()
+                    console.log("Goblin ataca.")
+                    goblin.jogada()
+                    console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                    console.log(`Vida ${goblin.nome}: ${goblin.vida}`)
+                    if (statusJogador.vida <= 0) {
+                        console.log("\nVOCÊ MORREU.")
+                        backup(2,statusJogador)
+                        let z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        while (z != 1 && z != 2) {
+                            console.log("\nNÚMERO INVÁLIDO!")
+                            z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        }
+                        if (z == 1){
+                            continue modoSobrevivência
+                        } else {
+                            break jogo
+                        }
+                    }
+                    statusJogador.opcoesDeJogada('goblin')
+                    if (elfoDaFloresta.vida <= 0) {
+                        break
+                    }
+                }
+            } else if (selecaoDeOponente == 1) {
+                elfoDaFloresta.alterarAtributos()
+                while(true){
+                    rodada++
+                    console.clear()
+                    console.log(`OPONENTE ${numeroOponente} \nRODADA ${rodada}:`)
+                    console.log("===========")
+                    console.log()
+                    console.log("Elfo da Floresta ataca.")
+                    elfoDaFloresta.jogada()
+                    console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                    console.log(`Vida ${elfoDaFloresta.nome}: ${elfoDaFloresta.vida}`)
+                    if (statusJogador.vida <= 0) {
+                        console.log("\nVOCÊ MORREU.")
+                        backup(2,statusJogador)
+                        let z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        while (z != 1 && z != 2) {
+                            console.log("\nNÚMERO INVÁLIDO!")
+                            z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        }
+                        if (z == 1){
+                            continue modoSobrevivência
+                        } else {
+                            break jogo
+                        }
+                    }
+                    statusJogador.opcoesDeJogada('elfoDaFloresta')
+                    if (elfoDaFloresta.vida <= 0) {
+                        break
+                    }
+                }
+            } else if (selecaoDeOponente == 2) {
+                troll.alterarAtributos()
+                while(true){
+                    rodada++
+                    console.clear()
+                    console.log(`OPONENTE ${numeroOponente} \nRODADA ${rodada}:`)
+                    console.log("===========")
+                    console.log()
+                    console.log("Troll ataca.")
+                    troll.jogada()
+                    console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                    console.log(`Vida ${troll.nome}: ${troll.vida}`)
+                    if (statusJogador.vida <= 0) {
+                        console.log("\nVOCÊ MORREU.")
+                        backup(2,statusJogador)
+                        let z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        while (z != 1 && z != 2) {
+                            console.log("\nNÚMERO INVÁLIDO!")
+                            z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        }
+                        if (z == 1){
+                            continue modoSobrevivência
+                        } else {
+                            break jogo
+                        }
+                    }
+                    statusJogador.opcoesDeJogada('troll')
+                    if (troll.vida <= 0) {
+                        break
+                    }
+                }
+            } else if (selecaoDeOponente == 3) {
+                dragao.alterarAtributos()
+                while(true){
+                    rodada++
+                    console.clear()
+                    console.log(`OPONENTE ${numeroOponente} \nRODADA ${rodada}:`)
+                    console.log("===========")
+                    console.log()
+                    console.log("Dragão ataca.")
+                    dragao.jogada()
+                    console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                    console.log(`Vida ${dragao.nome}: ${dragao.vida}`)
+                    if (statusJogador.vida <= 0) {
+                        console.log("\nVOCÊ MORREU.")
+                        backup(2,statusJogador)
+                        let z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        while (z != 1 && z != 2) {
+                            console.log("\nNÚMERO INVÁLIDO!")
+                            z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        }
+                        if (z == 1){
+                            continue modoSobrevivência
+                        } else {
+                            break jogo
+                        }
+                    }
+                    statusJogador.opcoesDeJogada('dragao')
+                    if (dragao.vida <= 0) {
+                        break
+                    }
+                }
+            } else if (selecaoDeOponente == 4) {
+                bruxa.alterarAtributos()
+                while(true){
+                    rodada++
+                    console.clear()
+                    console.log(`OPONENTE ${numeroOponente} \nRODADA ${rodada}:`)
+                    console.log("===========")
+                    console.log()
+                    console.log("Bruxa ataca.")
+                    bruxa.jogada()
+                    console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                    console.log(`Vida ${bruxa.nome}: ${bruxa.vida}`)
+                    if (statusJogador.vida <= 0) {
+                        console.log("\nVOCÊ MORREU.")
+                        backup(2,statusJogador)
+                        let z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        while (z != 1 && z != 2) {
+                            console.log("\nNÚMERO INVÁLIDO!")
+                            z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        }
+                        if (z == 1){
+                            continue modoSobrevivência
+                        } else {
+                            break jogo
+                        }
+                    }
+                    statusJogador.opcoesDeJogada('bruxa')
+                    if (bruxa.vida <= 0) {
+                        break
+                    }
+                }
+            } else if (selecaoDeOponente == 5) {
+                cavaleiroFantasma.alterarAtributos()
+                while(true){
+                    rodada++
+                    console.clear()
+                    console.log(`OPONENTE ${numeroOponente} \nRODADA ${rodada}:`)
+                    console.log("===========")
+                    console.log()
+                    console.log("Cavaleiro Fantasma ataca.")
+                    cavaleiroFantasma.jogada()
+                    console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                    console.log(`Vida ${cavaleiroFantasma.nome}: ${cavaleiroFantasma.vida}`)
+                    if (statusJogador.vida <= 0) {
+                        console.log("\nVOCÊ MORREU.")
+                        backup(2,statusJogador)
+                        let z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        while (z != 1 && z != 2) {
+                            console.log("\nNÚMERO INVÁLIDO!")
+                            z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        }
+                        if (z == 1){
+                            continue modoSobrevivência
+                        } else {
+                            break jogo
+                        }
+                    }
+                    statusJogador.opcoesDeJogada('cavaleiroFantasma')
+                    if (cavaleiroFantasma.vida <= 0) {
+                        break
+                    }
+                }
+            }
+            backup(2,statusJogador)
+            console.clear()
+            statusJogador.aumentarNivel()
+            let saida = +prompt("Gostaria de continuar? 1.[SIM] 2.[NÃO]: ")
+            while(saida != 1 && saida != 2) {
+                console.log("\nNÚMERO INVÁLIDO!")
+                saida = +prompt("Gostaria de continuar? 1.[SIM] 2.[NÃO]: ")
+            }
+            if (saida == 2) {
+                console.clea()
+                break modoSobrevivência
+            }
         }
         console.clear()
         let final1 = prompt("O jogo acabou. Gostaria de começar novamente? [1]SIM [2]NÃO:")
