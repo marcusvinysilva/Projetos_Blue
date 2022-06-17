@@ -950,7 +950,7 @@ jogo: while(true) {
             console.clear()
             statusJogador.aumentarTempo()
             console.log("======== \nO INÍCIO")
-            prompt("\nEra uma linda semana de primavera na terra de Blue, as pássaros cantavam, as flores desabrochavam e as pessoas estavam felizem e em paz.... [ENTER]")
+            prompt("\nEra uma linda semana de primavera na terra de Blue, os pássaros cantavam, as flores desabrochavam e as pessoas estavam felizem e em paz.... [ENTER]")
             if (personagem == 1) {
                 prompt("\nVocê, um conhecido guerreiro forte e destemido, teve de partir momentaneamente para ir comprar especiarias na cidade vizinha... [ENTER]")
             } else {
@@ -1907,7 +1907,7 @@ jogo: while(true) {
                 prompt("'Permita que eu conte um segredo antes de minha retirada humilhante... [ENTER]'")
                 console.log("\n'Há muito tempo atrás, Mordog era bondoso e feliz.'")
                 prompt("'Ele tinha um reino, uma esposa, um filho, e gostava de ajudar a todos.'[ENTER]")
-                console.log("\n'Mas certo dia seu seu reino foi atacado por bandidos saqueadores.'")
+                console.log("\n'Mas certo dia seu reino foi atacado por bandidos saqueadores.'")
                 prompt("'Eles colocaram fogo em seu castelo, apenas Mordog sobreviveu.' [ENTER]")
                 console.log()
                 console.log("O Dragão se levanta e sai voando.")
@@ -2870,7 +2870,7 @@ jogo: while(true) {
                 saida = +prompt("Gostaria de continuar? 1.[SIM] 2.[NÃO]: ")
             }
             if (saida == 2) {
-                console.clea()
+                console.clear()
                 break modoSobrevivência
             }
         }
