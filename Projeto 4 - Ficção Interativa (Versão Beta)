@@ -1,5 +1,7 @@
 const prompt = require("prompt-sync")();
 console.clear()
+while(true) {
+aventura: while(true) {
 let rodada = 0
 let kills = 0
 const backupJogador = {
@@ -65,7 +67,7 @@ const statusJogador = {
     nivel: 1,
     vida: 100,
     ataque: 20,
-    defesa: 20,
+    defesa: 10,
     dinheiro: 20,
     magia: 0,
     pontuacao: 0,
@@ -97,14 +99,19 @@ const statusJogador = {
     aumentarNivel: function(a = 1){
         this.nivel += a
         this.vida += 100
+        this.defesa += 10
         this.ataque += 20
-        this.defesa += 20
-        console.log(`\nVida restaurada.`) 
+        this.dinheiro += (20 * this.nivel)
+        this.magia += (5 * this.nivel)
         console.log(`\nVOCÊ SUBIU DE NÍVEL!`)
-        console.log(`Nível: ${this.nivel}`)
-        console.log(`Vida: ${this.vida}`)
-        console.log(`Ataque: ${this.ataque}`)
-        console.log(`Defesa: ${this.defesa}`)
+        console.log(`\nSEU STATUS:`)
+        console.log(`Nome: ${this.nome}`)
+        console.log(`Nível: ${this.nivel} (+${this.nivel - backupJogador.nivel})`)
+        console.log(`Vida: ${this.vida} (+${this.vida - backupJogador.vida})`)
+        console.log(`Ataque: ${this.ataque} (+${this.ataque - backupJogador.ataque})`)
+        console.log(`Defesa: ${this.defesa} (+${this.defesa - backupJogador.defesa})`)
+        console.log(`Dinheiro: ${this.dinheiro} (+${this.dinheiro - backupJogador.dinheiro})`)
+        console.log(`Magia: ${this.magia} (+${this.magia - backupJogador.magia})\n`)
         prompt(`[ENTER]`)
     },
     dano: function(quantidade){
@@ -150,8 +157,8 @@ const statusJogador = {
         prompt(`[ENTER]`)
     },
     aumentarAtaque: function(quantidade){
-        //console.log(`\nSeu ataque aumentou em +${quantidade}.`)
-        this.ataque += quantidade
+        console.log(`\nSeu ataque aumentou em +${quantidade}.`)
+        this.ataque = ((20 * this.nivel) + quantidade)
     },
     diminuirAtaque: function(quantidade){
         console.log(`\nSeu ataque diminuiu em -${quantidade}.\n`)
@@ -163,7 +170,7 @@ const statusJogador = {
         prompt(`[ENTER]`)
     },
     aumentarDefesa: function(quantidade){
-        // console.log(`\nSua defesa aumentou em +${quantidade}.`)
+        console.log(`\nSua defesa aumentou em +${quantidade}.`)
         this.defesa += quantidade
     },
     diminuirDefesa: function(quantidade){
@@ -524,6 +531,17 @@ const goblin = {
         console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
         let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
         statusJogador.dano(numeroAleatorio)
+    },
+    alterarAtributos: function(numero = 0) {
+        if (numero == 1) {
+            this.vida = (2 * statusJogador.vida)
+            this.defesa = (2 * statusJogador.defesa)
+            this.ataque = (2 * statusJogador.ataque)
+        } else {
+            this.vida = (100 * statusJogador.nivel)
+            this.ataque = (20 * statusJogador.nivel)
+            this.defesa = (10 * statusJogador.nivel)
+        }
     }
 }
 const elfoDaFloresta = {
@@ -535,7 +553,7 @@ const elfoDaFloresta = {
     defesa: (10 * statusJogador.nivel),
     dinheiro: 60,
     magia: 30,
-    ataques: ["Ataque da folha", "Golpe de karatê", "Socos super rápidos"],
+    ataques: ["Ataque da folha", "Golpe de karatê", "Flecha envenenada"],
     consultarStatus: function(){    
         console.log(`\nSTATUS DE ELFO DA FLORESTA:`)
         console.log(`Nome: ${this.nome}`)
@@ -569,6 +587,17 @@ const elfoDaFloresta = {
         console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
         let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
         statusJogador.dano(numeroAleatorio)
+    },
+    alterarAtributos: function(numero = 0) {
+        if (numero == 1) {
+            this.vida = (2 * statusJogador.vida)
+            this.defesa = (2 * statusJogador.defesa)
+            this.ataque = (2 * statusJogador.ataque)
+        } else {
+            this.vida = (100 * statusJogador.nivel)
+            this.ataque = (20 * statusJogador.nivel)
+            this.defesa = (10 * statusJogador.nivel)
+        }
     }
 }
 const troll = {
@@ -614,6 +643,17 @@ const troll = {
         console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
         let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
         statusJogador.dano(numeroAleatorio)
+    },
+    alterarAtributos: function(numero = 0) {
+        if (numero == 1) {
+            this.vida = (2 * statusJogador.vida)
+            this.defesa = (2 * statusJogador.defesa)
+            this.ataque = (2 * statusJogador.ataque)
+        } else {
+            this.vida = (100 * statusJogador.nivel)
+            this.ataque = (20 * statusJogador.nivel)
+            this.defesa = (10 * statusJogador.nivel)
+        }
     }
 }
 const dragao = {
@@ -659,6 +699,17 @@ const dragao = {
         console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
         let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
         statusJogador.dano(numeroAleatorio)
+    },
+    alterarAtributos: function(numero = 0) {
+        if (numero == 1) {
+            this.vida = (2 * statusJogador.vida)
+            this.defesa = (2 * statusJogador.defesa)
+            this.ataque = (2 * statusJogador.ataque)
+        } else {
+            this.vida = (100 * statusJogador.nivel)
+            this.ataque = (20 * statusJogador.nivel)
+            this.defesa = (10 * statusJogador.nivel)
+        }
     }
 }
 const bruxa = {
@@ -704,6 +755,17 @@ const bruxa = {
         console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
         let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
         statusJogador.dano(numeroAleatorio)
+    },
+    alterarAtributos: function(numero = 0) {
+        if (numero == 1) {
+            this.vida = (2 * statusJogador.vida)
+            this.defesa = (2 * statusJogador.defesa)
+            this.ataque = (2 * statusJogador.ataque)
+        } else {
+            this.vida = (100 * statusJogador.nivel)
+            this.ataque = (20 * statusJogador.nivel)
+            this.defesa = (10 * statusJogador.nivel)
+        }
     }
 }
 const cavaleiroFantasma = {
@@ -749,18 +811,29 @@ const cavaleiroFantasma = {
         console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
         let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
         statusJogador.dano(numeroAleatorio)
+    },
+    alterarAtributos: function(numero = 0) {
+        if (numero == 1) {
+            this.vida = (2 * statusJogador.vida)
+            this.defesa = (2 * statusJogador.defesa)
+            this.ataque = (2 * statusJogador.ataque)
+        } else {
+            this.vida = (100 * statusJogador.nivel)
+            this.ataque = (20 * statusJogador.nivel)
+            this.defesa = (10 * statusJogador.nivel)
+        }
     }
 }
 const mordog = {
     nome: 'Mordog',
     nivel: 'Infinito(∞)',
-    descricao: 'Possui o poder equivalente a 1 milhão de almas.',
+    descricao: 'Bruxo com o poder equivalente a 1 milhão de almas.',
     vida: (100 * statusJogador.nivel),
     ataque: (20 * statusJogador.nivel),
     defesa: (10 * statusJogador.nivel),
-    dinheiro: 213123,
-    magia: 1000000,
-    ataques: [],
+    dinheiro: 1000100,
+    magia: 9999999,
+    ataques: ["Feitiço venenoso", "Raio elétrico", "Bola de fogo", "Feitiço mortal", "Poção explosiva", "Poção atordoante", "Ataque telecinético"],
     consultarStatus: function(){    
         console.log(`\nSTATUS DE MORDOG:`)
         console.log(`Nome: ${this.nome}`)
@@ -794,6 +867,17 @@ const mordog = {
         console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * this.ataques.length)]}\n`)
         let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
         statusJogador.dano(numeroAleatorio)
+    },
+    alterarAtributos: function(numero = 0) {
+        if (numero == 1) {
+            this.vida = (2 * statusJogador.vida)
+            this.defesa = (2 * statusJogador.defesa)
+            this.ataque = (2 * statusJogador.ataque)
+        } else {
+            this.vida = (100 * statusJogador.nivel)
+            this.ataque = (20 * statusJogador.nivel)
+            this.defesa = (10 * statusJogador.nivel)
+        }
     }
 }
 function alteracao(b){
@@ -862,7 +946,6 @@ while (b != 1 && b != 2) {
 if (b == 1) {
     prompt("\nVocê pega sua espada. [ENTER]")
     statusJogador.aumentarAtaque(30)
-    prompt("Seu ataque aumentou em +30. [ENTER]")
     statusJogador.pontuacao += 1
     statusJogador.espada += 1
 } else if ( b == 2) {
@@ -885,8 +968,8 @@ if (c == 1) {
 console.clear()
 console.log()
 prompt("Após arrumar todas as coisas, visita seu vizinho elfo, que entende um pouco de magia e abençoa seu caminho. [ENTER]")
-console.log("\nEle disse, lhe oferecendo um colar e dois frascos: \n'Use esse amuleto em seu pescoço, vai proteger contra os feitiços do bruxo.'")
-console.log("'Leve também essa poção de cura, ela pode ser muito útil em algum momento.'")
+console.log("\nEle disse, lhe oferecendo um colar e um frasco: \n'Use esse amuleto em seu pescoço, vai proteger contra os feitiços do bruxo.'")
+console.log("'Leve também essa poção de cura, ela pode ser muito útil em algum momento.'\n")
 let d = +prompt("Você leva o amuleto e a poção? 1.[SIM] 2.[NÃO]: ")
 while (d != 1 && d != 2) {
     console.log("\nNÚMERO INVÁLIDO!")
@@ -1055,6 +1138,7 @@ if (personagem == 1) {
             prompt("\nVocê saca sua espada... [ENTER]")
         }
         backup(1,statusJogador)
+        goblin.alterarAtributos()
         rodada = 0
         while(true){
             rodada++
@@ -1079,6 +1163,7 @@ if (personagem == 1) {
             prompt("\nVocê saca sua espada... [ENTER]")
         }
         backup(1,statusJogador)
+        goblin.alterarAtributos()
         rodada = 0
         while(true){
             rodada++
@@ -1105,6 +1190,7 @@ if (personagem == 1) {
             prompt("\nVocê saca sua espada... [ENTER]")
         }
         backup(1,statusJogador)
+        goblin.alterarAtributos()
         rodada = 0
         while(true){
             rodada++
@@ -1129,6 +1215,7 @@ if (personagem == 1) {
             prompt("\nVocê saca sua espada... [ENTER]")
         }
         backup(1,statusJogador)
+        goblin.alterarAtributos()
         rodada = 0
         while(true){
             rodada++
@@ -1245,6 +1332,7 @@ if (personagem == 1) {
     }
 }
 backup(1,statusJogador)
+elfoDaFloresta.alterarAtributos()
 rodada = 0
 while(true){
     rodada++
@@ -1273,7 +1361,7 @@ if (personagem == 1) {
             console.log("\nVocê tira a vida do elfo e continua sua jornada.")
             kills++
         } else if (escolha2 == 2 && kills == 0) {
-            console.log("'\nVocês são mesmo guerreiros de coração puro.'")
+            console.log("\n'Vocês são mesmo guerreiros de coração puro.'")
             prompt("[ENTER]")
             console.clear()
             console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
@@ -1281,7 +1369,7 @@ if (personagem == 1) {
             console.log()
             console.log("O Elfo da Floresta faz uma reverência e vai embora.")
         } else if (escolha2 == 2) {
-            console.log("'\nAgradeço por pouparem minha vida, esperava que meu amigo tivesse tido essa mesma sorte.'")
+            console.log("\n'Agradeço por pouparem minha vida, esperava que meu amigo tivesse tido essa mesma sorte.'")
             prompt("[ENTER]")
             console.clear()
             console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
@@ -1294,7 +1382,7 @@ if (personagem == 1) {
             console.log("\nVocê tira a vida do elfo e continua sua jornada.")
             kills++
         } else if (escolha2 == 2 && kills == 0) {
-            console.log("'\nVocê é mesmo um guerreiro de coração puro.'")
+            console.log("\n'Você é mesmo um guerreiro de coração puro.'")
             prompt("[ENTER]")
             console.clear()
             console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
@@ -1302,7 +1390,7 @@ if (personagem == 1) {
             console.log()
             console.log("O Elfo da Floresta faz uma reverência e vai embora.")
         } else if (escolha2 == 2) {
-            console.log("'\nAgradeço por poupar minha vida, esperava que meu amigo tivesse tido essa mesma sorte.'")
+            console.log("\n'Agradeço por poupar minha vida, esperava que meu amigo tivesse tido essa mesma sorte.'")
             prompt("[ENTER]")
             console.clear()
             console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
@@ -1317,7 +1405,7 @@ if (personagem == 1) {
             console.log("\nVocê tira a vida do elfo e continua sua jornada.")
             kills++
         } else if (escolha2 == 2 && kills == 0) {
-            console.log("'\nVocês são mesmo guerreiras de coração puro.'")
+            console.log("\n'Vocês são mesmo guerreiras de coração puro.'")
             prompt("[ENTER]")
             console.clear()
             console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
@@ -1325,7 +1413,7 @@ if (personagem == 1) {
             console.log()
             console.log("O Elfo da Floresta faz uma reverência e vai embora.")
         } else if (escolha2 == 2) {
-            console.log("'\nAgradeço por pouparem minha vida, esperava que meu amigo tivesse tido essa mesma sorte.'")
+            console.log("\n'Agradeço por pouparem minha vida, esperava que meu amigo tivesse tido essa mesma sorte.'")
             prompt("[ENTER]")
             console.clear()
             console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
@@ -1338,7 +1426,7 @@ if (personagem == 1) {
             console.log("\nVocê tira a vida do elfo e continua sua jornada.")
             kills++
         } else if (escolha2 == 2 && kills == 0) {
-            console.log("'\nVocê é mesmo uma guerreira de coração puro.'")
+            console.log("\n'Você é mesmo uma guerreira de coração puro.'")
             prompt("[ENTER]")
             console.clear()
             console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
@@ -1346,7 +1434,7 @@ if (personagem == 1) {
             console.log()
             console.log("O Elfo da Floresta faz uma reverência e vai embora.")
         } else if (escolha2 == 2) {
-            console.log("'\nAgradeço por poupar minha vida, esperava que meu amigo tivesse tido essa mesma sorte.'")
+            console.log("\n'Agradeço por poupar minha vida, esperava que meu amigo tivesse tido essa mesma sorte.'")
             prompt("[ENTER]")
             console.clear()
             console.log("'Sabe, a várias gerações atrás Mordog já foi diferente. Ele foi um rei bruxo que usava seus poderes para praticar o bem.'")
@@ -1433,6 +1521,7 @@ if (personagem == 1) {
     }
 }
 backup(1,statusJogador)
+troll.alterarAtributos()
 rodada = 0
 while(true){
     rodada++
@@ -1556,6 +1645,7 @@ if (personagem == 1) {
     }
 }
 backup(1,statusJogador)
+dragao.alterarAtributos()
 rodada = 0
 while(true){
     rodada++
@@ -1602,7 +1692,7 @@ if (escolha4 == 1){
     prompt("'Ele tinha um reino, uma esposa, um filho, e gostava de ajudar a todos.'[ENTER]")
     console.log("\n'Mas certo dia seu seu reino foi atacado por bandidos saqueadores.'")
     prompt("'Eles colocaram fogo em seu castelo, apenas Mordog sobreviveu.' [ENTER]")
-    console.log("\n'Desde então ele busca cada vez mais poder para trazer de volta aqueles que ama.'\n")
+    console.log()
     console.log("O Dragão se levanta e sai voando.")
     prompt("[ENTER]")
     console.clear()
@@ -1619,10 +1709,10 @@ if (personagem == 1) {
         console.log("'O Dragão que enfrentamos ontem era muito poderoso, e ele ainda avisou que será mais difícil à frente.'")
         prompt("Disse Jhonny. [ENTER]")
         console.log()
-        let resposta1 = +prompt("'Você acha que vamos conseguir? [1]SIM [2]NÃO: '")
+        let resposta1 = +prompt("'Você acha que vamos conseguir?' [1]SIM [2]NÃO: ")
         while (resposta1 != 1 && resposta1 != 2){
             console.log("\nNÚMERO INVÁLIDO!")
-            resposta1 = +prompt("'Você acha que vamos conseguir? [1]SIM [2]NÃO: '")
+            resposta1 = +prompt("'Você acha que vamos conseguir?' [1]SIM [2]NÃO: ")
         }
         console.log()
         if (resposta1 == 1) {
@@ -1653,10 +1743,10 @@ if (personagem == 1) {
         console.log("'O Dragão que enfrentamos ontem era muito poderoso, e ele ainda avisou que será mais difícil à frente.'")
         prompt("Disse Amanda. [ENTER]")
         console.log()
-        let resposta1 = +prompt("'Você acha que vamos conseguir? [1]SIM [2]NÃO: '")
+        let resposta1 = +prompt("'Você acha que vamos conseguir?' [1]SIM [2]NÃO: ")
         while (resposta1 != 1 && resposta1 != 2){
             console.log("\nNÚMERO INVÁLIDO!")
-            resposta1 = +prompt("'Você acha que vamos conseguir? [1]SIM [2]NÃO: '")
+            resposta1 = +prompt("'Você acha que vamos conseguir?' [1]SIM [2]NÃO: ")
         }
         console.log()
         if (resposta1 == 1) {
@@ -1682,6 +1772,7 @@ if (personagem == 1) {
     }
 }
 backup(1,statusJogador)
+bruxa.alterarAtributos()
 rodada = 0
 while(true){
     rodada++
@@ -1691,7 +1782,7 @@ while(true){
     console.log(`Vida ${bruxa.nome}: ${bruxa.vida}`)
     console.log()
     console.log("A Bruxa ataca.")
-    dragao.jogada()
+    bruxa.jogada()
     statusJogador.opcoesDeJogada('bruxa')
     if (bruxa.vida <= 0) {
         break
@@ -1699,64 +1790,602 @@ while(true){
 }
 backup(2,statusJogador)
 console.clear()
+if (personagem == 1) {
+    if (statusJogador.grupo >= 1) {
+        console.log("A Bruxa fala:")
+        console.log("'Você conseguiu derrotar até meu exércio.'")
+        console.log("'És mesmo muito habilidoso em combate, mesmo que seu parceiro não ajude em nada.'")
+        prompt("[ENTER]")
+    } else {
+        console.log("A Bruxa fala:")
+        console.log("'Você conseguiu derrotar até meu exércio.'")
+        console.log("'És mesmo muito habilidoso em combate!.'")
+        prompt("[ENTER]")
+    }
+} else if (personagem == 2) {
+    if (statusJogador.grupo >= 1) {
+        console.log("A Bruxa fala:")
+        console.log("'Você conseguiu derrotar até meu exércio.'")
+        console.log("'És mesmo muito habilidosa em combate, mesmo que sua parceira não ajude em nada.'")
+        prompt("[ENTER]")
+    } else {
+        console.log("A Bruxa fala:")
+        console.log("'Você conseguiu derrotar até meu exércio.'")
+        console.log("'És mesmo muito habilidosa em combate!.'")
+        prompt("[ENTER]")
+    }
+}
+if (kills >= 3) {
+    console.log("'Vai fazer comigo o mesmo que com meus companheiros?'")
+}
+console.log()
+let escolha5 = +prompt("O que você faz? [1]MATAR [2]POUPAR: ")
+while(escolha5 != 1 && escolha5 != 2) {
+    console.log("\nNÚMERO INVÁLIDO!")
+    escolha5 = +prompt("O que você faz? [1]MATAR [2]POUPAR: ")
+    console.log()
+}
+if (escolha5 == 1) {
+    console.log("A Bruxa tenta lançar um último feitiço, mas não é rápida o suficiente para parar o inevitável.")
+    kills++
+} else if (escolha5 == 2) {
+    console.clear()
+    console.log("A Bruxa fala:")
+    prompt("'Eu tenho uma bola de cristal, já sabia que ficaria viva, muahahaha!'")
+    console.clear()
+    prompt("'Depois que o reino de Mordog foi saqueado, ele caçou cada um dos criminosos e fez justiça.' [ENTER]")
+    console.log()
+    prompt("'Desde então ele busca cada vez mais poder para trazer de volta aqueles que ama.' [ENTER]")
+    console.log("\n'Alguns de meus companheiros também perderam entes queridos naquele dia, Mordog é a nossa esperança.'")
+    if(statusJogador.grupo >= 1) {
+        prompt("'Espero que entendam. [ENTER]'")
+    } else {
+        prompt("'Espero que entenda. [ENTER]'")
+    }
+    console.log("\nA Bruxa monta em sua vassoura e sai voando.")
+}
+prompt(`[ENTER]`)
 statusJogador.aumentarNivel()
-//////  
 console.clear()
-if (statusJogador.mapa == 1) {
-    prompt("\nApesar de ter sido um caminho longo, foi fácil encontrar o esconderijo do bruxo com o mapa. [ENTER]")
-} else {
-    prompt("\nFoi difícil encontrar o esconderijo do bruxo sem o mapa, mas você conseguiu. [ENTER]")
+statusJogador.aumentarTempo()
+console.log("================ \nUMA REVALAÇÃO INESPERADA")
+console.log()
+if (personagem == 1) {
+    if (statusJogador.grupo >= 1) {
+        if (statusJogador.mapa >= 1) {
+            console.log("Após desarmarem o acampamento e continuarem seguindo o mapa, vocês avistam a montanha onde possivelmente está a caverna do bruxo.")
+            prompt("[ENTER]")
+        } else {
+            console.log("Após desarmarem o acampamento e continuarem a jornada, vocês avistam a montanha onde possivelmente está a caverna do bruxo.")
+            prompt("[ENTER]")
+        }
+        console.log("\nJhonny fala:")
+        prompt("'Estamos tão perto do objetivo, mas derrotamos apenas 5 guerreiros, ainda falta 1... [ENTER]'")
+        console.log()
+        console.log("'Exatamente, ainda falta eu, o Cavaleiro Fantasma!'")
+        prompt("Disse um cavaleiro montado em seu cavalo que os observava de longe. [ENTER]")
+        console.clear()
+        console.log("'Vou contar algo que provavelmente vocês dois não sabiam.'")
+        prompt("'Mordog não está roubando as almas, tudo voltará a ser o que era antes.' [ENTER]")
+        console.log("\n'Meu mestre já conseguiu todo o poder necessário para trazer todos os que amamos de volta.'")
+        console.log("'Não posso deixar que vocês o impeçam de fazer isso.'")
+        prompt("[ENTER]")
+        console.clear()
+        console.log("\n'Vocês devem estar pensando o porquê de eu ser o Cavaleiro Fantasma e não parecer com um fantasma.'")
+        prompt("'Pois saibam que esse é um nome que escolhi para assustar meus inimigos.' [ENTER]")
+        console.log()
+        let resposta2 = +prompt("'Vocês estão se sentindo assustados?' [1]SIM [2]NÃO: ")
+        while(resposta2 != 1 && resposta2 != 2) {
+            console.log("\nNÚMERO INVÁLIDO!")
+            resposta2 = +prompt("'Vocês estão se sentindo assustados?' [1]SIM [2]NÃO: ")
+        }
+        if (resposta2 == 2) {
+            console.log("\n'Pois vão se sentir assustados agora!'")
+            console.log("O cavaleiro pula de seu cavalo e saca sua linda espada cromada.")
+            prompt("[ENTER]")
+        } else if (resposta2 == 1) {
+            console.log("\n'Pois vão se sentir mais ainda agora!'")
+            console.log("O cavaleiro pula de seu cavalo e saca sua linda espada cromada.")
+            prompt("[ENTER]")
+        }
+        if (kills >= 4) {
+            console.log()
+            prompt("É melhor se prepararem seus assassinos desgraçados! [ENTER]")
+        }
+    } else {
+        if (statusJogador.mapa >= 1) {
+            console.log("Após desarmar o acampamento e continuar seguindo o mapa, você avista a montanha onde possivelmente está a caverna do bruxo.")
+            prompt("[ENTER]")
+        } else {
+            console.log("Após desarmar o acampamento e continuar a jornada, você avista a montanha onde possivelmente está a caverna do bruxo.")
+            prompt("[ENTER]")
+        }
+        console.log("\nVocê fala para si mesmo:")
+        prompt("'Estou tão perto do objetivo, mas derrotei apenas 5 guerreiros, ainda falta 1... [ENTER]'")
+        console.log()
+        console.log("'Exatamente, ainda falta eu, o Cavaleiro Fantasma!'")
+        prompt("Disse um cavaleiro montado em seu cavalo que o observava de longe. [ENTER]")
+        console.clear()
+        console.log("'Vou contar algo que provavelmente você não sabia.'")
+        prompt("'Mordog não está roubando as almas, tudo voltará a ser o que era antes.' [ENTER]")
+        console.log("\n'Meu mestre já conseguiu todo o poder necessário para trazer todos os que amamos de volta.'")
+        console.log("'Não posso deixar que você o impeça de fazer isso.'")
+        prompt("[ENTER]")
+        console.clear()
+        console.log("\n'Você deve estar pensando o porquê de eu ser o Cavaleiro Fantasma e não parecer com um fantasma.'")
+        prompt("'Pois saiba que esse é um nome que escolhi para assustar meus inimigos.' [ENTER]")
+        console.log()
+        let resposta2 = +prompt("'Você está se sentindo assustado?' [1]SIM [2]NÃO: ")
+        while(resposta2 != 1 && resposta2 != 2) {
+            console.log("\nNÚMERO INVÁLIDO!")
+            resposta2 = +prompt("'Você está se sentindo assustado?' [1]SIM [2]NÃO: ")
+        }
+        if (resposta2 == 2) {
+            console.log("\n'Pois vai se sentir assustado agora!'")
+            console.log("O cavaleiro pula de seu cavalo e saca sua linda espada cromada.")
+            prompt("[ENTER]")
+        } else if (resposta2 == 1) {
+            console.log("\n'Poi vai se sentir mais ainda agora!'")
+            console.log("O cavaleiro pula de seu cavalo e saca sua linda espada cromada.")
+            prompt("[ENTER]")
+        }
+        if (kills >= 4) {
+            console.log()
+            prompt("É melhor se preparar seu assassino desgraçado! [ENTER]")
+        }
+    }
+} else if (personagem == 2) {
+    if (statusJogador.grupo >= 1) {
+        if (statusJogador.mapa >= 1) {
+            console.log("Após desarmarem o acampamento e continuarem seguindo o mapa, vocês avistam a montanha onde possivelmente está a caverna do bruxo.")
+            prompt("[ENTER]")
+        } else {
+            console.log("Após desarmarem o acampamento e continuarem a jornada, vocês avistam a montanha onde possivelmente está a caverna do bruxo.")
+            prompt("[ENTER]")
+        }
+        console.log("\nAmanda fala:")
+        prompt("'Estamos tão perto do objetivo, mas derrotamos apenas 5 guerreiros, ainda falta 1... [ENTER]'")
+        console.log()
+        console.log("'Exatamente, ainda falta eu, o Cavaleiro Fantasma!'")
+        prompt("Disse um cavaleiro montado em seu cavalo que as observava de longe. [ENTER]")
+        console.clear()
+        console.log("'Vou contar algo que provavelmente vocês duas não sabiam.'")
+        prompt("'Mordog não está roubando as almas, tudo voltará a ser o que era antes.' [ENTER]")
+        console.log("\n'Meu mestre já conseguiu todo o poder necessário para trazer todos os que amamos de volta.'")
+        console.log("'Não posso deixar que vocês o impeçam de fazer isso.'")
+        prompt("[ENTER]")
+        console.clear()
+        console.log("\n'Vocês devem estar pensando o porquê de eu ser o Cavaleiro Fantasma e não parecer com um fantasma.'")
+        prompt("'Pois saibam que esse é um nome que escolhi para assustar meus inimigos.' [ENTER]")
+        console.log()
+        let resposta2 = +prompt("'Vocês estão se sentindo assustadas?' [1]SIM [2]NÃO: ")
+        while(resposta2 != 1 && resposta2 != 2) {
+            console.log("\nNÚMERO INVÁLIDO!")
+            resposta2 = +prompt("'Vocês estão se sentindo assustadas?' [1]SIM [2]NÃO: ")
+        }
+        if (resposta2 == 2) {
+            console.log("\n'Pois vão se sentir assustadas agora!'")
+            console.log("O cavaleiro pula de seu cavalo e saca sua linda espada cromada.")
+            prompt("[ENTER]")
+        } else if (resposta2 == 1) {
+            console.log("\n'Pois vão se sentir mais ainda agora!'")
+            console.log("O cavaleiro pula de seu cavalo e saca sua linda espada cromada.")
+            prompt("[ENTER]")
+        }
+        if (kills >= 4) {
+            console.log()
+            prompt("É melhor se prepararem suas assassinas desgraçadas! [ENTER]")
+        }
+    } else {
+        if (statusJogador.mapa >= 1) {
+            console.log("Após desarmar o acampamento e continuarem seguindo o mapa, você avista a montanha onde possivelmente está a caverna do bruxo.")
+            prompt("[ENTER]")
+        } else {
+            console.log("Após desarmar o acampamento e continuar a jornada, você avista a montanha onde possivelmente está a caverna do bruxo.")
+            prompt("[ENTER]")
+        }
+        console.log("\nVocê fala para si mesma:")
+        prompt("'Estou tão perto do objetivo, mas derrotei apenas 5 guerreiros, ainda falta 1... [ENTER]'")
+        console.log()
+        console.log("'Exatamente, ainda falta eu, o Cavaleiro Fantasma!'")
+        prompt("Disse um cavaleiro montado em seu cavalo que a observava de longe. [ENTER]")
+        console.clear()
+        console.log("'Vou contar algo que provavelmente você não sabia.'")
+        prompt("'Mordog não está roubando as almas, tudo voltará a ser o que era antes.' [ENTER]")
+        console.log("\n'Meu mestre já conseguiu todo o poder necessário para trazer todos os que amamos de volta.'")
+        console.log("'Não posso deixar que você o impeça de fazer isso.'")
+        prompt("[ENTER]")
+        console.clear()
+        console.log("\n'Você deve estar pensando o porquê de eu ser o Cavaleiro Fantasma e não parecer com um fantasma.'")
+        prompt("'Pois saiba que esse é um nome que escolhi para assustar meus inimigos.' [ENTER]")
+        console.log()
+        let resposta2 = +prompt("'Você está se sentindo assustada?' [1]SIM [2]NÃO: ")
+        while(resposta2 != 1 && resposta2 != 2) {
+            console.log("\nNÚMERO INVÁLIDO!")
+            resposta2 = +prompt("'Você está se sentindo assustada?' [1]SIM [2]NÃO: ")
+        }
+        if (resposta2 == 2) {
+            console.log("\n'Pois vai se sentir assustada agora!'")
+            console.log("O cavaleiro pula de seu cavalo e saca sua linda espada cromada.")
+            prompt("[ENTER]")
+        } else if (resposta2 == 1) {
+            console.log("\n'Poi vai se sentir mais ainda agora!'")
+            console.log("O cavaleiro pula de seu cavalo e saca sua linda espada cromada.")
+            prompt("[ENTER]")
+        }
+        if (kills >= 4) {
+            console.log()
+            prompt("É melhor se preparar sua assassina desgraçada! [ENTER]")
+        }
+    }
 }
-if (statusJogador.espada == 1) {
-    prompt("\nA espada foi de grande ajuda para derrotar os inimigos. [ENTER]")
-} else {
-    prompt("\nDerrotar os inimigos foi muito mais diícil sem sua espada. [ENTER]")
+backup(1,statusJogador)
+cavaleiroFantasma.alterarAtributos()
+rodada = 0
+while(true){
+    rodada++
+    console.clear()
+    console.log(`RODADA ${rodada}:`)
+    console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
+    console.log(`Vida ${cavaleiroFantasma.nome}: ${cavaleiroFantasma.vida}`)
+    console.log()
+    console.log("O Cavaleiro Fantasma ataca.")
+    cavaleiroFantasma.jogada()
+    statusJogador.opcoesDeJogada('cavaleiroFantasma')
+    if (cavaleiroFantasma.vida <= 0) {
+        break
+    }
 }
-if (statusJogador.capa == 1) {
-    prompt("\nVocê se protegeu muito bem do fogo dos dragões com sua linda capa. [ENTER]")
-} else {
-    prompt("\nVocê acabou sofrendo queimaduras pelo fogo dos dragões. [ENTER]")
+backup(2,statusJogador)
+console.clear()
+console.log("'Me perdoe mestre, eu falhei em protegê-lo.'")
+prompt("Disse o Cavaleiro caído no chão sem seu elmo. [ENTER]")
+console.log()
+let escolha6 = +prompt("O que você faz? [1]MATAR [2]POUPAR: ")
+while(escolha6 != 1 && escolha6 != 2) {
+    console.log("\nNÚMERO INVÁLIDO!")
+    escolha6 = +prompt("O que você faz? [1]MATAR [2]POUPAR: ")
+    console.log()
 }
-if (statusJogador.amuleto == 1) {
-    prompt("\nO bruxo ficou surpreso ao perceber que você era imune aos feitiços dele, graças ao seu amuleto mágico. [ENTER]")
+if (escolha6 == 1) {
+    if (kills == 5) {
+        prompt("'Não estou nem um pouco surpreso com sua decisão.' [ENTER]")
+        console.log()
+        prompt("Você tira a vida do último inimigo. [ENTER]")
+        kills++
+    } else {
+        prompt("Você tira a vida do Cavaleiro Fantasma. [ENTER]")
+        kills++
+    }
+} else if (escolha6 == 2) {
+    if (kills == 5) {
+        prompt("'Estou surpreso que tenha poupado ao menos uma vida.' [ENTER]")
+    } else if (kills == 0) {
+        prompt("'Você possui mesmo um coração muito nobre.' [ENTER]")
+    } else {
+        prompt("'Agradeço por poupares minha vida.' [ENTER]")
+    }
+    console.clear()
+    console.log("O Cavaleiro continua:\n")
+    if (personagem == 1) {
+        if (statusJogador.grupo >= 1) {
+            prompt("'Mordog ainda não se recuperou completamente da última batalha.' [ENTER]")
+            console.log("\n'Vocês ainda têm uma chance de derrotá-lo.'")
+            prompt("'Mas peço que pensem melhor no que estão fazendo.' [ENTER]")
+            console.log("\n'Ele possui o poder necessário para trazer todos de volta à vida.'")
+            prompt("'Sei que deve ser difícil para vocês acreditarem.' [ENTER]")
+            console.clear()
+            console.log("\n'Se vocês matarem Mordog estarão destruindo também 1 milhão de almas.'")
+            console.log("'Se confiarem nele podem trazê-las de volta, ou serem mortos depois que ele se recuperar.'\n")
+            prompt("'A escolha do que acontece em seguida cabe apenas a vocês.' [ENTER]")
+            console.log()
+            prompt("\nO Cavaleiro Fantasma monta em seu cavalo e vai embora. [ENTER]")
+        } else {
+            prompt("'Mordog ainda não se recuperou completamente da última batalha.' [ENTER]")
+            console.log("\n'Você ainda têm uma chance de derrotá-lo.'")
+            prompt("'Mas peço que pense melhor no que está fazendo.' [ENTER]")
+            console.log("\n'Ele possui o poder necessário para trazer todos de volta à vida.'")
+            prompt("'Sei que deve ser difícil para você acreditar.' [ENTER]")
+            console.clear()
+            console.log("\n'Se você matar Mordog estará destruindo também 1 milhão de almas.'")
+            console.log("'Se confiar nele pode trazê-las de volta, ou ser morto depois que ele se recuperar.'\n")
+            prompt("'A escolha do que acontece em seguida cabe apenas a você.' [ENTER]")
+            console.log()
+            prompt("\nO Cavaleiro Fantasma monta em seu cavalo e vai embora. [ENTER]")
+        }
+    } else if (personagem == 2) {
+        if (statusJogador.grupo >= 1) {
+            prompt("'Mordog ainda não se recuperou completamente da última batalha.' [ENTER]")
+            console.log("\n'Vocês ainda têm uma chance de derrotá-lo.'")
+            prompt("'Mas peço que pensem melhor no que estão fazendo.' [ENTER]")
+            console.log("\n'Ele possui o poder necessário para trazer todos de volta à vida.'")
+            prompt("'Sei que deve ser difícil para vocês acreditarem.' [ENTER]")
+            console.clear()
+            console.log("\n'Se vocês matarem Mordog estarão destruindo também 1 milhão de almas.'")
+            console.log("'Se confiarem nele podem trazê-las de volta, ou serem mortas depois que ele se recuperar.'\n")
+            prompt("'A escolha do que acontece em seguida cabe apenas a vocês.' [ENTER]")
+            console.log()
+            prompt("\nO Cavaleiro Fantasma monta em seu cavalo e vai embora. [ENTER]")
+        } else {
+            prompt("'Mordog ainda não se recuperou completamente da última batalha.' [ENTER]")
+            console.log("\n'Você ainda têm uma chance de derrotá-lo.'")
+            prompt("'Mas peço que pense melhor no que está fazendo.' [ENTER]")
+            console.log("\n'Ele possui o poder necessário para trazer todos de volta à vida.'")
+            prompt("'Sei que deve ser difícil para você acreditar.' [ENTER]")
+            console.clear()
+            console.log("\n'Se você matar Mordog estará destruindo também 1 milhão de almas.'")
+            console.log("'Se confiar nele pode trazê-las de volta, ou ser morta depois que ele se recuperar.'\n")
+            prompt("'A escolha do que acontece em seguida cabe apenas a você.' [ENTER]")
+            console.log()
+            prompt("\nO Cavaleiro Fantasma monta em seu cavalo e vai embora. [ENTER]")
+        }
+    }
+}
+statusJogador.aumentarNivel()
+console.clear()
+statusJogador.aumentarTempo()
+console.log("================ \nONDE TUDO TERMINA")
+console.log()
+if (personagem == 1) {
+    if (statusJogador.grupo >= 1) {
+        console.log("Após desmontarem o acampamento, vocês estão agora a poucos quilômetros de distância da montanha.\n")
+        prompt("[ENTER]")
+        console.log("\nVocês sabem que esse é um dia decisivo na sua missão: vencer ou fracassar.")
+        console.log("Mas será que vencer ou fracassar não pode ser apenas uma questão de ponto de vista?")
+        prompt("[ENTER]")
+        console.clear()
+        prompt("Vocês chegam até a entrada de uma caverna na base da grande montanha. [ENTER]")
+        console.log("\nMas não é uma caverna qualquer, ela possui paredes e desenhos esculpidos em seu interior.")
+        prompt("[ENTER]")
+        console.log("\nMais no interior vocês encontram um salão gigantesco.")
+        console.log("Nesse salão há um homem alto vestindo uma bela capa preta que cobre todo o seu corpo.")
+        prompt("Vocês já sabem quem é esse homem. [ENTER]")
+        console.clear()
+        console.log("Mordog então começa a falar:\n")
+        prompt(`'${statusJogador.nome} e Jhonny, estava esperando vocês, sei o que vieram fazer aqui.' [ENTER]`)
+        console.log("\n'Sei que vieram vingar seu povo e todos aqueles que eu supostamente roubei as almas.'")
+        prompt("'Mas eu perdi pessoas que amava e vou usar esse poder para trazê-las de volta. [ENTER]'")
+        console.log("\n'Depois as almas ficarão livres para voltarem para casa.'")
+        prompt("'Estou tão perto de concluir meu plano, não posso deixar que vocês atrapalhem.' [ENTER]")
+        if(kills == 6) {
+            console.log("\n'Além disso, Vocês mataram todos os meus leais companheiros.'")
+            console.log("'Desse modo é impossível que eu lhes dê piedade.'")
+            mordog.alterarAtributos(1)
+        } else {
+            mordog.alterarAtributos()
+        }
+    } else {
+        console.log("Após desmontar o acampamento, você está agora a poucos quilômetros de distância da montanha.\n")
+        prompt("[ENTER]")
+        console.log("\nVocê sabe que esse é um dia decisivo na sua missão: vencer ou fracassar.")
+        console.log("Mas será que vencer ou fracassar não pode ser apenas uma questão de ponto de vista?")
+        prompt("[ENTER]")
+        console.clear()
+        prompt("Você chega até a entrada de uma caverna na base da grande montanha. [ENTER]")
+        console.log("\nMas não é uma caverna qualquer, ela possui paredes e desenhos esculpidos em seu interior.")
+        prompt("[ENTER]")
+        console.log("\nMais no interior você encontra um salão gigantesco.")
+        console.log("Nesse salão há um homem alto vestindo uma bela capa preta que cobre todo o seu corpo.")
+        prompt("Você já sabe quem é esse homem. [ENTER]")
+        console.clear()
+        console.log("Mordog então começa a falar:\n")
+        prompt(`'${statusJogador.nome} ,estava esperando você, sei o que veio fazer aqui.' [ENTER]`)
+        console.log("\n'Sei que veio vingar seu povo e todos aqueles que eu supostamente roubei as almas.'")
+        prompt("'Mas eu perdi pessoas que amava e vou usar esse poder para trazê-las de volta. [ENTER]'")
+        console.log("\n'Depois as almas ficarão livres para voltarem para casa.'")
+        prompt("'Estou tão perto de concluir meu plano, não posso deixar que você atrapalhe.' [ENTER]")
+        if(kills == 6) {
+            console.log("\n'Além disso, Você matou todos os meus leais companheiros.'")
+            console.log("'Desse modo é impossível que eu lhe dê piedade.'")
+            mordog.alterarAtributos(1)
+        } else {
+            mordog.alterarAtributos()
+        }
+    }
+} else if (personagem == 2) {
+    if (statusJogador.grupo >= 1) {
+        console.log("Após desmontarem o acampamento, vocês estão agora a poucos quilômetros de distância da montanha.\n")
+        prompt("[ENTER]")
+        console.log("\nVocês sabem que esse é um dia decisivo na sua missão: vencer ou fracassar.")
+        console.log("Mas será que vencer ou fracassar não pode ser apenas uma questão de ponto de vista?")
+        prompt("[ENTER]")
+        console.clear()
+        prompt("Vocês chegam até a entrada de uma caverna na base da grande montanha. [ENTER]")
+        console.log("\nMas não é uma caverna qualquer, ela possui paredes e desenhos esculpidos em seu interior.")
+        prompt("[ENTER]")
+        console.log("\nMais no interior vocês encontram um salão gigantesco.")
+        console.log("Nesse salão há um homem alto vestindo uma bela capa preta que cobre todo o seu corpo.")
+        prompt("Vocês já sabem quem é esse homem. [ENTER]")
+        console.clear()
+        console.log("Mordog então começa a falar:\n")
+        prompt(`'${statusJogador.nome} e Amanda, estava esperando vocês, sei o que vieram fazer aqui.' [ENTER]`)
+        console.log("\n'Sei que vieram vingar seu povo e todos aqueles que eu supostamente roubei as almas.'")
+        prompt("'Mas eu perdi pessoas que amava e vou usar esse poder para trazê-las de volta. [ENTER]'")
+        console.log("\n'Depois as almas ficarão livres para voltarem para casa.'")
+        prompt("'Estou tão perto de concluir meu plano, não posso deixar que vocês atrapalhem.' [ENTER]")
+        if(kills == 6) {
+            console.log("\n'Além disso, Vocês mataram todos os meus leais companheiros.'")
+            console.log("'Desse modo é impossível que eu lhes dê piedade.'")
+            mordog.alterarAtributos(1)
+        } else {
+            mordog.alterarAtributos()
+        }
+    } else {
+        console.log("Após desmontar o acampamento, você está agora a poucos quilômetros de distância da montanha.\n")
+        prompt("[ENTER]")
+        console.log("\nVocê sabe que esse é um dia decisivo na sua missão: vencer ou fracassar.")
+        console.log("Mas será que vencer ou fracassar não pode ser apenas uma questão de ponto de vista?")
+        prompt("[ENTER]")
+        console.clear()
+        prompt("Você chega até a entrada de uma caverna na base da grande montanha. [ENTER]")
+        console.log("\nMas não é uma caverna qualquer, ela possui paredes e desenhos esculpidos em seu interior.")
+        prompt("[ENTER]")
+        console.log("\nMais no interior você encontra um salão gigantesco.")
+        console.log("Nesse salão há um homem alto vestindo uma bela capa preta que cobre todo o seu corpo.")
+        prompt("Você já sabe quem é esse homem. [ENTER]")
+        console.clear()
+        console.log("Mordog então começa a falar:\n")
+        prompt(`'${statusJogador.nome} ,estava esperando você, sei o que veio fazer aqui.' [ENTER]`)
+        console.log("\n'Sei que veio vingar seu povo e todos aqueles que eu supostamente roubei as almas.'")
+        prompt("'Mas eu perdi pessoas que amava e vou usar esse poder para trazê-las de volta. [ENTER]'")
+        console.log("\n'Depois as almas ficarão livres para voltarem para casa.'")
+        prompt("'Estou tão perto de concluir meu plano, não posso deixar que você atrapalhe.' [ENTER]")
+        if(kills == 6) {
+            console.log("\n'Além disso, Você matou todos os meus leais companheiros.'")
+            console.log("'Desse modo é impossível que eu lhe dê piedade.'")
+            mordog.alterarAtributos(1)
+        } else {
+            mordog.alterarAtributos()
+        }
+    }
+}
+backup(1,statusJogador)
+rodada = 0
+while(true){
+    rodada++
+    console.clear()
+    console.log(`RODADA ${rodada}:`)
+    console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
+    console.log(`Vida ${mordog.nome}: ${mordog.vida}`)
+    console.log()
+    console.log("Mordog ataca.")
+    mordog.jogada()
+    statusJogador.opcoesDeJogada('mordog')
+    if (mordog.vida <= 0) {
+        break
+    }
+    if (statusJogador.vida <= 0) {
+        console.log("VOCÊ MORREU.")
+        break aventura
+    }
+}
+backup(2,statusJogador)
+console.clear()
+if (personagem == 1) {
+    if (statusJogador.grupo >= 1) {
+        prompt("'Vocês conseguiram mesmo me derrotar, foi uma batalha digna.' [ENTER]")
+        console.log()
+        prompt("'Mas saibam que nunca foi nada pessoal, eu ...' [ENTER]")
+        console.log()
+        console.log("'... eu só queria poder ver a minha família de novo.'")
+        prompt("Lágrimas saem dos olhos do bruxo. [ENTER]")
+        console.log("\n'E pretendo velos de novo'.")
+        prompt("'Mesmo depois da derrota, vocês não vão conseguir me impedir' [ENTER]")
+    } else {
+        prompt("'Você conseguiu mesmo me derrotar, foi uma batalha digna.' [ENTER]")
+        console.log()
+        prompt("'Mas saiba que nunca foi nada pessoal, eu ...' [ENTER]")
+        console.log()
+        console.log("'... eu só queria poder ver a minha família de novo.'")
+        prompt("Lágrimas saem dos olhos do bruxo. [ENTER]")
+        console.log("\n'E pretendo velos de novo'.")
+        prompt("'Mesmo depois da derrota, você não vão conseguir me impedir' [ENTER]")
+    }
+} else if (personagem == 2) {
+    if (statusJogador.grupo >= 1) {
+        prompt("'Vocês conseguiram mesmo me derrotar, foi uma batalha digna.' [ENTER]")
+        console.log()
+        prompt("'Mas saibam que nunca foi nada pessoal, eu ...' [ENTER]")
+        console.log()
+        console.log("'... eu só queria poder ver a minha família de novo.'")
+        prompt("Lágrimas saem dos olhos do bruxo. [ENTER]")
+        console.log("\n'E pretendo velos de novo'.")
+        prompt("'Mesmo depois da derrota, vocês não vão conseguir me impedir' [ENTER]")
+    } else {
+        prompt("'Você conseguiu mesmo me derrotar, foi uma batalha digna.' [ENTER]")
+        console.log()
+        prompt("'Mas saiba que nunca foi nada pessoal, eu ...' [ENTER]")
+        console.log()
+        console.log("'... eu só queria poder ver a minha família de novo.'")
+        prompt("Lágrimas saem dos olhos do bruxo. [ENTER]")
+        console.log("\n'E pretendo velos de novo'.")
+        prompt("'Mesmo depois da derrota, você não vão conseguir me impedir' [ENTER]")
+    }
+}
+console.clear()
+console.log("Então o corpo inteiro de Mordog começa a brilhar.")
+if (personagem == 1) {
+    if (statusJogador.grupo >= 1) {
+        console.log("\nJhonny fala:")
+        console.log("'Parece que ele está usando sua energia restante para fazer a magia, mas como ele consegue?'")
+        prompt("[ENTER]")
+    } else {
+        console.log("\nVocê pensa consigo mesmo:")
+        console.log("'Parece que ele está usando sua energia restante para fazer a magia, mas como ele consegue?'")
+        prompt("[ENTER]")
+    }
+} else if (personagem == 2) {
+    if (statusJogador.grupo >= 1) {
+        console.log("\nAmanda fala:")
+        console.log("'Parece que ele está usando sua energia restante para fazer a magia, mas como ele consegue?'")
+        prompt("[ENTER]")
+    } else {
+        console.log("\nVocê pensa consigo mesma:")
+        console.log("'Parece que ele está usando sua energia restante para fazer a magia, mas como ele consegue?'")
+        prompt("[ENTER]")
+    }
+}
+console.log("\nAs almas começam a sair de seu corpo como se fossem rápidos feixes se dirigindo à saída da caverna.")
+prompt("[ENTER]")
+console.log("\nE de repente as almas adquiriram forma.")
+console.log("Todos aqueles que estavam aprisionados começavam a reaparecer onde deveriam estar.")
+prompt("[ENTER]")
+console.clear()
+console.log("E ali estavam, abraçados no bruxo, sua esposa e seu filho que haviam retornado.")
+prompt("[ENTER]")
+console.log("\nMas a felicidade não durou muito, Mordog estava tão determinado que usou tudo o que restara de sua energia vital.")
+console.log("Desse modo, ele só poderia aproveitar mais alguns minutos com sua família.")
+prompt("[ENTER]")
+console.clear()
+prompt("E nesse momento você se lembra de tudo o que passou em sua jornada até ali. [ENTER]")
+console.log()
+prompt("Você se lembra das batalhas que aconteceram. [ENTER]")
+console.log()
+prompt("Você se lembra das escolhas que teve de fazer. [ENTER]")
+console.log()
+console.log("Então você se lembra da poção de cura que seu vizinho elfo lhe deu antes de partir.")
+let final = +prompt("Você entrega a poção para Mordog? [1]SIM [2]NÃO: ")
+while(final != 1 && final != 2) {
+    console.log("\nNÚMERO INVÁLIDO!")
+    final = +prompt("Você entrega a poção para Mordog? [1]SIM [2]NÃO: ")
+}
+console.clear()
+if (final == 1) {
+    prompt("Você entrega a poção para Mordog, ele bebe e é magicamente curado. [ENTER]")
 } else {
-    prompt("\nVocê teve dificuldades em lutar contra os feitiços do bruxo, ele era mesmo muito poderoso. [ENTER]")
+    prompt("Mordog realiza seu desejo de ver sua família, mas acaba não resistindo ao seu próprio feitiço. [ENTER]")
 }
 if (personagem == 1) {
-    if (statusJogador.grupo == 1) {
-        prompt("\nVocê não teria chegado tão longe sem seu amigo, ele realmente foi de grande ajuda. [ENTER]")
+    if (statusJogador.grupo >= 1) {
+        console.log("Você e Jhonny retornam para a terra de Blue, sua casa, para reencontrar seus amigos e familiares que voltaram.")
+        console.log(`${statusJogador.nome}, parabéns pela aventura!`)
     } else {
-        prompt("\nÉ muito difícil finalizar uma jornda desse tipo sem companhia, mas você estava muito confiante. [ENTER]")
+        console.log("Você retorna para a terra de Blue, sua casa, para reencontrar seus amigos e familiares que voltaram.")
+        console.log(`${statusJogador.nome}, parabéns pela aventura!`)
     }
-} else {
-    if (statusJogador.grupo == 1) {
-        prompt("\nVocê não teria chegado tão longe sem sua amiga, ela realmente foi de grande ajuda. [ENTER]")
+} else if (personagem == 2) {
+    if (statusJogador.grupo >= 1) {
+        console.log("Você e Amanda retornam para a terra de Blue, sua casa, para reencontrar seus amigos e familiares que voltaram.")
+        console.log(`${statusJogador.nome}, parabéns pela aventura!`)
     } else {
-        prompt("\nÉ muito difícil finalizar uma jornda desse tipo sem companhia, mas você estava muito confiante. [ENTER]")
+        console.log("Você retorna para a terra de Blue, sua casa, para reencontrar seus amigos e familiares que voltaram.")
+        console.log(`${statusJogador.nome}, parabéns pela aventura!`)
     }
 }
-if (personagem == 1) {
- if (statusJogador.pontuacao == 0) {
-    console.log(`\nVOCÊ NÃO CONSEGUIU CHEGAR NEM PERTO DE DETER MORDOG.`)
- } else if (statusJogador.pontuacao == 1 || statusJogador.pontuacao == 2) {
-    console.log(`\nVOCÊ NÃO CONSEGUIU DETER MORDOG.`)
- } else if (statusJogador.pontuacao == 3) {
-    console.log(`\nVOCÊ CONSEGUIU DETER MORDOG, MAS INFELIZMENTE NÃO SOBREVIVEU À BATALHA.`)
- } else if (statusJogador.pontuacao == 4) {    
-    console.log(`\nAPESAR DE TER SIDO UMA BATALHA DIFÍCIL, VOCÊ CONSEGUIU DETER MORDOG E SE TORNOU UM HERÓI!`)
- } else if (statusJogador.pontuacao == 5) {
-    console.log(`\nVOCÊ CONSEGUIU DETER MORDOG, SALVOU SUA CIDADE E SE TORNOU UM HERÓI. SUA HISTÓRIA SERÁ LEMBRADA POR VÁRIAS GERAÇÕES!`)
- }
-} else {
-  if (statusJogador.pontuacao == 0) {
-    console.log(`\nVOCÊ NÃO CONSEGUIU CHEGAR NEM PERTO DE DETER MORDOG.`)
- } else if (statusJogador.pontuacao == 1 || statusJogador.pontuacao == 2) {
-    console.log(`\nVOCÊ NÃO CONSEGUIU DETER MORDOG.`)
- } else if (statusJogador.pontuacao == 3) {
-    console.log(`\nVOCÊ CONSEGUIU DETER MORDOG, MAS INFELIZMENTE NÃO SOBREVIVEU À BATALHA.`)
- } else if (statusJogador.pontuacao == 4) {    
-    console.log(`\nAPESAR DE TER SIDO UMA BATALHA DIFÍCIL, VOCÊ CONSEGUIU DETER MORDOG E SE TORNOU UMA HEROÍNA!`)
- } else if (statusJogador.pontuacao == 5) {
-    console.log(`\nVOCÊ CONSEGUIU DETER MORDOG, SALVOU SUA CIDADE E SE TORNOU UMA HEROÍNA. SUA HISTÓRIA SERÁ LEMBRADA POR VÁRIAS GERAÇÕES!`)
- }   
+console.log()
+prompt(`[ENTER]`)
+break
 }
+console.clear()
+let final1 = prompt("O jogo acabou. Gostaria de jogar de novo? [1]SIM [2]NÃO:")
+while(final1 != 1 && final1 != 2) {
+    console.log("\nNÚMERO INVÁLIDO!")
+    final1 = prompt("O jogo acabou. Gostaria de jogar de novo? [1]SIM [2]NÃO:")
+}
+if (final1 == 1) {
+    continue
+} else {
+    break
+}
+}
+console.log("FIM DE JOGO.")
