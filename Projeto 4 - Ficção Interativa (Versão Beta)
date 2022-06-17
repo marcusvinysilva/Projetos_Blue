@@ -251,6 +251,9 @@ jogo: while(true) {
                 }
                 if (opcao == 1) {
                     let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                    while (numeroAleatorio < (this.ataque * 0.3)) {
+                        numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                    }
                     if (a == "jhonny") {
                         jhonny.dano(numeroAleatorio)
                     } else if (a == 'amanda') {
@@ -390,6 +393,9 @@ jogo: while(true) {
             },
             jogada: function() {
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                while (numeroAleatorio < (this.ataque * 0.3)) {
+                    numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                }
                 statusJogador.dano(numeroAleatorio)
             }
         }
@@ -486,6 +492,9 @@ jogo: while(true) {
             },
             jogada: function() {
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                while (numeroAleatorio < (this.ataque * 0.3)) {
+                    numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                }
                 statusJogador.dano(numeroAleatorio)
             }
         }
@@ -531,6 +540,9 @@ jogo: while(true) {
             jogada: function() {
                 console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                while (numeroAleatorio < (this.ataque * 0.3)) {
+                    numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                }
                 statusJogador.dano(numeroAleatorio)
             },
             alterarAtributos: function(numero = 0) {
@@ -587,6 +599,9 @@ jogo: while(true) {
             jogada: function() {
                 console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                while (numeroAleatorio < (this.ataque * 0.3)) {
+                    numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                }
                 statusJogador.dano(numeroAleatorio)
             },
             alterarAtributos: function(numero = 0) {
@@ -643,6 +658,9 @@ jogo: while(true) {
             jogada: function() {
                 console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                while (numeroAleatorio < (this.ataque * 0.3)) {
+                    numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                }
                 statusJogador.dano(numeroAleatorio)
             },
             alterarAtributos: function(numero = 0) {
@@ -699,6 +717,9 @@ jogo: while(true) {
             jogada: function() {
                 console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                while (numeroAleatorio < (this.ataque * 0.3)) {
+                    numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                }
                 statusJogador.dano(numeroAleatorio)
             },
             alterarAtributos: function(numero = 0) {
@@ -755,6 +776,9 @@ jogo: while(true) {
             jogada: function() {
                 console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                while (numeroAleatorio < (this.ataque * 0.3)) {
+                    numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                }
                 statusJogador.dano(numeroAleatorio)
             },
             alterarAtributos: function(numero = 0) {
@@ -811,6 +835,9 @@ jogo: while(true) {
             jogada: function() {
                 console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                while (numeroAleatorio < (this.ataque * 0.3)) {
+                    numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                }
                 statusJogador.dano(numeroAleatorio)
             },
             alterarAtributos: function(numero = 0) {
@@ -867,6 +894,9 @@ jogo: while(true) {
             jogada: function() {
                 console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * this.ataques.length)]}\n`)
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                while (numeroAleatorio < (this.ataque * 0.3)) {
+                    numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
+                }
                 statusJogador.dano(numeroAleatorio)
             },
             alterarAtributos: function(numero = 0) {
@@ -1014,11 +1044,12 @@ jogo: while(true) {
                     rodada++
                     console.clear()
                     console.log(`RODADA ${rodada}:`)
-                    console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
-                    console.log(`Vida ${jhonny.nome}: ${jhonny.vida}`)
+                    console.log("===========")
                     console.log()
                     console.log("Jhonny ataca.")
                     jhonny.jogada()
+                    console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                    console.log(`Vida ${jhonny.nome}: ${jhonny.vida}`)
                     if (statusJogador.vida <= 0) {
                         console.log("\nVOCÊ MORREU.")
                         backup(2,statusJogador)
@@ -1076,11 +1107,12 @@ jogo: while(true) {
                     rodada++
                     console.clear()
                     console.log(`RODADA ${rodada}:`)
-                    console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
-                    console.log(`Vida ${amanda.nome}: ${amanda.vida}`)
+                    console.log("===========")
                     console.log()
                     console.log("Amanda ataca.")
                     amanda.jogada()
+                    console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                    console.log(`Vida ${amanda.nome}: ${amanda.vida}`)
                     if (statusJogador.vida <= 0) {
                         console.log("\nVOCÊ MORREU.")
                         backup(2,statusJogador)
@@ -1179,18 +1211,19 @@ jogo: while(true) {
                         rodada++
                         console.clear()
                         console.log(`RODADA ${rodada}:`)
-                        console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
-                        console.log(`Vida ${goblin.nome}: ${goblin.vida}`)
+                        console.log("===========")
                         console.log()
-                        console.log("O Goblin ataca.")
+                        console.log("Goblin ataca.")
                         goblin.jogada()
+                        console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                        console.log(`Vida ${goblin.nome}: ${goblin.vida}`)
                         if (statusJogador.vida <= 0) {
                             console.log("\nVOCÊ MORREU.")
                             backup(2,statusJogador)
                             let z = +prompt("Gostaria de jogar o capítulo novamente? [1]SIM [2]NÃO: ")
                             while (z != 1 && z != 2) {
                                 console.log("\nNÚMERO INVÁLIDO!")
-                                z = +prompt("\nGostaria de jogar o capítulo novamente? [1]SIM [2]NÃO: ")
+                                z = +prompt("Gostaria de jogar o capítulo novamente? [1]SIM [2]NÃO: ")
                             }
                             if (z == 1){
                                 continue dia2
@@ -1218,11 +1251,12 @@ jogo: while(true) {
                         rodada++
                         console.clear()
                         console.log(`RODADA ${rodada}:`)
-                        console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
-                        console.log(`Vida ${goblin.nome}: ${goblin.vida}`)
+                        console.log("===========")
                         console.log()
-                        console.log("O Goblin ataca.")
+                        console.log("Goblin ataca.")
                         goblin.jogada()
+                        console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                        console.log(`Vida ${goblin.nome}: ${goblin.vida}`)
                         if (statusJogador.vida <= 0) {
                             console.log("\nVOCÊ MORREU.")
                             backup(2,statusJogador)
@@ -1259,11 +1293,12 @@ jogo: while(true) {
                         rodada++
                         console.clear()
                         console.log(`RODADA ${rodada}:`)
-                        console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
-                        console.log(`Vida ${goblin.nome}: ${goblin.vida}`)
+                        console.log("===========")
                         console.log()
-                        console.log("O Goblin ataca.")
+                        console.log("Goblin ataca.")
                         goblin.jogada()
+                        console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                        console.log(`Vida ${goblin.nome}: ${goblin.vida}`)
                         if (statusJogador.vida <= 0) {
                             console.log("\nVOCÊ MORREU.")
                             backup(2,statusJogador)
@@ -1298,11 +1333,12 @@ jogo: while(true) {
                         rodada++
                         console.clear()
                         console.log(`RODADA ${rodada}:`)
-                        console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
-                        console.log(`Vida ${goblin.nome}: ${goblin.vida}`)
+                        console.log("===========")
                         console.log()
-                        console.log("O Goblin ataca.")
+                        console.log("Goblin ataca.")
                         goblin.jogada()
+                        console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                        console.log(`Vida ${goblin.nome}: ${goblin.vida}`)
                         if (statusJogador.vida <= 0) {
                             console.log("\nVOCÊ MORREU.")
                             backup(2,statusJogador)
@@ -1433,11 +1469,12 @@ jogo: while(true) {
                 rodada++
                 console.clear()
                 console.log(`RODADA ${rodada}:`)
-                console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
-                console.log(`Vida ${elfoDaFloresta.nome}: ${elfoDaFloresta.vida}`)
+                console.log("===========")
                 console.log()
-                console.log("O Elfo da Floresta ataca.")
+                console.log("Elfo da Floresta ataca.")
                 elfoDaFloresta.jogada()
+                console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                console.log(`Vida ${elfoDaFloresta.nome}: ${elfoDaFloresta.vida}`)
                 if (statusJogador.vida <= 0) {
                     console.log("\nVOCÊ MORREU.")
                     backup(2,statusJogador)
@@ -1661,11 +1698,12 @@ jogo: while(true) {
                 rodada++
                 console.clear()
                 console.log(`RODADA ${rodada}:`)
-                console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
-                console.log(`Vida ${troll.nome}: ${troll.vida}`)
+                console.log("===========")
                 console.log()
-                console.log("O Troll ataca.")
+                console.log("Troll ataca.")
                 troll.jogada()
+                console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                console.log(`Vida ${troll.nome}: ${troll.vida}`)
                 if (statusJogador.vida <= 0) {
                     console.log("\nVOCÊ MORREU.")
                     backup(2,statusJogador)
@@ -1803,11 +1841,12 @@ jogo: while(true) {
                 rodada++
                 console.clear()
                 console.log(`RODADA ${rodada}:`)
-                console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
-                console.log(`Vida ${dragao.nome}: ${dragao.vida}`)
+                console.log("===========")
                 console.log()
-                console.log("O Dragão ataca.")
+                console.log("Dragão ataca.")
                 dragao.jogada()
+                console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                console.log(`Vida ${dragao.nome}: ${dragao.vida}`)
                 if (statusJogador.vida <= 0) {
                     console.log("\nVOCÊ MORREU.")
                     backup(2,statusJogador)
@@ -1949,11 +1988,12 @@ jogo: while(true) {
                 rodada++
                 console.clear()
                 console.log(`RODADA ${rodada}:`)
-                console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
-                console.log(`Vida ${bruxa.nome}: ${bruxa.vida}`)
+                console.log("===========")
                 console.log()
-                console.log("A Bruxa ataca.")
+                console.log("Bruxa ataca.")
                 bruxa.jogada()
+                console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                console.log(`Vida ${bruxa.nome}: ${bruxa.vida}`)
                 if (statusJogador.vida <= 0) {
                     console.log("\nVOCÊ MORREU.")
                     backup(2,statusJogador)
@@ -2215,11 +2255,12 @@ jogo: while(true) {
                 rodada++
                 console.clear()
                 console.log(`RODADA ${rodada}:`)
-                console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
-                console.log(`Vida ${cavaleiroFantasma.nome}: ${cavaleiroFantasma.vida}`)
+                console.log("===========")
                 console.log()
-                console.log("O Cavaleiro Fantasma ataca.")
+                console.log("Cavaleiro Fantasma ataca.")
                 cavaleiroFantasma.jogada()
+                console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                console.log(`Vida ${cavaleiroFantasma.nome}: ${cavaleiroFantasma.vida}`)
                 if (statusJogador.vida <= 0) {
                     console.log("\nVOCÊ MORREU.")
                     backup(2,statusJogador)
@@ -2455,11 +2496,12 @@ jogo: while(true) {
                 rodada++
                 console.clear()
                 console.log(`RODADA ${rodada}:`)
-                console.log(`Vida ${statusJogador.nome}: ${statusJogador.vida}`)
-                console.log(`Vida ${mordog.nome}: ${mordog.vida}`)
+                console.log("===========")
                 console.log()
                 console.log("Mordog ataca.")
                 mordog.jogada()
+                console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
+                console.log(`Vida ${mordog.nome}: ${mordog.vida}`)
                 if (statusJogador.vida <= 0) {
                     console.log("\nVOCÊ MORREU.")
                     backup(2,statusJogador)
@@ -2611,3 +2653,6 @@ jogo: while(true) {
     }
 }
 console.log("\nFIM DE JOGO.")
+
+////Criado por Douglas Volcato
+////Github: https://github.com/DouglasVolcato
