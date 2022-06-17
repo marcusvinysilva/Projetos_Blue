@@ -252,7 +252,7 @@ jogo: while(true) {
                 }
                 if (opcao == 1) {
                     let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
-                    while (numeroAleatorio < (this.ataque * 0.3)) {
+                    while (numeroAleatorio < (this.ataque * 0.4)) {
                         numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
                     }
                     if (a == "jhonny") {
