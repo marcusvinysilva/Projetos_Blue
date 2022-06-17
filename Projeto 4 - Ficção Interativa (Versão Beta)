@@ -252,7 +252,7 @@ jogo: while(true) {
                 }
                 if (opcao == 1) {
                     let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
-                    while (numeroAleatorio < (this.ataque * 0.45)) {
+                    while (numeroAleatorio < (this.ataque * 0.3)) {
                         numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
                     }
                     if (a == "jhonny") {
@@ -990,7 +990,7 @@ jogo: while(true) {
             }
             if (b == 1) {
                 prompt("\nVocê pega sua espada. [ENTER]")
-                statusJogador.aumentarAtaque(20)
+                statusJogador.aumentarAtaque(15)
                 statusJogador.pontuacao += 1
                 statusJogador.espada += 1
             } else if ( b == 2) {
@@ -2875,10 +2875,10 @@ jogo: while(true) {
             }
         }
         console.clear()
-        let final1 = prompt("O jogo acabou. Gostaria de começar novamente? [1]SIM [2]NÃO:")
+        let final1 = prompt("O jogo acabou. Gostaria de começar novamente? [1]SIM [2]NÃO: ")
         while(final1 != 1 && final1 != 2) {
         console.log("\nNÚMERO INVÁLIDO!")
-        final1 = prompt("O jogo acabou. Gostaria de começar novamente? [1]SIM [2]NÃO:")
+        final1 = prompt("O jogo acabou. Gostaria de começar novamente? [1]SIM [2]NÃO: ")
         }
         if (final1 == 1) {
             console.clear()
