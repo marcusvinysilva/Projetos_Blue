@@ -394,7 +394,7 @@ jogo: while(true) {
             },
             jogada: function() {
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
-                while (numeroAleatorio < (this.ataque * 0.3)) {
+                while (numeroAleatorio < (this.ataque * 0.2)) {
                     numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
                 }
                 statusJogador.dano(numeroAleatorio)
@@ -493,7 +493,7 @@ jogo: while(true) {
             },
             jogada: function() {
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
-                while (numeroAleatorio < (this.ataque * 0.3)) {
+                while (numeroAleatorio < (this.ataque * 0.2)) {
                     numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
                 }
                 statusJogador.dano(numeroAleatorio)
@@ -541,7 +541,7 @@ jogo: while(true) {
             jogada: function() {
                 console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
-                while (numeroAleatorio < (this.ataque * 0.3)) {
+                while (numeroAleatorio < (this.ataque * 0.2)) {
                     numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
                 }
                 statusJogador.dano(numeroAleatorio)
@@ -600,7 +600,7 @@ jogo: while(true) {
             jogada: function() {
                 console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
-                while (numeroAleatorio < (this.ataque * 0.3)) {
+                while (numeroAleatorio < (this.ataque * 0.2)) {
                     numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
                 }
                 statusJogador.dano(numeroAleatorio)
@@ -659,7 +659,7 @@ jogo: while(true) {
             jogada: function() {
                 console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
-                while (numeroAleatorio < (this.ataque * 0.3)) {
+                while (numeroAleatorio < (this.ataque * 0.2)) {
                     numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
                 }
                 statusJogador.dano(numeroAleatorio)
@@ -718,7 +718,7 @@ jogo: while(true) {
             jogada: function() {
                 console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
-                while (numeroAleatorio < (this.ataque * 0.3)) {
+                while (numeroAleatorio < (this.ataque * 0.2)) {
                     numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
                 }
                 statusJogador.dano(numeroAleatorio)
@@ -777,7 +777,7 @@ jogo: while(true) {
             jogada: function() {
                 console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
-                while (numeroAleatorio < (this.ataque * 0.3)) {
+                while (numeroAleatorio < (this.ataque * 0.2)) {
                     numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
                 }
                 statusJogador.dano(numeroAleatorio)
@@ -836,7 +836,7 @@ jogo: while(true) {
             jogada: function() {
                 console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * 3)]}\n`)
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
-                while (numeroAleatorio < (this.ataque * 0.3)) {
+                while (numeroAleatorio < (this.ataque * 0.2)) {
                     numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
                 }
                 statusJogador.dano(numeroAleatorio)
@@ -895,7 +895,7 @@ jogo: while(true) {
             jogada: function() {
                 console.log(`\n${this.nome} usou ${this.ataques[Math.floor(Math.random() * this.ataques.length)]}\n`)
                 let numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
-                while (numeroAleatorio < (this.ataque * 0.3)) {
+                while (numeroAleatorio < (this.ataque * 0.2)) {
                     numeroAleatorio = (Math.floor(Math.random() * this.ataque + 1))
                 }
                 statusJogador.dano(numeroAleatorio)
@@ -2682,7 +2682,7 @@ jogo: while(true) {
                     console.log(`OPONENTE ${numeroOponente} \nRODADA ${rodada}:`)
                     console.log("===========")
                     console.log()
-                    console.log("Goblin ataca.")
+                    console.log(`Goblin nível ${statusJogador.nivel} ataca.`)
                     goblin.jogada()
                     console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
                     console.log(`Vida ${goblin.nome}: ${goblin.vida}`)
@@ -2701,7 +2701,7 @@ jogo: while(true) {
                         }
                     }
                     statusJogador.opcoesDeJogada('goblin')
-                    if (elfoDaFloresta.vida <= 0) {
+                    if (goblin.vida <= 0) {
                         break
                     }
                 }
@@ -2713,7 +2713,7 @@ jogo: while(true) {
                     console.log(`OPONENTE ${numeroOponente} \nRODADA ${rodada}:`)
                     console.log("===========")
                     console.log()
-                    console.log("Elfo da Floresta ataca.")
+                    console.log(`Elfo da Floresta nível ${statusJogador.nivel} ataca.`)
                     elfoDaFloresta.jogada()
                     console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
                     console.log(`Vida ${elfoDaFloresta.nome}: ${elfoDaFloresta.vida}`)
@@ -2744,7 +2744,7 @@ jogo: while(true) {
                     console.log(`OPONENTE ${numeroOponente} \nRODADA ${rodada}:`)
                     console.log("===========")
                     console.log()
-                    console.log("Troll ataca.")
+                    console.log(`Troll nível ${statusJogador.nivel} ataca.`)
                     troll.jogada()
                     console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
                     console.log(`Vida ${troll.nome}: ${troll.vida}`)
@@ -2775,7 +2775,7 @@ jogo: while(true) {
                     console.log(`OPONENTE ${numeroOponente} \nRODADA ${rodada}:`)
                     console.log("===========")
                     console.log()
-                    console.log("Dragão ataca.")
+                    console.log(`Dragão nível ${statusJogador.nivel} ataca.`)
                     dragao.jogada()
                     console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
                     console.log(`Vida ${dragao.nome}: ${dragao.vida}`)
@@ -2806,7 +2806,7 @@ jogo: while(true) {
                     console.log(`OPONENTE ${numeroOponente} \nRODADA ${rodada}:`)
                     console.log("===========")
                     console.log()
-                    console.log("Bruxa ataca.")
+                    console.log(`Bruxa nível ${statusJogador.nivel} ataca.`)
                     bruxa.jogada()
                     console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
                     console.log(`Vida ${bruxa.nome}: ${bruxa.vida}`)
@@ -2837,7 +2837,7 @@ jogo: while(true) {
                     console.log(`OPONENTE ${numeroOponente} \nRODADA ${rodada}:`)
                     console.log("===========")
                     console.log()
-                    console.log("Cavaleiro Fantasma ataca.")
+                    console.log(`Cavaleiro Fantasma nível ${statusJogador.nivel} ataca.`)
                     cavaleiroFantasma.jogada()
                     console.log(`\nVida ${statusJogador.nome}: ${statusJogador.vida}`)
                     console.log(`Vida ${cavaleiroFantasma.nome}: ${cavaleiroFantasma.vida}`)
