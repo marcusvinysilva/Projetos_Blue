@@ -115,6 +115,7 @@ jogo: while(true) {
                 console.log(`Dinheiro: ${this.dinheiro} (+${this.dinheiro - backupJogador.dinheiro})`)
                 console.log(`Magia: ${this.magia} (+${this.magia - backupJogador.magia})\n`)
                 prompt(`[ENTER]`)
+                console.log()
             },
             dano: function(quantidade){
                 let a = quantidade - this.defesa
@@ -124,7 +125,7 @@ jogo: while(true) {
                 if (b == 0){
                     console.log("Você defendeu o ataque.")
                 }
-                if (this.vida < 0) {
+                if (this.vida <= 0) {
                     console.log(`Sua vida acabou.`)
                     this.vida = 0
                 } else {
@@ -330,7 +331,7 @@ jogo: while(true) {
                 if (b == 0){
                     console.log("Jhonny defendeu o ataque.")
                 }
-                if (this.vida < 0) {
+                if (this.vida <= 0) {
                     console.log(`A vida de Jhonny acabou.`)
                     this.vida = 0
                 } else {
@@ -429,7 +430,7 @@ jogo: while(true) {
                 if (b == 0){
                     console.log("Amanda defendeu o ataque.")
                 }
-                if (this.vida < 0) {
+                if (this.vida <= 0) {
                     console.log(`A vida de Amanda acabou.`)
                     this.vida = 0
                 } else {
@@ -529,7 +530,7 @@ jogo: while(true) {
                 if (b == 0){
                     console.log("Goblin defendeu o ataque.")
                 }
-                if (this.vida < 0) {
+                if (this.vida <= 0) {
                     console.log(`A vida de Goblin acabou.`)
                     this.vida = 0
                 } else {
@@ -588,7 +589,7 @@ jogo: while(true) {
                 if (b == 0){
                     console.log("Elfo da Floresta defendeu o ataque.")
                 }
-                if (this.vida < 0) {
+                if (this.vida <= 0) {
                     console.log(`A vida de Elfo da Floresta acabou.`)
                     this.vida = 0
                 } else {
@@ -647,7 +648,7 @@ jogo: while(true) {
                 if (b == 0){
                     console.log("Troll defendeu o ataque.")
                 }
-                if (this.vida < 0) {
+                if (this.vida <= 0) {
                     console.log(`A vida de Troll acabou.`)
                     this.vida = 0
                 } else {
@@ -706,7 +707,7 @@ jogo: while(true) {
                 if (b == 0){
                     console.log("Dragão defendeu o ataque.")
                 }
-                if (this.vida < 0) {
+                if (this.vida <= 0) {
                     console.log(`A vida de Dragão acabou.`)
                     this.vida = 0
                 } else {
@@ -765,7 +766,7 @@ jogo: while(true) {
                 if (b == 0){
                     console.log("Bruxa defendeu o ataque.")
                 }
-                if (this.vida < 0) {
+                if (this.vida <= 0) {
                     console.log(`A vida de Bruxa acabou.`)
                     this.vida = 0
                 } else {
@@ -824,7 +825,7 @@ jogo: while(true) {
                 if (b == 0){
                     console.log("Cavaleiro Fantasma defendeu o ataque.")
                 }
-                if (this.vida < 0) {
+                if (this.vida <= 0) {
                     console.log(`A vida de Cavaleiro Fantasma acabou.`)
                     this.vida = 0
                 } else {
@@ -883,7 +884,7 @@ jogo: while(true) {
                 if (b == 0){
                     console.log("Mordog defendeu o ataque.")
                 }
-                if (this.vida < 0) {
+                if (this.vida <= 0) {
                     console.log(`A vida de Mordog acabou.`)
                     this.vida = 0
                 } else {
@@ -2689,10 +2690,10 @@ jogo: while(true) {
                     if (statusJogador.vida <= 0) {
                         console.log("\nVOCÊ MORREU.")
                         backup(2,statusJogador)
-                        let z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        let z = +prompt("\nGostaria de reiniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
                         while (z != 1 && z != 2) {
                             console.log("\nNÚMERO INVÁLIDO!")
-                            z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                            z = +prompt("\nGostaria de reiniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
                         }
                         if (z == 1){
                             continue modoSobrevivência
@@ -2720,10 +2721,10 @@ jogo: while(true) {
                     if (statusJogador.vida <= 0) {
                         console.log("\nVOCÊ MORREU.")
                         backup(2,statusJogador)
-                        let z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        let z = +prompt("\nGostaria de reiniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
                         while (z != 1 && z != 2) {
                             console.log("\nNÚMERO INVÁLIDO!")
-                            z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                            z = +prompt("\nGostaria de reiniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
                         }
                         if (z == 1){
                             continue modoSobrevivência
@@ -2751,10 +2752,10 @@ jogo: while(true) {
                     if (statusJogador.vida <= 0) {
                         console.log("\nVOCÊ MORREU.")
                         backup(2,statusJogador)
-                        let z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        let z = +prompt("\nGostaria de reiniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
                         while (z != 1 && z != 2) {
                             console.log("\nNÚMERO INVÁLIDO!")
-                            z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                            z = +prompt("\nGostaria de reiniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
                         }
                         if (z == 1){
                             continue modoSobrevivência
@@ -2782,10 +2783,10 @@ jogo: while(true) {
                     if (statusJogador.vida <= 0) {
                         console.log("\nVOCÊ MORREU.")
                         backup(2,statusJogador)
-                        let z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        let z = +prompt("\nGostaria de reiniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
                         while (z != 1 && z != 2) {
                             console.log("\nNÚMERO INVÁLIDO!")
-                            z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                            z = +prompt("\nGostaria de reiniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
                         }
                         if (z == 1){
                             continue modoSobrevivência
@@ -2813,10 +2814,10 @@ jogo: while(true) {
                     if (statusJogador.vida <= 0) {
                         console.log("\nVOCÊ MORREU.")
                         backup(2,statusJogador)
-                        let z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        let z = +prompt("\nGostaria de reiniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
                         while (z != 1 && z != 2) {
                             console.log("\nNÚMERO INVÁLIDO!")
-                            z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                            z = +prompt("\nGostaria de reiniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
                         }
                         if (z == 1){
                             continue modoSobrevivência
@@ -2844,10 +2845,10 @@ jogo: while(true) {
                     if (statusJogador.vida <= 0) {
                         console.log("\nVOCÊ MORREU.")
                         backup(2,statusJogador)
-                        let z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                        let z = +prompt("\nGostaria de reiniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
                         while (z != 1 && z != 2) {
                             console.log("\nNÚMERO INVÁLIDO!")
-                            z = +prompt("\nGostaria de reniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
+                            z = +prompt("\nGostaria de reiniciar o Modo Sobrevivência? [1]SIM [2]NÃO: ")
                         }
                         if (z == 1){
                             continue modoSobrevivência
