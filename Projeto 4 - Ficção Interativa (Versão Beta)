@@ -91,13 +91,6 @@ jogo: while(true) {
                 console.log(`Magia: ${this.magia}\n`)
                 prompt(`[ENTER]`)
             },
-            consultarInventário: function(){
-                console.log(`Mapa: ${this.mapa}`)
-                console.log(`Espada: ${this.espada}`)
-                console.log(`Capa contra fogo: ${this.capa}`)
-                console.log(`Amuleto mágico: ${this.amuleto}`)
-                prompt(`[ENTER]`)
-            },
             aumentarNivel: function(a = 1){
                 this.nivel += a
                 this.vida += 100
@@ -134,69 +127,17 @@ jogo: while(true) {
                 console.log()
                 prompt(`[ENTER]`)
             },
-            regeneracao: function(quantidade){
-                this.vida += quantidade
-                if (this.vida > 100) {
-                    console.log(`\nSua vida está cheia.\n`) 
-                    this.vida = 100
-                } else {
-                console.log(`\nSua vida aumentou +${quantidade}.\n`) 
-                }
-                prompt(`[ENTER]`)
-            },
-            gastarDinheiro: function(quantidade){
-                this.dinheiro -= quantidade
-                if (this.dinheiro < 0) {
-                    console.log(`\nSeu dinheiro acabou.\n`)
-                    this.dinheiro = 0
-                } else {
-                console.log(`\n-${quantidade} de dinheiro.\n`) 
-                }
-                prompt(`[ENTER]`)
-            },
-            ganharDinheiro: function(quantidade){
-                console.log(`\n+${quantidade} de dinheiro.\n`)
-                this.dinheiro += quantidade
-                prompt(`[ENTER]`)
-            },
             aumentarAtaque: function(quantidade){
                 console.log(`\nSeu ataque aumentou em +${quantidade}.`)
                 this.ataque = ((20 * this.nivel) + quantidade)
-            },
-            diminuirAtaque: function(quantidade){
-                console.log(`\nSeu ataque diminuiu em -${quantidade}.\n`)
-                this.ataque -= quantidade
-                if (this.ataque < 0) {
-                    console.log(`\nSeu ataque chegou em 0.\n`)
-                    this.ataque = 0
-                }
-                prompt(`[ENTER]`)
             },
             aumentarDefesa: function(quantidade){
                 console.log(`\nSua defesa aumentou em +${quantidade}.`)
                 this.defesa += quantidade
             },
-            diminuirDefesa: function(quantidade){
-                console.log(`\nSua defesa diminuiu em -${quantidade}.\n`)
-                this.defesa -= quantidade
-                if (this.defesa < 0) {
-                    console.log(`\nSua defesa chegou em 0.\n`)
-                    this.defesa = 0
-                }
-                prompt(`[ENTER]`)
-            },
             aumentarMagia: function(quantidade){
                 console.log(`\nSua magia aumentou em +${quantidade}.\n`)
                 this.magia += quantidade
-                prompt(`[ENTER]`)
-            },
-            diminuirMagia: function(quantidade){
-                console.log(`\nSua magia diminuiu em +${quantidade}.\n`)
-                this.magia -= quantidade
-                if (this.magia < 0) {
-                    console.log(`\nSua magia chegou em 0.\n`)
-                    this.magia = 0
-                }
                 prompt(`[ENTER]`)
             },
             aumentarPontuacao: function(){
@@ -219,17 +160,9 @@ jogo: while(true) {
                 console.log(`\nSeu grupo aumentou em +${quantidade} membro. \nQuantidade atual: ${this.grupo} membros.\n`)
                 prompt(`[ENTER]`)
             },
-            diminuirGrupo: function(quantidade = 1){
-                this.grupo -= quantidade
-                console.log(`\nSeu grupo diminuiu em -${quantidade} membro. \nQuantidade atual: ${this.grupo} membros.\n`)
-                prompt(`[ENTER]`)
-            },
             aumentarTempo: function(quantidade = 1){
                 this.tempo += quantidade
                 console.log(`DIA ${this.tempo}`)
-            },
-            diminuirTempo: function(quantidade = 1){
-                this.tempo -= quantidade
             },
             insultar: function(){
                 let insultos = [`É só isso que você consegue fazer?`,
@@ -340,57 +273,14 @@ jogo: while(true) {
                 console.log()
                 prompt(`[ENTER]`)
             },
-            regeneracao: function(quantidade){
-                this.vida += quantidade
-                if (this.vida > 100) {
-                    console.log(`\nA vida de Jhonny está cheia.\n`) 
-                    this.vida = 100
-                } else {
-                console.log(`\nJhonny ganhou +${quantidade} de vida.\n`) 
-                }
-                prompt(`[ENTER]`)
-            },
-            gastarDinheiro: function(quantidade){
-                this.dinheiro -= quantidade
-                if (this.dinheiro < 0) {
-                    console.log(`\nO dinheiro de Jhonny acabou.\n`)
-                    this.dinheiro = 0
-                } else {
-                console.log(`\nJhonny perdeu -${quantidade} de dinheiro.\n`) 
-                }
-                prompt(`[ENTER]`)
-            },
-            ganharDinheiro: function(quantidade){
-                console.log(`\nJhonny ganhou +${quantidade} de dinheiro.\n`)
-                this.dinheiro += quantidade
-                prompt(`[ENTER]`)
-            },
             aumentarAtaque: function(quantidade){
                 console.log(`\nO ataque de Jhonny aumentou em +${quantidade}.\n`)
                 this.ataque += quantidade
                 prompt(`[ENTER]`)
             },
-            diminuirAtaque: function(quantidade){
-                console.log(`\nO ataque de Jhonny diminuiu em -${quantidade}.\n`)
-                this.ataque -= quantidade
-                if (this.ataque < 0) {
-                    console.log(`\nO ataque de Jhonny chegou em 0.\n`)
-                    this.ataque = 0
-                }
-                prompt(`[ENTER]`)
-            },
             aumentarDefesa: function(quantidade){
                 console.log(`\nA defesa de Jhonny aumentou em +${quantidade}.\n`)
                 this.defesa += quantidade
-                prompt(`[ENTER]`)
-            },
-            diminuirDefesa: function(quantidade){
-                console.log(`\nA defesa de Jhonny diminuiu em -${quantidade}.\n`)
-                this.defesa -= quantidade
-                if (this.defesa < 0) {
-                    console.log(`\nA defesa de Jhonny chegou em 0.\n`)
-                    this.defesa = 0
-                }
                 prompt(`[ENTER]`)
             },
             jogada: function() {
@@ -439,57 +329,14 @@ jogo: while(true) {
                 console.log()
                 prompt(`[ENTER]`)
             },
-            regeneracao: function(quantidade){
-                this.vida += quantidade
-                if (this.vida > 100) {
-                    console.log(`\nA vida de Amanda está cheia.\n`) 
-                    this.vida = 100
-                } else {
-                console.log(`\Amanda ganhou +${quantidade} de vida.\n`) 
-                }
-                prompt(`[ENTER]`)
-            },
-            gastarDinheiro: function(quantidade){
-                this.dinheiro -= quantidade
-                if (this.dinheiro < 0) {
-                    console.log(`\nO dinheiro de Jhonny acabou.\n`)
-                    this.dinheiro = 0
-                } else {
-                console.log(`\Amanda perdeu -${quantidade} de dinheiro.\n`) 
-                }
-                prompt(`[ENTER]`)
-            },
-            ganharDinheiro: function(quantidade){
-                console.log(`\Amanda ganhou +${quantidade} de dinheiro.\n`)
-                this.dinheiro += quantidade
-                prompt(`[ENTER]`)
-            },
             aumentarAtaque: function(quantidade){
                 console.log(`\nO ataque de Amanda aumentou em +${quantidade}.\n`)
                 this.ataque += quantidade
                 prompt(`[ENTER]`)
             },
-            diminuirAtaque: function(quantidade){
-                console.log(`\nO ataque de Amanda diminuiu em -${quantidade}.\n`)
-                this.ataque -= quantidade
-                if (this.ataque < 0) {
-                    console.log(`\nO ataque de Amanda chegou em 0.\n`)
-                    this.ataque = 0
-                }
-                prompt(`[ENTER]`)
-            },
             aumentarDefesa: function(quantidade){
                 console.log(`\nA defesa de Amanda aumentou em +${quantidade}.\n`)
                 this.defesa += quantidade
-                prompt(`[ENTER]`)
-            },
-            diminuirDefesa: function(quantidade){
-                console.log(`\nA defesa de Amanda diminuiu em -${quantidade}.\n`)
-                this.defesa -= quantidade
-                if (this.defesa < 0) {
-                    console.log(`\nA defesa de Amanda chegou em 0.\n`)
-                    this.defesa = 0
-                }
                 prompt(`[ENTER]`)
             },
             jogada: function() {
@@ -2090,7 +1937,7 @@ jogo: while(true) {
             dia++
             console.clear()
             statusJogador.aumentarTempo()
-            console.log("================ \nUMA REVALAÇÃO INESPERADA")
+            console.log("================ \nUMA REVELAÇÃO INESPERADA")
             console.log()
             if (personagem == 1) {
                 if (statusJogador.grupo >= 1) {
@@ -2570,7 +2417,7 @@ jogo: while(true) {
                     console.log("'... eu só queria poder ver a minha família de novo.'")
                     prompt("Lágrimas saem dos olhos do bruxo. [ENTER]")
                     console.log("\n'E pretendo velos de novo'.")
-                    prompt("'Mesmo depois da derrota, você não vão conseguir me impedir' [ENTER]")
+                    prompt("'Mesmo depois da derrota, você não vai conseguir me impedir' [ENTER]")
                 }
             } else if (personagem == 2) {
                 if (statusJogador.grupo >= 1) {
@@ -2590,7 +2437,7 @@ jogo: while(true) {
                     console.log("'... eu só queria poder ver a minha família de novo.'")
                     prompt("Lágrimas saem dos olhos do bruxo. [ENTER]")
                     console.log("\n'E pretendo velos de novo'.")
-                    prompt("'Mesmo depois da derrota, você não vão conseguir me impedir' [ENTER]")
+                    prompt("'Mesmo depois da derrota, você não vai conseguir me impedir' [ENTER]")
                 }
             }
             console.clear()
