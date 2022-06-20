@@ -97,7 +97,7 @@ jogo: while(true) {
                 this.defesa += 10
                 this.ataque += 20
                 this.dinheiro += (20 * this.nivel)
-                this.magia += (5 * this.nivel)
+                this.magia += 5
                 console.log(`\nVOCÊ SUBIU DE NÍVEL!`)
                 console.log(`\nSEU STATUS:`)
                 console.log(`Nome: ${this.nome}`)
@@ -130,6 +130,7 @@ jogo: while(true) {
             aumentarAtaque: function(quantidade){
                 console.log(`\nSeu ataque aumentou em +${quantidade}.`)
                 this.ataque = ((20 * this.nivel) + quantidade)
+                prompt("[ENTER]")
             },
             aumentarDefesa: function(quantidade){
                 console.log(`\nSua defesa aumentou em +${quantidade}.`)
@@ -527,7 +528,7 @@ jogo: while(true) {
         const dragao = {
             nome: 'Dragão',
             nivel: 4,
-            descricao: 'Ser elegante que via e gospe fogo.',
+            descricao: 'Ser elegante que voa e gospe fogo.',
             vida: (100 * statusJogador.nivel),
             ataque: (20 * statusJogador.nivel),
             defesa: (10 * statusJogador.nivel),
@@ -798,25 +799,21 @@ jogo: while(true) {
             console.clear()
             statusJogador.aumentarTempo()
             console.log("======== \nO INÍCIO")
-            prompt("\nEra uma linda semana de primavera na terra de Blue, os pássaros cantavam, as flores desabrochavam e as pessoas estavam felizem e em paz.... [ENTER]")
+            const intro1 = ["\nEra uma linda semana de primavera na terra de Blue, os pássaros cantavam, as flores desabrochavam e as pessoas estavam felizem e em paz....", "\nVocê, um conhecido guerreiro forte e destemido, teve de partir momentaneamente para ir comprar especiarias na cidade vizinha...", "\nDurante o caminho de volta, ao ver sua cidade surgindo no horizonte, percebe fumaça e destruição em grande parte dela. Você acelera seu cavalo...", `\nAo entrar em sua cidade, um guarda real vêm ao seu encontro e diz: \n'${statusJogador.nome}, nosso rei precisa de sua presença o mais rápido possível!'`, "\nApós uma breve conversa com o rei de Blue, descobre que o ataque à cidade foi feito pelo poderoso bruxo Mordog, o qual rouba a alma dos seres vivos para aumentar seu poder...", `\nO rei disse: \n'Dessa vez conseguimos conter Mordog e seu exército, mas com as almas que ele conseguiu tememos que venha mais forte da próxima vez.'`, `\n'${statusJogador.nome}, você já fez parte de minha guarda real, é o único guerreiro que pode deter Mordog!'`]
+            const intro2 = ["\nEra uma linda semana de primavera na terra de Blue, os pássaros cantavam, as flores desabrochavam e as pessoas estavam felizem e em paz....", "\nVocê, uma guerreira habilidosa e valente, teve de partir momentaneamente para ir comprar especiarias na cidade vizinha...", "\nDurante o caminho de volta, ao ver sua cidade surgindo no horizonte, percebe fumaça e destruição em grande parte dela. Você acelera seu cavalo...", `\nAo entrar em sua cidade, um guarda real vêm ao seu encontro e diz: \n'${statusJogador.nome}, nosso rei precisa de sua presença o mais rápido possível!'`, "\nApós uma breve conversa com o rei de Blue, descobre que o ataque à cidade foi feito pelo poderoso bruxo Mordog, o qual rouba a alma dos seres vivos para aumentar seu poder...", `\nO rei disse: \n'Dessa vez conseguimos conter Mordog e seu exército, mas com as almas que ele conseguiu tememos que venha mais forte da próxima vez.'`, `\n'${statusJogador.nome}, você já fez parte de minha guarda real, é a única guerreira que pode deter Mordog!`]
             if (personagem == 1) {
-                prompt("\nVocê, um conhecido guerreiro forte e destemido, teve de partir momentaneamente para ir comprar especiarias na cidade vizinha... [ENTER]")
+                for (let i of intro1) {
+                    console.log(i)
+                    prompt("[ENTER]")
+                }
             } else {
-                prompt("\nVocê, uma guerreira habilidosa e valente, teve de partir momentaneamente para ir comprar especiarias na cidade vizinha... [ENTER]")
+                for (let i of intro2) {
+                    console.log(i)
+                    prompt("[ENTER]")
+                }
             }
             console.clear()
-            prompt("\nDurante o caminho de volta, ao ver sua cidade surgindo no horizonte, percebe fumaça e destruição em grande parte dela. Você acelera seu cavalo... [ENTER]")
-            prompt(`\nAo entrar em sua cidade, um guarda real vêm ao seu encontro e diz: \n'${statusJogador.nome}, nosso rei precisa de sua presença o mais rápido possível!' [ENTER]`)
-            console.clear()
-            prompt("\nApós uma breve conversa com o rei de Blue, descobre que o ataque à cidade foi feito pelo poderoso bruxo Mordog, o qual rouba a alma dos seres vivos para aumentar seu poder... [ENTER}")
-            prompt(`\nO rei disse: \n 'Dessa vez conseguimos conter Mordog e seu exército, mas com as almas que ele conseguiu tememos que venha mais forte da próxima vez.' [ENTER]`) 
-            if (personagem == 1) {
-                prompt(`\n'${statusJogador.nome}, você já fez parte de minha guarda real, é o único guerreiro que pode deter Mordog!'[ENTER]`)
-            } else {
-                prompt(`\n'${statusJogador.nome}, você já fez parte de minha guarda real, é a única guerreira que pode deter Mordog!'[ENTER]`)
-            }
-            console.clear()
-            console.log("\nVocê aceita a missão de ir atrás do bruxo. Antes de deixar o salão, o rei lhe oferece um mapa de onde possivelmente Mordog se esconde.")
+            console.log("Você aceita a missão de ir atrás do bruxo. Antes de deixar o salão, o rei lhe oferece um mapa de onde possivelmente Mordog se esconde.\n")
             let a = +prompt("Você pega o mapa? 1.[SIM] 2.[NÃO]: ")
             while (a != 1 && a != 2) {
                 console.log("\nNÚMERO INVÁLIDO!")
@@ -830,8 +827,8 @@ jogo: while(true) {
                 prompt("\nVocê diz:\n'Não preciso de mapas, já sei o caminho!' \n e parte. [ENTER]")
             }
             console.clear()
-            console.log("\nVocê vai até sua casa e começa a se aprontar para a missão.")
-            let b = +prompt("Vai levar sua espada? 1.[SIM] 2.[NÃO]: ")
+            console.log("Você vai até sua casa e começa a se aprontar para a missão.\n")
+            let b = +prompt("Vai levar sua espada? (o jogo ficará mais difícil sem ela) 1.[SIM] 2.[NÃO]: ")
             while (b != 1 && b != 2) {
                 console.log("\nNÚMERO INVÁLIDO!")
                 b = +prompt("Vai levar sua espada? 1.[SIM] 2.[NÃO]: ")
@@ -845,14 +842,15 @@ jogo: while(true) {
                 prompt("\nVocê confia muito em seus punhos e decide não levar sua espada. [ENTER]")
             }
             console.clear()
-            console.log("\nVocê se lembra do alerta que o rei lhe deu sobre os perigosos dragões que compõem o exército de Mordog.")
+            console.log("Você se lembra do alerta que o rei lhe deu sobre o perigoso dragão que compõe o exército de Mordog.\n")
             let c = +prompt("Vai levar sua capa contra fogo? 1.[SIM] 2.[NÃO]: ")
             while (c != 1 && c != 2) {
                 console.log("\nNÚMERO INVÁLIDO!")
                 c = +prompt("Vai levar sua capa contra fogo? 1.[SIM] 2.[NÃO]: ")
             }
             if (c == 1) {
-                prompt("\nVocê veste sua linda capa contra fogo. [ENTER]")
+                console.log("\nVocê veste sua linda capa contra fogo.\n")
+                prompt("Proteção contra fogo adicionada. [ENTER]")
                 statusJogador.pontuacao += 1
                 statusJogador.capa += 1
             } else if ( c == 2) {
@@ -870,7 +868,7 @@ jogo: while(true) {
             }
             if (d == 1) {
                 prompt("\nVocê agradece pelos presentes, e coloca o amuleto em seu pescoço. [ENTER]")
-                statusJogador.aumentarMagia(50)
+                statusJogador.aumentarMagia(20)
                 statusJogador.pontuacao += 1
                 statusJogador.amuleto += 1
                 statusJogador.pocao += 1
@@ -1018,19 +1016,25 @@ jogo: while(true) {
                     prompt("Mas sua paixão pela aventura e vontade de salvar seu povo falam mais alto. [ENTER]")
                     console.clear()
                     console.log("Vocês conversam enquanto caminham até seu objetivo:")
+                    prompt("[ENTER]")
                     console.log(`\n'Sabe ${statusJogador.nome}, ouvi dizer que o exército de Mordog têm apenas 6 guerreiros, é realmente impressionante como ele consegue causar tanta destruição...'`)
                     console.log("Disse Jhonny.")
                     if (statusJogador.mapa == 1) {
                         prompt("\nVocês encontram facilmente seu caminho seguindo o mapa. [ENTER]")
+                    } else {
+                        prompt("[ENTER]")
                     }
                 } else {
                     console.log("\nAo deixar a cidade você sabe que esse pode ser um caminho sem volta...")
                     prompt("Mas sua paixão pela aventura e vontade de salvar seu povo falam mais alto. [ENTER]")
                     console.clear()
                     console.log("Você pensa caminham até seu objetivo:")
+                    prompt("[ENTER]")
                     console.log("\n'Ouvi dizer que o exército de Mordog têm apenas 6 guerreiros, é realmente impressionante como ele consegue causar tanta destruição...'")
                     if (statusJogador.mapa == 1) {
                         prompt("\nVocês encontra facilmente seu caminho seguindo o mapa. [ENTER]")
+                    } else {
+                        prompt("[ENTER]")
                     }
                 }
             } else {
@@ -1039,19 +1043,25 @@ jogo: while(true) {
                     prompt("Mas sua paixão pela aventura e vontade de salvar seu povo falam mais alto. [ENTER]")
                     console.clear()
                     console.log("Vocês conversam enquanto caminham até seu objetivo:")
+                    prompt("[ENTER]")
                     console.log(`\n'Sabe ${statusJogador.nome}, ouvi dizer que o exército de Mordog têm apenas 6 guerreiros, é realmente impressionante como ele consegue causar tanta destruição...'`)
                     console.log("Disse Amanda.")
                     if (statusJogador.mapa == 1) {
                         prompt("\nVocês encontram facilmente seu caminho seguindo o mapa. [ENTER]")
+                    } else {
+                        prompt("[ENTER]")
                     }
                 } else {
                     console.log("\nAo deixar a cidade você sabe que esse pode ser um caminho sem volta...")
                     prompt("Mas sua paixão pela aventura e vontade de salvar seu povo falam mais alto. [ENTER]")
                     console.clear()
                     console.log("Você pensa caminham até seu objetivo:")
+                    prompt("[ENTER]")
                     console.log("\n'Ouvi dizer que o exército de Mordog têm apenas 6 guerreiros, é realmente impressionante como ele consegue causar tanta destruição...'")
                     if (statusJogador.mapa == 1) {
                         prompt("\nVocê encontram facilmente seu caminho seguindo o mapa. [ENTER]")
+                    } else {
+                        prompt("[ENTER]")
                     }
                 }
             }
@@ -1140,7 +1150,7 @@ jogo: while(true) {
                 }
             } else if (personagem == 2) {
                 if (statusJogador.grupo >= 1) {
-                    prompt("No caminho vocês se deparam com uma ser baixinho e musculoso que os recebe aos gritos: [ENTER]")
+                    prompt("No caminho vocês se deparam com uma ser baixinho e musculoso que as recebe aos gritos: [ENTER]")
                     console.log("\n'Sou o guerreiro Goblin do exército de Mordog, vocês jamais passarão por mim!'")
                     prompt("Disse o Goblin se lançando contra vocês de maneira deselegante. [ENTER]")
                     if (statusJogador.espada == 1) {
@@ -1180,7 +1190,7 @@ jogo: while(true) {
                     }
                     backup(2,statusJogador)
                 } else {
-                    prompt("No caminho você se depara com uma ser baixinho e musculoso que o recebe aos gritos: [ENTER]")
+                    prompt("No caminho você se depara com uma ser baixinho e musculoso que a recebe aos gritos: [ENTER]")
                     console.log("\n'Sou o guerreiro Goblin do exército de Mordog, você jamais passará por mim!'")
                     prompt("Disse o Goblin se lançando contra você de maneira deselegante. [ENTER]")
                     if (statusJogador.espada == 1) {
@@ -1356,7 +1366,7 @@ jogo: while(true) {
             }
             backup(2,statusJogador)
             console.clear()
-            console.log("'Você é mais forte do que eu pensava. É digno da vitória!'\n")
+            console.log("'Você é mais forte do que eu pensava. Mereceu a vitória!'\n")
             let escolha2 = +prompt("O que você faz? [1]MATAR [2]POUPAR: ")
             while(escolha2 != 1 && escolha2 != 2) {
                 console.log("\nNÚMERO INVÁLIDO!")
@@ -1650,7 +1660,7 @@ jogo: while(true) {
                     }
                 } else {
                     console.log("Após ser surpreendido pelo Troll ontem de madrugada, você agora fica mais atento.\n")
-                    console.log("Se aquele Troll não fosse tão pesado, talvez eu nem teria visto sua chegada.")
+                    console.log("'Se aquele Troll não fosse tão pesado, talvez eu nem teria visto sua chegada.'")
                     prompt("Você pensa. [ENTER]")
                     console.log("\nVocê se alegra por estar na metade do caminho. A jornada está mesmo longa.")
                     prompt("[ENTER]")
@@ -1680,7 +1690,7 @@ jogo: while(true) {
                     }
                 } else {
                     console.log("Após ser surpreendida pelo Troll ontem de madrugada, você agora fica mais atenta.\n")
-                    console.log("Se aquele Troll não fosse tão pesado, talvez eu nem teria visto sua chegada.")
+                    console.log("'Se aquele Troll não fosse tão pesado, talvez eu nem teria visto sua chegada.'")
                     prompt("Você pensa. [ENTER]")
                     console.log("\nVocê se alegra por estar na metade do caminho. A jornada está mesmo longa.")
                     prompt("[ENTER]")
@@ -1752,7 +1762,7 @@ jogo: while(true) {
                     prompt("[ENTER]")
                 }
                 console.clear()
-                prompt("'Permita que eu conte um segredo antes de minha retirada humilhante... [ENTER]'")
+                prompt("'Permita que eu conte um segredo antes de minha retirada humilhante...' [ENTER]")
                 console.log("\n'Há muito tempo atrás, Mordog era bondoso e feliz.'")
                 prompt("'Ele tinha um reino, uma esposa, um filho, e gostava de ajudar a todos.'[ENTER]")
                 console.log("\n'Mas certo dia seu reino foi atacado por bandidos saqueadores.'")
@@ -1807,7 +1817,7 @@ jogo: while(true) {
                 }
             } else if (personagem == 2) {
                 if (statusJogador.grupo >= 1) {
-                    console.log("Mais um dia de caminhada, dessa vez vocês estão cada vez mais próximos do destino.")
+                    console.log("Mais um dia de caminhada, dessa vez vocês estão cada vez mais próximas do destino.")
                     console.log()
                     console.log("'O Dragão que enfrentamos ontem era muito poderoso, e ele ainda avisou que será mais difícil à frente.'")
                     prompt("Disse Amanda. [ENTER]")
@@ -1828,7 +1838,7 @@ jogo: while(true) {
                     console.log("\n'Sou a Bruxa Guerreira de Mordog, preparem-se para enfrentar meu exército!'")
                     console.log("\nDe repente centenas de esqueletos saem de baixo da terra e partem para o ataque.")
                 } else {
-                    console.log("Mais um dia de caminhada, dessa vez você está cada vez mais próximo do destino.")
+                    console.log("Mais um dia de caminhada, dessa vez você está cada vez mais próxima do destino.")
                     console.log()
                     console.log("'O Dragão que enfrentamei ontem era muito poderoso, e ele ainda avisou que será mais difícil à frente.'")
                     prompt("Você pensa. [ENTER]")
@@ -1884,7 +1894,7 @@ jogo: while(true) {
                 } else {
                     console.log("A Bruxa fala:")
                     console.log("'Você conseguiu derrotar até meu exércio.'")
-                    console.log("'És mesmo muito habilidoso em combate!.'")
+                    console.log("'És mesmo muito habilidoso em combate!'")
                     prompt("[ENTER]")
                 }
             } else if (personagem == 2) {
@@ -1896,7 +1906,7 @@ jogo: while(true) {
                 } else {
                     console.log("A Bruxa fala:")
                     console.log("'Você conseguiu derrotar até meu exércio.'")
-                    console.log("'És mesmo muito habilidosa em combate!.'")
+                    console.log("'És mesmo muito habilidosa em combate!'")
                     prompt("[ENTER]")
                 }
             }
@@ -1923,9 +1933,9 @@ jogo: while(true) {
                 prompt("'Desde então ele busca cada vez mais poder para trazer de volta aqueles que ama.' [ENTER]")
                 console.log("\n'Alguns de meus companheiros também perderam entes queridos naquele dia, Mordog é a nossa esperança.'")
                 if(statusJogador.grupo >= 1) {
-                    prompt("'Espero que entendam. [ENTER]'")
+                    prompt("'Espero que entendam.' [ENTER]")
                 } else {
-                    prompt("'Espero que entenda. [ENTER]'")
+                    prompt("'Espero que entenda.' [ENTER]")
                 }
                 console.log("\nA Bruxa monta em sua vassoura e sai voando.")
             }
@@ -1949,7 +1959,7 @@ jogo: while(true) {
                         prompt("[ENTER]")
                     }
                     console.log("\nJhonny fala:")
-                    prompt("'Estamos tão perto do objetivo, mas derrotamos apenas 5 guerreiros, ainda falta 1... [ENTER]'")
+                    prompt("'Estamos tão perto do objetivo, mas derrotamos apenas 5 guerreiros, ainda falta 1...' [ENTER]")
                     console.log()
                     console.log("'Exatamente, ainda falta eu, o Cavaleiro Fantasma!'")
                     prompt("Disse um cavaleiro montado em seu cavalo que os observava de longe. [ENTER]")
@@ -1990,7 +2000,7 @@ jogo: while(true) {
                         prompt("[ENTER]")
                     }
                     console.log("\nVocê fala para si mesmo:")
-                    prompt("'Estou tão perto do objetivo, mas derrotei apenas 5 guerreiros, ainda falta 1... [ENTER]'")
+                    prompt("'Estou tão perto do objetivo, mas derrotei apenas 5 guerreiros, ainda falta 1...' [ENTER]")
                     console.log()
                     console.log("'Exatamente, ainda falta eu, o Cavaleiro Fantasma!'")
                     prompt("Disse um cavaleiro montado em seu cavalo que o observava de longe. [ENTER]")
@@ -2033,7 +2043,7 @@ jogo: while(true) {
                         prompt("[ENTER]")
                     }
                     console.log("\nAmanda fala:")
-                    prompt("'Estamos tão perto do objetivo, mas derrotamos apenas 5 guerreiros, ainda falta 1... [ENTER]'")
+                    prompt("'Estamos tão perto do objetivo, mas derrotamos apenas 5 guerreiros, 'ainda falta 1...' [ENTER]")
                     console.log()
                     console.log("'Exatamente, ainda falta eu, o Cavaleiro Fantasma!'")
                     prompt("Disse um cavaleiro montado em seu cavalo que as observava de longe. [ENTER]")
@@ -2074,7 +2084,7 @@ jogo: while(true) {
                         prompt("[ENTER]")
                     }
                     console.log("\nVocê fala para si mesma:")
-                    prompt("'Estou tão perto do objetivo, mas derrotei apenas 5 guerreiros, ainda falta 1... [ENTER]'")
+                    prompt("'Estou tão perto do objetivo, mas derrotei apenas 5 guerreiros, ainda falta 1...' [ENTER]")
                     console.log()
                     console.log("'Exatamente, ainda falta eu, o Cavaleiro Fantasma!'")
                     prompt("Disse um cavaleiro montado em seu cavalo que a observava de longe. [ENTER]")
@@ -2408,7 +2418,7 @@ jogo: while(true) {
                     console.log("'... eu só queria poder ver a minha família de novo.'")
                     prompt("Lágrimas saem dos olhos do bruxo. [ENTER]")
                     console.log("\n'E pretendo velos de novo'.")
-                    prompt("'Mesmo depois da derrota, vocês não vão conseguir me impedir' [ENTER]")
+                    prompt("'Mesmo depois da derrota, vocês não vão conseguir me impedir.' [ENTER]")
                 } else {
                     prompt("'Você conseguiu mesmo me derrotar, foi uma batalha digna.' [ENTER]")
                     console.log()
@@ -2417,7 +2427,7 @@ jogo: while(true) {
                     console.log("'... eu só queria poder ver a minha família de novo.'")
                     prompt("Lágrimas saem dos olhos do bruxo. [ENTER]")
                     console.log("\n'E pretendo velos de novo'.")
-                    prompt("'Mesmo depois da derrota, você não vai conseguir me impedir' [ENTER]")
+                    prompt("'Mesmo depois da derrota, você não vai conseguir me impedir.' [ENTER]")
                 }
             } else if (personagem == 2) {
                 if (statusJogador.grupo >= 1) {
@@ -2428,7 +2438,7 @@ jogo: while(true) {
                     console.log("'... eu só queria poder ver a minha família de novo.'")
                     prompt("Lágrimas saem dos olhos do bruxo. [ENTER]")
                     console.log("\n'E pretendo velos de novo'.")
-                    prompt("'Mesmo depois da derrota, vocês não vão conseguir me impedir' [ENTER]")
+                    prompt("'Mesmo depois da derrota, vocês não vão conseguir me impedir.' [ENTER]")
                 } else {
                     prompt("'Você conseguiu mesmo me derrotar, foi uma batalha digna.' [ENTER]")
                     console.log()
@@ -2437,7 +2447,7 @@ jogo: while(true) {
                     console.log("'... eu só queria poder ver a minha família de novo.'")
                     prompt("Lágrimas saem dos olhos do bruxo. [ENTER]")
                     console.log("\n'E pretendo velos de novo'.")
-                    prompt("'Mesmo depois da derrota, você não vai conseguir me impedir' [ENTER]")
+                    prompt("'Mesmo depois da derrota, você não vai conseguir me impedir.' [ENTER]")
                 }
             }
             console.clear()
